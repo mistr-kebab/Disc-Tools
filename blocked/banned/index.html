@@ -2,162 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You got clapped | Disc-Tools</title>
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Account Suspended | Disc-Tools</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0d13">
+
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+
     <style>
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg);
-            margin: 0;
-            padding: 20px;
-            overflow: hidden;
-        }
-        .banned-container {
-            width: 100%;
-            max-width: 440px;
-            animation: slideUp 0.3s ease forwards;
-            position: relative;
-            z-index: 10;
-        }
-        .banned-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 48px 36px 36px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .banned-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(231, 76, 60, 0.08), transparent 70%);
-            pointer-events: none;
-        }
-        .banned-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(231, 76, 60, 0.1);
-            color: #e74c3c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 34px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
-        .banned-icon .hammer {
-            animation: hammerSwing 2s ease-in-out infinite;
-            transform-origin: 70% 80%;
-        }
-        @keyframes hammerSwing {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-15deg); }
-            75% { transform: rotate(10deg); }
-        }
-        .banned-card h1 {
-            font-family: var(--sans);
-            font-size: 28px;
-            font-weight: 900;
-            margin: 0 0 8px;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-        .banned-card h1 span {
-            color: #e74c3c;
-        }
-        .banned-sub {
-            color: var(--muted);
-            font-size: 14px;
-            margin: 0 0 24px;
-            line-height: 1.6;
-        }
-        .banned-graphic {
-            margin: 0 auto 24px;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-        .banned-graphic .bar {
-            width: 6px;
-            height: 40px;
-            border-radius: 3px;
-            background: #e74c3c;
-            animation: barPulse 1.5s ease-in-out infinite;
-        }
-        .banned-graphic .bar:nth-child(2) { animation-delay: 0.2s; height: 55px; }
-        .banned-graphic .bar:nth-child(3) { animation-delay: 0.4s; height: 35px; }
-        .banned-graphic .bar:nth-child(4) { animation-delay: 0.1s; height: 50px; }
-        .banned-graphic .bar:nth-child(5) { animation-delay: 0.3s; height: 30px; }
-        @keyframes barPulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-            50% { opacity: 1; transform: scaleY(1); }
-        }
-        .banned-btn {
-            display: block;
-            width: 100%;
-            padding: 13px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-family: var(--sans);
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            border: none;
-        }
-        .banned-btn-discord {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #5865F2;
-            color: #fff;
-        }
-        .banned-btn-discord:hover {
-            background: #4752c4;
-            transform: translateY(-1px);
-        }
-        .banned-footer {
-            font-size: 11px;
-            color: rgba(255,255,255,0.15);
-            margin-top: 20px;
-            text-align: center;
-        }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; text-align: center; }
+        .blocked-box { position: relative; max-width: 420px; }
+        .blocked-box .icon { width: 96px; height: 96px; background: rgba(240,71,71,0.1); color: #f04747; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 20px; position: relative; }
+        .blocked-box .icon i { animation: swing 2s ease-in-out infinite; transform-origin: 70% 80%; }
+        @keyframes swing { 0%,100% { transform:rotate(0deg) } 25% { transform:rotate(-15deg) } 75% { transform:rotate(10deg) } }
+        .blocked-box h1 { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 8px; }
+        .blocked-box h1 em { color: #f04747; font-style: normal; }
+        .blocked-box p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 28px; }
+        .blocked-box .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; border-radius: 12px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; border: none; background: var(--blurple); color: #fff; transition: background 0.2s; }
+        .blocked-box .btn:hover { background: var(--blurple-strong); }
+        .blocked-box .footer-note { font-size: 11px; color: var(--text-muted); opacity: 0.4; margin-top: 18px; }
     </style>
-    <link rel="canonical" href="https://disc-tools.de">
-    <meta property="og:title" content="You got clapped | Disc-Tools">
-    <meta property="og:description" content="Account suspended.">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
 <body>
-    <div class="glow"></div>
-    <div class="banned-container">
-        <div class="banned-card">
-            <div class="banned-icon">
-                <span class="hammer">🔨</span>
-            </div>
-            <div class="banned-graphic">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <h1>You got <span>clapped</span></h1>
-            <p class="banned-sub">Your account has been suspended. If you believe this is a mistake, hit us up on Discord.</p>
-            <a href="https://discord.gg/rtRs8rhj5u" class="banned-btn banned-btn-discord"><i class="fa-brands fa-discord"></i> Contact Support</a>
-            <div class="banned-footer">disc-tools.de</div>
-        </div>
+    <div class="blocked-box">
+        <div class="icon"><i class="fa-solid fa-gavel"></i></div>
+        <h1>You got <em>suspended</em></h1>
+        <p>Your account has been suspended. If you believe this is a mistake, reach out on Discord.</p>
+        <a href="https://discord.gg/rtRs8rhj5u" class="btn"><i class="fa-brands fa-discord"></i> Contact Support</a>
+        <p class="footer-note">disc-tools.de</p>
     </div>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

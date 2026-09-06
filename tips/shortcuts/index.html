@@ -1,314 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta name="description" content="Complete list of Discord keyboard shortcuts: quick switcher, navigation, emoji picker, search, and more.">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Keyboard Shortcuts | Tips & Tricks | Disc-Tools</title>
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Keyboard Shortcuts | Disc-Tools</title>
+    <meta name="description" content="All Discord keyboard shortcuts — navigate without a mouse.">
+    <meta name="keywords" content="discord shortcuts, discord keyboard shortcuts, discord hotkeys, discord keybinds">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
     <link rel="canonical" href="https://disc-tools.de/tips/shortcuts/">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://disc-tools.de/tips/shortcuts/">
-    <meta property="og:title" content="Discord Keyboard Shortcuts | Tips & Tricks | Disc-Tools">
-    <meta property="og:description" content="Master Discord keyboard shortcuts for navigation, communication, and more.">
-    <meta property="twitter:card" content="summary_large_image">
-
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
     <style>
-        .shortcut-demo {
-            background: rgba(255,255,255,0.04);
-            border-radius: 8px;
-            padding: 10px 14px;
-            margin-top: 10px;
-            font-family: var(--mono);
-            font-size: 13px;
-            color: var(--muted);
-            border: 1px solid var(--border);
-        }
-        .shortcut-demo kbd {
-            background: rgba(255,255,255,0.08);
-            border-radius: 4px;
-            padding: 2px 7px;
-            font-family: var(--mono);
-            font-size: 12px;
-            color: #fff;
-            border: 1px solid var(--border);
-        }
-        .category-label {
-            grid-column: 1 / -1;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--muted);
-            margin: 8px 0 4px;
-            padding: 0 4px;
-        }
+        .page { padding: calc(var(--nav-h) + 56px) 0 120px; }
+        .hero { max-width: 720px; }
+        .hero h1 { font-size: clamp(2.4rem, 5vw, 3.2rem); }
+        .hero h1 em { color: var(--success); font-style: normal; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-top: 40px; }
+        .cat-label { grid-column: 1/-1; display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--blurple-soft); margin-top: 8px; }
+        .cat-label i { font-size: 15px; opacity: 0.7; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 10px; transition: border-color 0.2s, transform 0.2s; }
+        a.card:hover { border-color: var(--blurple); transform: translateY(-2px); }
+        .card i.head-icon { font-size: 24px; color: var(--blurple); }
+        .card h3 { font-size: 16px; }
+        .card p { color: var(--text-muted); font-size: 13px; line-height: 1.5; flex: 1; }
+        .card .keys { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 4px; }
+        .card .keys kbd { display: inline-block; padding: 3px 8px; background: rgba(255,255,255,0.07); border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--text); }
+        .card .keys span { font-size: 12px; color: var(--text-muted); }
     </style>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
-
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-        <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle active" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/" class="active">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/" aria-current="page"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="./" class="current">Shortcuts</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
-
-    <main class="tool-page">
-        <section class="tool-hero">
-            <span class="hero-tag">// tips & tricks</span>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="/partner/" class="btn btn-ghost btn-block"><i class="fa-solid fa-handshake" aria-hidden="true"></i> Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="page">
+    <div class="container">
+        <div class="hero">
             <h1>Keyboard <em>Shortcuts</em></h1>
-            <p>All Discord keyboard shortcuts — navigate, communicate, and control Discord without a mouse.</p>
-        </section>
+            <p class="team-intro">All Discord keyboard shortcuts — navigate, communicate, and control Discord without a mouse.</p>
+        </div>
+        <div class="grid">
 
-        <div class="guides-grid">
+            <div class="cat-label"><i class="fa-solid fa-bolt"></i> Navigation</div>
 
-            <div class="category-label"><i class="fa-solid fa-bolt"></i> Navigation</div>
-
-            <a href="quick-switcher/" class="guide-card">
-                <i class="fa-solid fa-bolt"></i>
+            <a href="/tips/shortcuts/quick-switcher/" class="card">
+                <i class="fa-solid fa-bolt head-icon"></i>
                 <h3>Quick Switcher</h3>
                 <p>Jump between channels, DMs, and servers instantly.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+K</kbd> <span style="color:var(--muted)">/</span> <kbd>Cmd+K</kbd></div>
+                <div class="keys"><kbd>Ctrl+K</kbd> <span>/</span> <kbd>Cmd+K</kbd></div>
             </a>
-
-            <a href="search/" class="guide-card">
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="/tips/shortcuts/search/" class="card">
+                <i class="fa-solid fa-magnifying-glass head-icon"></i>
                 <h3>Search</h3>
                 <p>Search messages, files, and links in the current channel or server.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+F</kbd> <span style="color:var(--muted)">/</span> <kbd>Cmd+F</kbd></div>
+                <div class="keys"><kbd>Ctrl+F</kbd> <span>/</span> <kbd>Cmd+F</kbd></div>
             </a>
-
-            <a href="navigation/" class="guide-card">
-                <i class="fa-solid fa-arrow-up"></i>
+            <a href="/tips/shortcuts/navigation/" class="card">
+                <i class="fa-solid fa-arrow-up head-icon"></i>
                 <h3>Navigation</h3>
                 <p>Navigate between messages, channels, and servers with the keyboard.</p>
-                <div class="shortcut-demo"><kbd>Alt+↑</kbd> <kbd>Alt+↓</kbd> <kbd>Ctrl+Alt+↑</kbd></div>
+                <div class="keys"><kbd>Alt+↑</kbd> <kbd>Alt+↓</kbd> <kbd>Ctrl+Alt+↑</kbd></div>
             </a>
-
-            <a href="mark-as-read/" class="guide-card">
-                <i class="fa-solid fa-check-double"></i>
+            <a href="/tips/shortcuts/mark-as-read/" class="card">
+                <i class="fa-solid fa-check-double head-icon"></i>
                 <h3>Mark as Read</h3>
                 <p>Quickly mark the current channel or server as read.</p>
-                <div class="shortcut-demo"><kbd>Esc</kbd> <span style="color:var(--muted)">/</span> <kbd>Shift+Esc</kbd></div>
+                <div class="keys"><kbd>Esc</kbd> <span>/</span> <kbd>Shift+Esc</kbd></div>
             </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#2ecc71">
-                <i class="fa-solid fa-arrow-left"></i>
+            <a href="/tips/shortcuts/navigation/" class="card">
+                <i class="fa-solid fa-arrow-left head-icon"></i>
                 <h3>Previous / Next Channel</h3>
                 <p>Move between channels without clicking the sidebar.</p>
-                <div class="shortcut-demo"><kbd>Alt+↑</kbd> <span style="color:var(--muted)">prev</span> &nbsp; <kbd>Alt+↓</kbd> <span style="color:var(--muted)">next</span></div>
+                <div class="keys"><kbd>Alt+↑</kbd> <span>prev</span> &nbsp; <kbd>Alt+↓</kbd> <span>next</span></div>
             </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#2ecc71">
-                <i class="fa-solid fa-server"></i>
+            <a href="/tips/shortcuts/navigation/" class="card">
+                <i class="fa-solid fa-server head-icon"></i>
                 <h3>Previous / Next Server</h3>
                 <p>Switch between servers using only your keyboard.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+↑</kbd> <span style="color:var(--muted)">/</span> <kbd>Ctrl+Shift+↓</kbd></div>
+                <div class="keys"><kbd>Ctrl+Shift+↑</kbd> <span>/</span> <kbd>Ctrl+Shift+↓</kbd></div>
             </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#f39c12">
-                <i class="fa-solid fa-undo"></i>
+            <a href="/tips/shortcuts/navigation/" class="card">
+                <i class="fa-solid fa-undo head-icon"></i>
                 <h3>Last Unread Channel</h3>
                 <p>Jump directly to the most recent unread message.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+Backspace</kbd></div>
+                <div class="keys"><kbd>Ctrl+Shift+Backspace</kbd></div>
             </a>
 
-            <div class="category-label" style="margin-top:20px"><i class="fa-solid fa-message"></i> Communication</div>
+            <div class="cat-label"><i class="fa-solid fa-message"></i> Communication</div>
 
-            <a href="emoji-picker/" class="guide-card">
-                <i class="fa-solid fa-face-smile"></i>
+            <a href="/tips/shortcuts/emoji-picker/" class="card">
+                <i class="fa-solid fa-face-smile head-icon"></i>
                 <h3>Emoji Picker</h3>
                 <p>Open the emoji picker to react or reply with the perfect emoji.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+I</kbd></div>
+                <div class="keys"><kbd>Ctrl+Shift+I</kbd></div>
             </a>
-
-            <a href="emoji-picker/" class="guide-card" style="--card-accent:#2ecc71">
-                <i class="fa-solid fa-gift"></i>
+            <a href="/tips/shortcuts/emoji-picker/" class="card">
+                <i class="fa-solid fa-gift head-icon"></i>
                 <h3>GIF Picker</h3>
                 <p>Search and send GIFs directly from the picker.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+G</kbd></div>
+                <div class="keys"><kbd>Ctrl+Shift+G</kbd></div>
             </a>
-
-            <a href="emoji-picker/" class="guide-card" style="--card-accent:#9b59b6">
-                <i class="fa-solid fa-sticker"></i>
+            <a href="/tips/shortcuts/emoji-picker/" class="card">
+                <i class="fa-solid fa-sticker head-icon"></i>
                 <h3>Sticker Picker</h3>
                 <p>Browse and send stickers from your available packs.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+S</kbd></div>
+                <div class="keys"><kbd>Ctrl+Shift+S</kbd></div>
             </a>
-
-            <a href="upload/" class="guide-card">
-                <i class="fa-solid fa-upload"></i>
+            <a href="/tips/shortcuts/upload/" class="card">
+                <i class="fa-solid fa-upload head-icon"></i>
                 <h3>Upload File</h3>
                 <p>Open the file picker to attach images, videos, or documents.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+U</kbd> <span style="color:var(--muted)">/</span> <kbd>Cmd+Shift+U</kbd></div>
+                <div class="keys"><kbd>Ctrl+Shift+U</kbd> <span>/</span> <kbd>Cmd+Shift+U</kbd></div>
             </a>
 
-            <div class="category-label" style="margin-top:20px"><i class="fa-solid fa-sliders"></i> Interface</div>
+            <div class="cat-label"><i class="fa-solid fa-sliders"></i> Interface</div>
 
-            <a href="quick-switcher/" class="guide-card" style="--card-accent:#e74c3c">
-                <i class="fa-solid fa-gear"></i>
+            <div class="card">
+                <i class="fa-solid fa-gear head-icon"></i>
                 <h3>User Settings</h3>
                 <p>Open Discord's user settings panel.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+,</kbd></div>
-            </a>
-
-            <a href="search/" class="guide-card" style="--card-accent:#f39c12">
-                <i class="fa-solid fa-inbox"></i>
+                <div class="keys"><kbd>Ctrl+,</kbd></div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-inbox head-icon"></i>
                 <h3>Inbox</h3>
-                <p>Open the inbox to review pending friend requests and message requests.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+I</kbd></div>
-            </a>
-
-            <a href="search/" class="guide-card" style="--card-accent:#2ecc71">
-                <i class="fa-solid fa-at"></i>
+                <p>Open the inbox to review pending friend requests.</p>
+                <div class="keys"><kbd>Ctrl+I</kbd></div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-at head-icon"></i>
                 <h3>Mentions</h3>
                 <p>View all your recent mentions and message requests.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+M</kbd></div>
-            </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#9b59b6">
-                <i class="fa-solid fa-image"></i>
+                <div class="keys"><kbd>Ctrl+Shift+M</kbd></div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-image head-icon"></i>
                 <h3>Toggle Embeds</h3>
                 <p>Show or hide embedded content in messages.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+E</kbd></div>
-            </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#e74c3c">
-                <i class="fa-solid fa-compress"></i>
+                <div class="keys"><kbd>Ctrl+Shift+E</kbd></div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-compress head-icon"></i>
                 <h3>Toggle Compact Mode</h3>
                 <p>Switch between cozy and compact message display.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+C</kbd></div>
-            </a>
+                <div class="keys"><kbd>Ctrl+Shift+C</kbd></div>
+            </div>
 
-            <div class="category-label" style="margin-top:20px"><i class="fa-solid fa-microphone"></i> Voice</div>
+            <div class="cat-label"><i class="fa-solid fa-microphone"></i> Voice</div>
 
-            <a href="navigation/" class="guide-card" style="--card-accent:#e74c3c">
-                <i class="fa-solid fa-microphone-slash"></i>
+            <div class="card">
+                <i class="fa-solid fa-microphone-slash head-icon"></i>
                 <h3>Mute / Unmute</h3>
                 <p>Toggle your microphone during a voice call.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+M</kbd></div>
-            </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#f39c12">
-                <i class="fa-solid fa-volume-off"></i>
+                <div class="keys"><kbd>Ctrl+Shift+M</kbd></div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-volume-off head-icon"></i>
                 <h3>Deafen / Undeafen</h3>
                 <p>Toggle deafen to mute all audio output.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+D</kbd></div>
-            </a>
-
-            <a href="navigation/" class="guide-card" style="--card-accent:#2ecc71">
-                <i class="fa-solid fa-phone"></i>
+                <div class="keys"><kbd>Ctrl+Shift+D</kbd></div>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-phone head-icon"></i>
                 <h3>Start / Answer Call</h3>
                 <p>Start a call in a DM or answer an incoming call.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+Shift+Enter</kbd></div>
-            </a>
+                <div class="keys"><kbd>Ctrl+Shift+Enter</kbd></div>
+            </div>
 
-            <div class="category-label" style="margin-top:20px"><i class="fa-solid fa-lightbulb"></i> Quick Tips</div>
+            <div class="cat-label"><i class="fa-solid fa-lightbulb"></i> Quick Tips</div>
 
-            <div class="guide-card" style="cursor:default">
-                <i class="fa-solid fa-keyboard"></i>
+            <div class="card">
+                <i class="fa-solid fa-keyboard head-icon"></i>
                 <h3>All Shortcuts</h3>
                 <p>Press this anywhere in Discord to see the full list of available shortcuts.</p>
-                <div class="shortcut-demo"><kbd>Ctrl+/</kbd></div>
+                <div class="keys"><kbd>Ctrl+/</kbd></div>
             </div>
-
-            <div class="guide-card" style="cursor:default">
-                <i class="fa-solid fa-pen"></i>
+            <div class="card">
+                <i class="fa-solid fa-pen head-icon"></i>
                 <h3>Edit Last Message</h3>
                 <p>Quickly edit your most recent message without reaching for the mouse.</p>
-                <div class="shortcut-demo"><kbd>↑</kbd> <span style="color:var(--muted)">(in empty chat)</span></div>
+                <div class="keys"><kbd>↑</kbd> <span>(in empty chat)</span></div>
             </div>
-
-            <div class="guide-card" style="cursor:default">
-                <i class="fa-solid fa-hashtag"></i>
+            <div class="card">
+                <i class="fa-solid fa-hashtag head-icon"></i>
                 <h3>Quick Links</h3>
                 <p>Type these prefixes anywhere in the chat box for quick autocomplete.</p>
-                <div class="shortcut-demo"><kbd>@</kbd>user &nbsp; <kbd>#</kbd>channel &nbsp; <kbd>:</kbd>emoji &nbsp; <kbd>/</kbd>commands</div>
+                <div class="keys"><kbd>@</kbd><span>user</span> &nbsp; <kbd>#</kbd><span>channel</span> &nbsp; <kbd>:</kbd><span>emoji</span> &nbsp; <kbd>/</kbd><span>commands</span></div>
             </div>
 
         </div>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
             </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-
-    <script src="/js/main.js?v=3" defer></script>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/consent.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
-
 </html>

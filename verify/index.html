@@ -2,482 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify - Disc-Tools</title>
-    <meta name="theme-color" content="#5865F2">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verify | Disc-Tools</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0d13">
+
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+
     <style>
-        .verify-step {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        .verify-step.active { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 0;
-            margin-bottom: 36px;
-        }
-        .step-item {
-            display: flex;
-            align-items: center;
-            gap: 0;
-        }
-        .step-dot {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--surface2);
-            border: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--mono);
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--muted);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .step-dot.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
-        }
-        .step-dot.done {
-            background: #2ECC71;
-            border-color: #2ECC71;
-            color: #fff;
-        }
-        .step-line {
-            width: 40px;
-            height: 2px;
-            background: var(--border);
-            margin: 0 8px;
-            transition: background 0.3s ease;
-        }
-        .step-line.done { background: #2ECC71; }
-
-        .checkbox-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 16px;
-            text-align: left;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 18px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-        .checkbox-row:hover {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,255,255,0.15);
-        }
-        .checkbox-row input[type="checkbox"] {
-            margin-top: 2px;
-            width: 20px;
-            height: 20px;
-            accent-color: var(--accent);
-            flex-shrink: 0;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .checkbox-row label {
-            font-family: var(--mono);
-            font-size: 13px;
-            color: var(--text);
-            cursor: pointer;
-            line-height: 1.5;
-        }
-        .checkbox-row label a {
-            color: var(--accent2);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .checkbox-row label a:hover {
-            text-decoration: underline;
-        }
-
-        .error-embed {
-            background: rgba(240, 71, 71, 0.08);
-            border: 1px solid rgba(240, 71, 71, 0.25);
-            border-radius: 16px;
-            padding: 30px 24px;
-            margin-bottom: 24px;
-            text-align: center;
-            animation: fadeIn 0.3s ease;
-        }
-        .error-embed .error-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        .error-embed h2 {
-            color: #f04747;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        .error-embed p {
-            color: var(--muted);
-            font-family: var(--mono);
-            font-size: 13px;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: var(--accent);
-            color: #fff;
-            padding: 14px 32px;
-            border-radius: 14px;
-            font-family: var(--sans);
-            font-weight: 700;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            width: 100%;
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.3);
-        }
-        .btn-primary:hover:not(:disabled) {
-            background: var(--accent2);
-            transform: translateY(-2px);
-        }
-        .btn-primary:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 14px 32px;
-            border-radius: 14px;
-            font-family: var(--sans);
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            width: 100%;
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        .spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255,255,255,0.15);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .hidden { display: none !important; }
-
-        .security-status {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            padding: 20px;
-        }
-        .security-status .spinner { width: 32px; height: 32px; border-width: 3px; }
-
-        @media (max-width: 600px) {
-            #app .modal-container {
-                padding: 32px 20px !important;
-            }
-            .step-line {
-                width: 20px;
-            }
-            .step-dot {
-                width: 30px;
-                height: 30px;
-                font-size: 11px;
-            }
-            .modal-container h1 {
-                font-size: 24px;
-            }
-            .modal-icon-box {
-                font-size: 48px !important;
-            }
-            .modal-description {
-                font-size: 14px;
-            }
-            .checkbox-row {
-                padding: 12px 14px;
-            }
-            .checkbox-row label {
-                font-size: 12px;
-            }
-            .error-embed {
-                padding: 20px 16px;
-            }
-            .btn-primary, .btn-secondary {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-        }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .verify-box { width: min(440px, calc(100% - 32px)); background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px; }
+        .verify-box h1 { font-size: 1.5rem; margin-bottom: 6px; }
+        .verify-box .sub { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+        .verify-box .login-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; background: var(--blurple); color: #fff; border: none; border-radius: 12px; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+        .verify-box .login-btn:hover { background: var(--blurple-strong); }
+        .verify-box .user-row { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; }
+        .verify-box .user-row img { border-radius: 50%; object-fit: cover; }
+        .verify-box .user-row strong { font-size: 15px; }
+        .verify-box .user-row span { font-size: 12px; color: var(--text-muted); }
+        .verify-box label.check-row { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; margin-bottom: 10px; transition: border-color 0.15s; }
+        .verify-box label.check-row:hover { border-color: var(--blurple-soft); }
+        .verify-box label.check-row input { margin-top: 2px; accent-color: var(--blurple); width: 16px; height: 16px; flex-shrink: 0; }
+        .verify-box label.check-row .text { font-size: 14px; color: var(--text-muted); line-height: 1.4; }
+        .verify-box label.check-row .text a { color: var(--blurple-soft); }
+        .verify-box .submit-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; background: var(--success); color: #fff; border: none; border-radius: 12px; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 16px; transition: background 0.2s, opacity 0.2s; }
+        .verify-box .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .verify-box .submit-btn:not(:disabled):hover { background: #3db87a; }
+        .verify-box .success { text-align: center; padding: 16px 0; }
+        .verify-box .success .icon { font-size: 48px; color: var(--success); margin-bottom: 12px; }
+        .verify-box .error { padding: 12px; background: rgba(240,71,71,0.08); border: 1px solid rgba(240,71,71,0.25); border-radius: 10px; color: #f04747; font-size: 14px; margin-top: 12px; }
+        .verify-box .error:empty { display: none; }
     </style>
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
-        </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
-            <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
-                </div>
-            </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
 
-    <div class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <span class="current">Verify</span>
-    </div>
+<div class="verify-box" id="verifyBox">
+    <h1>Verify your account</h1>
+    <p class="sub">You need to verify before accessing certain features.</p>
+    <div id="verifyContent"></div>
+</div>
 
-    <section class="centered-modal-page" id="app">
-        <div class="modal-container" style="padding: 48px 40px;">
-            <div class="step-indicator" id="stepIndicator">
-                <div class="step-item">
-                    <div class="step-dot active" data-step="1">1</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-line" data-line="1"></div>
-                    <div class="step-dot" data-step="2">2</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-line" data-line="2"></div>
-                    <div class="step-dot" data-step="3">3</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-line" data-line="3"></div>
-                    <div class="step-dot" data-step="4">4</div>
-                </div>
-            </div>
+<script src="/static/js/authnav.js" defer></script>
+<script>
+(function () {
+    'use strict';
 
-            <div id="step1" class="verify-step active">
-                <div class="modal-icon-box" style="font-size: 60px;">
-                    <i class="fa-brands fa-discord"></i>
-                </div>
-                <h1>Login with Discord</h1>
-                <p class="modal-description">
-                    To verify your account, log in with Discord first.
-                </p>
-                <div class="modal-actions">
-                    <a href="/api/auth/login?redirect=/verify/" class="btn-primary">
-                        <i class="fa-brands fa-discord"></i> Login with Discord
-                    </a>
-                </div>
-            </div>
+    var box = document.getElementById('verifyContent');
+    var redirect = new URLSearchParams(location.search).get('redirect') || '/';
 
-            <div id="step2" class="verify-step">
-                <div class="modal-icon-box" style="font-size: 54px;">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h1>Security Check</h1>
-                <p class="modal-description">Checking your connection security...</p>
-                <div class="security-status">
-                    <div class="spinner"></div>
-                </div>
-                <div id="vpnError" class="error-embed hidden">
-                    <div class="error-icon">🚫</div>
-                    <h2>VPN Detected</h2>
-                    <p>Please disable your VPN and reload the page.</p>
-                    <div class="modal-actions" style="margin-top: 20px;">
-                        <button class="btn-secondary" onclick="location.reload()">
-                            <i class="fa-solid fa-rotate"></i> Try Again
-                        </button>
-                    </div>
-                </div>
-            </div>
+    function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
 
-            <div id="step3" class="verify-step">
-                <div class="modal-icon-box" style="font-size: 54px;">
-                    <i class="fa-solid fa-file-contract"></i>
-                </div>
-                <h1>Terms of Service</h1>
-                <p class="modal-description">
-                    Please accept our policies to continue.
-                </p>
-                <div style="text-align: left; margin-bottom: 24px;">
-                    <div class="checkbox-row">
-                        <input type="checkbox" id="tosCheck">
-                        <label for="tosCheck">
-                            I agree to the <a href="/legal/terms-of-service/" target="_blank">Terms of Service</a>
-                        </label>
-                    </div>
-                    <div class="checkbox-row">
-                        <input type="checkbox" id="privacyCheck">
-                        <label for="privacyCheck">
-                            I agree to the <a href="/legal/privacy-policy/" target="_blank">Privacy Policy</a>
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button class="btn-primary" id="completeVerify" disabled>
-                        <i class="fa-solid fa-check"></i> Complete Verification
-                    </button>
-                </div>
-            </div>
+    function showLogin() {
+        box.innerHTML =
+            '<a href="/api/auth/login?redirect=' + encodeURIComponent('/verify/?redirect=' + encodeURIComponent(redirect)) + '" class="login-btn">' +
+            '<i class="fa-brands fa-discord"></i> Login with Discord</a>';
+    }
 
-            <div id="step4" class="verify-step">
-                <div class="modal-icon-box" style="font-size: 54px;">
-                    <i class="fa-solid fa-circle-check" style="color: #2ECC71;"></i>
-                </div>
-                <h1>Completing Verification...</h1>
-                <div class="security-status">
-                    <div class="spinner"></div>
-                </div>
-            </div>
+    function showForm(u) {
+        var ext = u.avatar && u.avatar.startsWith('a_') ? 'gif' : 'webp';
+        var avatarURL = u.avatar
+            ? 'https://cdn.discordapp.com/avatars/' + u.id + '/' + u.avatar + '.' + ext + '?size=64'
+            : '/static/assets/img/logo.png';
 
-            <div id="step5" class="verify-step">
-                <div class="modal-icon-box" style="font-size: 60px;">
-                    <i class="fa-solid fa-check-double" style="color: #2ECC71;"></i>
-                </div>
-                <h1>Already verified</h1>
-                <p class="modal-description">
-                    You're already verified in this server.
-                </p>
-                <div class="modal-actions">
-                    <a href="/" class="btn-ghost" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text); padding: 12px 28px; border-radius: 12px; font-family: var(--sans); font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.2s ease;">
-                        <i class="fa-solid fa-arrow-left"></i> Back to Home
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        box.innerHTML =
+            '<div class="user-row">' +
+            '<img src="' + avatarURL + '" alt="" width="40" height="40">' +
+            '<div><strong>' + esc(u.global_name || u.username) + '</strong><br>' +
+            '<span>@' + esc(u.username) + '</span></div>' +
+            '</div>' +
+            '<label class="check-row"><input type="checkbox" id="cbTos">' +
+            '<span class="text">I accept the <a href="/legal/terms-of-service/" target="_blank">Terms of Service</a></span></label>' +
+            '<label class="check-row"><input type="checkbox" id="cbPrivacy">' +
+            '<span class="text">I accept the <a href="/legal/privacy-policy/" target="_blank">Privacy Policy</a></span></label>' +
+            '<button class="submit-btn" id="submitBtn" disabled>' +
+            '<i class="fa-solid fa-shield-halved"></i> Verify</button>' +
+            '<div class="error" id="verifyError"></div>';
 
-    <script>
-        async function checkAuth() {
-            try {
-                const res = await fetch('/api/auth/me');
-                return await res.json();
-            } catch { return { authenticated: false }; }
+        var cbTos = document.getElementById('cbTos');
+        var cbPrivacy = document.getElementById('cbPrivacy');
+        var submitBtn = document.getElementById('submitBtn');
+        var verifyError = document.getElementById('verifyError');
+
+        function updateSubmit() {
+            submitBtn.disabled = !cbTos.checked || !cbPrivacy.checked;
         }
+        cbTos.addEventListener('change', updateSubmit);
+        cbPrivacy.addEventListener('change', updateSubmit);
 
-        async function checkVPN() {
-            try {
-                const res = await fetch('/api/security/vpn-check');
-                return await res.json();
-            } catch { return { isVpn: false }; }
-        }
+        submitBtn.addEventListener('click', function () {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...';
+            verifyError.textContent = '';
 
-        function showStep(n) {
-            document.querySelectorAll('.verify-step').forEach(el => {
-                el.classList.remove('active');
-                el.style.animation = 'none';
-                void el.offsetHeight;
-                el.style.animation = '';
-            });
-            const next = document.getElementById('step' + n);
-            next.classList.add('active');
-
-            document.querySelectorAll('.step-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i + 1 === n);
-                dot.classList.toggle('done', i + 1 < n);
-            });
-            document.querySelectorAll('.step-line').forEach((line, i) => {
-                line.classList.toggle('done', i + 1 < n);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            const data = await checkAuth();
-            if (!data.authenticated) { showStep(1); return; }
-
-            const statusRes = await fetch('/api/verify/status');
-            const statusData = await statusRes.json();
-            if (statusData.verified) {
-                showStep(5);
-                return;
-            }
-
-            showStep(2);
-            const vpnResult = await checkVPN();
-            if (vpnResult.isVpn) {
-                document.getElementById('vpnError').classList.remove('hidden');
-                document.querySelector('#step2 .spinner').style.display = 'none';
-                return;
-            }
-
-            document.querySelector('#step2 .spinner').style.display = 'none';
-            showStep(3);
-
-            const tosCheck = document.getElementById('tosCheck');
-            const privacyCheck = document.getElementById('privacyCheck');
-            const completeBtn = document.getElementById('completeVerify');
-
-            function updateButton() {
-                completeBtn.disabled = !(tosCheck.checked && privacyCheck.checked);
-            }
-            tosCheck.addEventListener('change', updateButton);
-            privacyCheck.addEventListener('change', updateButton);
-
-            completeBtn.addEventListener('click', async () => {
-                showStep(4);
-                try {
-                    const res = await fetch('/api/verify/complete', { method: 'POST' });
-                    const data = await res.json();
-                    if (data.success && data.alreadyVerified) {
-                        showStep(5);
-                    } else if (data.success) {
-                        window.location.href = '/verified/';
+            fetch('/api/verify/complete', { method: 'POST', credentials: 'include' })
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (data.success) {
+                        if (data.alreadyVerified) {
+                            box.innerHTML = '<div class="success"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><h2>Already verified</h2><p style="color:var(--text-muted);margin-top:4px">You are already verified.</p><p style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);opacity:0.6;margin-top:16px">Redirecting in <span id="countdown">5</span> seconds&hellip;</p></div>';
+                        } else {
+                            box.innerHTML = '<div class="success"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><h2>Verified!</h2><p style="color:var(--text-muted);margin-top:4px">Your account has been verified.</p><p style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);opacity:0.6;margin-top:16px">Redirecting in <span id="countdown">5</span> seconds&hellip;</p></div>';
+                        }
+                        var c = 5;
+                        var cd = document.getElementById('countdown');
+                        setInterval(function () { c--; if (c >= 0 && cd) cd.textContent = c; }, 1000);
+                        setTimeout(function () { window.location.href = redirect; }, 5000);
                     } else {
-                        alert(data.error || 'Verification failed');
-                        showStep(3);
+                        verifyError.textContent = data.error || 'Verification failed. Please try again.';
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Verify';
                     }
-                } catch {
-                    alert('Connection error – please try again.');
-                    showStep(3);
-                }
-            });
+                })
+                .catch(function (err) {
+                    verifyError.textContent = 'Network error. Please try again.';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Verify';
+                });
         });
-    </script>
+    }
+
+    fetch('/api/auth/me', { credentials: 'include' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.authenticated) {
+                showForm(data.user);
+            } else {
+                showLogin();
+            }
+        })
+        .catch(function () {
+            showLogin();
+        });
+})();
+</script>
+
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

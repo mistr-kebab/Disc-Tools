@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Partner | Disc-Tools</title>
+    <script>document.documentElement.style.display='none';fetch('/api/admin/check').then(r=>{if(!r.ok)window.location.href='/';else document.documentElement.style.display=''}).catch(()=>{window.location.href='/'})</script>
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+    <link rel="icon" type="image/png" href="/assets/img/admin_logo.png">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <style>
+        :root { --bg: #0d0d0f; --surface: #16161a; --border: #2a2a2e; --text: #e1e1e6; --muted: #7f7f87; --accent: #e74c3c; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        .layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background: var(--surface); border-right: 1px solid var(--border); padding: 20px 0; flex-shrink: 0; }
+        .sidebar-logo { display: flex; align-items: center; gap: 10px; padding: 0 20px 20px; border-bottom: 1px solid var(--border); text-decoration: none; }
+        .sidebar-logo img { height: 32px; }
+        .sidebar-logo span { font-weight: 800; font-size: 18px; color: #fff; }
+        .sidebar-logo span em { color: #e74c3c; font-style: normal; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 2px; padding: 15px 10px; flex: 1; }
+        .sidebar-nav a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; color: var(--muted); text-decoration: none; border-radius: 10px; font-weight: 500; font-size: 14px; transition: all 0.2s; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(231,76,60,0.1); color: #e74c3c; }
+        .sidebar-nav a i { width: 16px; text-align: center; }
+        .main { flex: 1; padding: 30px 40px; overflow-y: auto; }
+        .back { color: var(--muted); text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 25px; }
+        .back:hover { color: var(--accent); }
+        h1 { font-size: 24px; margin-bottom: 25px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+        .card-head { padding: 18px 25px; border-bottom: 1px solid var(--border); font-size: 15px; font-weight: 600; }
+        .card-body { padding: 25px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .row.full { grid-template-columns: 1fr; }
+        .fg label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .fg input, .fg textarea { width: 100%; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; transition: border 0.2s; }
+        .fg input:focus, .fg textarea:focus { border-color: var(--accent); }
+        .fg textarea { min-height: 100px; resize: vertical; }
+        .img-upload { display: flex; align-items: center; gap: 15px; }
+        .img-preview { width: 80px; height: 80px; border-radius: 10px; background: var(--bg); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+        .img-preview img { width: 100%; height: 100%; object-fit: cover; }
+        .img-preview i { font-size: 24px; color: var(--muted); }
+        .up-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+        .up-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .up-btn input { display: none; }
+        .up-hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
+        .bg-preview { width: 100%; max-width: 600px; max-height: 200px; border-radius: 10px; background: linear-gradient(135deg, #1a1a1f 0%, #121216 100%); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px; }
+        .bg-preview img { max-width: 100%; max-height: 200px; object-fit: contain; }
+        .bg-preview i { font-size: 28px; color: var(--muted); opacity: 0.5; }
+
+        .member-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .member-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; }
+        .member-row img { width: 36px; height: 36px; border-radius: 50%; }
+        .member-info { flex: 1; min-width: 0; }
+        .member-info .name { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .member-info .id { font-size: 11px; color: var(--muted); }
+        .member-row .remove { background: none; border: none; color: var(--muted); cursor: pointer; padding: 6px; border-radius: 6px; font-size: 14px; transition: all 0.2s; }
+        .member-row .remove:hover { color: #e74c3c; background: rgba(231,76,60,0.1); }
+        .add-member { display: flex; gap: 8px; }
+        .add-member input { flex: 1; padding: 9px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; outline: none; }
+        .add-member input:focus { border-color: var(--accent); }
+        .add-member button { padding: 9px 16px; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; white-space: nowrap; }
+        .add-member button:hover { background: #c0392b; }
+        .add-member button:disabled { opacity: 0.5; }
+
+        .actions { display: flex; gap: 10px; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .btn { padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+        .btn-p { background: var(--accent); color: #fff; }
+        .btn-p:hover { background: #c0392b; transform: translateY(-1px); }
+        .btn-s { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); }
+        .btn-s:hover { background: rgba(255,255,255,0.12); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 20px; border-radius: 10px; font-weight: 600; z-index: 9999; display: none; background: #2ecc71; color: #fff; }
+        .toast.show { display: block; animation: slideUp 0.3s ease; }
+        .toast.err { background: #e74c3c; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .loading { text-align: center; padding: 60px; color: var(--muted); }
+        .loading i { font-size: 32px; margin-bottom: 10px; display: block; opacity: 0.4; }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { padding: 20px; }
+            .row { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <a href="/" class="sidebar-logo">
+                <img src="/assets/img/admin_logo.png" alt="Logo">
+                <span>Disc<em>-</em>Tools</span>
+            </a>
+            <nav class="sidebar-nav">
+                <a href="/admin/overview/"><i class="fa-solid fa-house"></i> Overview</a>
+                <a href="/admin/partner/" class="active"><i class="fa-solid fa-handshake"></i> Partners</a>
+                <a href="/admin/partner/requests/"><i class="fa-solid fa-inbox"></i> Requests</a>
+                <a href="/admin/linktree/"><i class="fa-solid fa-link"></i> Linktree</a>
+                <a href="/admin/members/"><i class="fa-solid fa-users"></i> Members</a>
+                <a href="/admin/announcements/"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+                <a href="/admin/logs/"><i class="fa-solid fa-file-lines"></i> Logs</a>
+                <a href="/" style="margin-top:auto;"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
+            </nav>
+        </aside>
+        <main class="main">
+            <a href="/admin/partner/" class="back"><i class="fa-solid fa-arrow-left"></i> Back to Partners</a>
+            <h1 id="pageTitle">Edit Partner</h1>
+
+            <div class="card">
+                <div class="card-head">General</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="fg"><label>Partner Name</label><input type="text" id="name" placeholder="Partner name"></div>
+                    </div>
+                    <div class="row full" style="margin-top:15px;">
+                        <div class="fg"><label>Description</label><textarea id="desc" placeholder="Describe the partner..."></textarea></div>
+                    </div>
+                    <div class="row" style="margin-top:15px;">
+                        <div class="fg"><label>Website URL</label><input type="url" id="website" placeholder="https://..."></div>
+                        <div class="fg"><label>Discord Server Invite</label><input type="url" id="discord" placeholder="https://discord.gg/..."></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">Logo</div>
+                <div class="card-body">
+                    <div class="img-upload">
+                        <div class="img-preview" id="logoPreview"><i class="fa-solid fa-image"></i></div>
+                        <div>
+                            <label class="up-btn"><i class="fa-solid fa-upload"></i> Upload Logo<input type="file" id="logoFile" accept="image/png,image/jpeg,image/gif,image/webp" onchange="uploadImage('logo')"></label>
+                            <button class="up-btn" onclick="removeImage('logo')" style="margin-left:8px;color:#e74c3c;"><i class="fa-solid fa-trash"></i> Remove</button>
+                            <div class="up-hint">Recommended: 512x512 &middot; Max 1MB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">Background</div>
+                <div class="card-body">
+                    <div class="bg-preview" id="bgPreview"><i class="fa-solid fa-image"></i></div>
+                    <div style="display:flex;gap:8px;">
+                        <label class="up-btn"><i class="fa-solid fa-upload"></i> Upload Background<input type="file" id="bgFile" accept="image/png,image/jpeg,image/gif,image/webp" onchange="uploadImage('background')"></label>
+                        <button class="up-btn" onclick="removeImage('background')" style="color:#e74c3c;"><i class="fa-solid fa-trash"></i> Remove</button>
+                    </div>
+                    <div class="up-hint">PNG, JPEG, GIF, WebP &middot; Max 1MB</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">Team Members</div>
+                <div class="card-body">
+                    <div class="member-list" id="memberList"></div>
+                    <div class="add-member">
+                        <input type="text" id="addUserId" placeholder="Discord User ID" onkeydown="if(event.key==='Enter')lookupUser()">
+                        <button onclick="lookupUser()">Look Up</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-s" onclick="window.location.href='/admin/partner/'"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                <button class="btn btn-p" id="saveBtn" onclick="save()"><i class="fa-solid fa-check"></i> Save</button>
+            </div>
+        </main>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+        var slug = new URLSearchParams(window.location.search).get('slug');
+        if (!slug) window.location.href = '/admin/partner/';
+
+        var members = [];
+        var partnerData = null;
+
+        function escapeHtml(s) {
+            if (!s) return '';
+            return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function toast(msg, err) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'toast show' + (err ? ' err' : '');
+            clearTimeout(t._timer);
+            t._timer = setTimeout(function(){ t.className = 'toast'; }, 3000);
+        }
+
+        async function load() {
+            try {
+                var res = await fetch('/api/admin/partner/manage/' + slug);
+                if (!res.ok) { toast('Failed to load', true); return; }
+                var p = await res.json();
+                partnerData = p;
+                document.title = p.name + ' - Edit Partner | Disc-Tools';
+                document.getElementById('pageTitle').textContent = 'Edit: ' + p.name;
+                document.getElementById('name').value = p.name || '';
+                document.getElementById('desc').value = p.description || '';
+                document.getElementById('website').value = p.website || '';
+                document.getElementById('discord').value = p.discord_server || '';
+                if (p.logo) document.getElementById('logoPreview').innerHTML = '<img src="' + p.logo + '" alt="">';
+                if (p.background) document.getElementById('bgPreview').innerHTML = '<img src="' + p.background + '" alt="">';
+
+                members = Array.isArray(p.members) ? p.members.map(function(m){ return m.user_id; }) : (p.user_id ? [p.user_id] : []);
+                renderMembers();
+            } catch(e) { toast('Load error: ' + e.message, true); }
+        }
+
+        function renderMembers() {
+            var list = document.getElementById('memberList');
+            if (members.length === 0) {
+                list.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:8px 0;">No team members yet</div>';
+                return;
+            }
+            var html = '';
+            for (var i = 0; i < members.length; i++) {
+                var uid = members[i];
+                var cached = memberCache[uid];
+                html += '<div class="member-row">' +
+                    '<img src="' + (cached ? cached.avatar : 'https://cdn.discordapp.com/embed/avatars/0.png') + '" alt="">' +
+                    '<div class="member-info">' +
+                        '<div class="name">' + escapeHtml(cached ? (cached.displayName || cached.username) : uid) + '</div>' +
+                        '<div class="id">' + (cached ? escapeHtml(cached.username) + ' &middot; ' : '') + uid + '</div>' +
+                    '</div>' +
+                    '<button class="remove" onclick="removeMember(' + i + ')" title="Remove"><i class="fa-solid fa-xmark"></i></button>' +
+                '</div>';
+            }
+            list.innerHTML = html;
+        }
+
+        var memberCache = {};
+
+        async function fetchUserInfo(uid) {
+            if (memberCache[uid]) return memberCache[uid];
+            try {
+                var r = await fetch('/api/user-info/' + uid);
+                if (r.ok) {
+                    var d = await r.json();
+                    var avatarUrl = d.avatar
+                        ? 'https://cdn.discordapp.com/avatars/' + uid + '/' + d.avatar + '.' + (d.avatar.startsWith('a_') ? 'gif' : 'png') + '?size=64'
+                        : 'https://cdn.discordapp.com/embed/avatars/' + ((parseInt(uid) >> 22) % 6) + '.png';
+                    memberCache[uid] = { username: d.username, displayName: d.global_name || d.username, avatar: avatarUrl };
+                    return memberCache[uid];
+                }
+            } catch(e) {}
+            return null;
+        }
+
+        async function lookupUser() {
+            var input = document.getElementById('addUserId');
+            var uid = input.value.trim().replace(/\D/g, '');
+            if (!uid || uid.length < 17) { toast('Invalid User ID', true); return; }
+            if (members.indexOf(uid) !== -1) { toast('Already a member', true); input.value = ''; return; }
+
+            var btn = input.nextElementSibling;
+            btn.disabled = true;
+            btn.textContent = '...';
+
+            var info = await fetchUserInfo(uid);
+            if (!info) { toast('User not found', true); btn.disabled = false; btn.textContent = 'Look Up'; return; }
+
+            members.push(uid);
+            input.value = '';
+            btn.disabled = false;
+            btn.textContent = 'Look Up';
+            renderMembers();
+        }
+
+        function removeMember(i) {
+            members.splice(i, 1);
+            renderMembers();
+        }
+
+        (async function preloadMembers() {
+            await load();
+            for (var i = 0; i < members.length; i++) { await fetchUserInfo(members[i]); }
+            renderMembers();
+        })();
+
+        async function uploadImage(type) {
+            var input = document.getElementById(type === 'logo' ? 'logoFile' : 'bgFile');
+            var f = input.files[0];
+            if (!f) return;
+            if (f.size > 1*1024*1024) { toast('File too large (max 1MB)', true); return; }
+            var fd = new FormData();
+            fd.append('file', f);
+            fd.append('type', type);
+            try {
+                var r = await fetch('/api/admin/partner/manage/' + slug + '/upload', { method: 'POST', body: fd });
+                if (!r.ok) { var e = await r.json().catch(function(){return{};}); throw new Error(e.error || 'Upload failed'); }
+                var d = await r.json();
+                if (type === 'logo') {
+                    document.getElementById('logoPreview').innerHTML = '<img src="' + d.url + '" alt="">';
+                } else {
+                    document.getElementById('bgPreview').innerHTML = '<img src="' + d.url + '" alt="">';
+                }
+                input.value = '';
+                toast('Uploaded!');
+            } catch(e) { toast(e.message, true); }
+        }
+
+        async function removeImage(type) {
+            if (!confirm('Remove ' + type + '?')) return;
+            try {
+                var r = await fetch('/api/admin/partner/manage/' + slug + '/upload/remove', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: type })
+                });
+                if (!r.ok) throw new Error('Failed');
+                if (type === 'logo') {
+                    document.getElementById('logoPreview').innerHTML = '<i class="fa-solid fa-image"></i>';
+                } else {
+                    document.getElementById('bgPreview').innerHTML = '<i class="fa-solid fa-image"></i>';
+                }
+                toast('Removed!');
+            } catch(e) { toast(e.message, true); }
+        }
+
+        async function save() {
+            var btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            try {
+                var r = await fetch('/api/admin/partner/manage/' + slug, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('name').value.trim() || null,
+                        description: document.getElementById('desc').value.trim() || null,
+                        website: document.getElementById('website').value.trim() || null,
+                        discord_server: document.getElementById('discord').value.trim() || null,
+                        user_ids: members
+                    })
+                });
+                if (!r.ok) {
+                    var e = await r.json().catch(function(){return{};});
+                    throw new Error(e.error || 'Save failed (HTTP ' + r.status + ')');
+                }
+                toast('Saved!');
+            } catch(e) { toast(e.message, true); }
+            finally { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-check"></i> Save'; }
+        }
+    </script>
+</body>
+</html>

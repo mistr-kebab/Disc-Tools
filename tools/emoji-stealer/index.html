@@ -1,156 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Emoji Stealer | Download Guild Emojis | Disc-Tools</title>
-    
-    
-    
-    <!-- Meta Tags for Discord/Social Media Embeds -->
-    <meta name="description" content="Extract and download emojis from any Discord server with ease.">
-    <meta name="theme-color" content="#5865F2">
-    <meta property="og:title" content="Emoji Stealer - Disc-Tools">
-    <meta property="og:description" content="Grab direct high-quality links for any Discord emoji or sticker.">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Disc-Tools">
-    <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Emoji Stealer | Disc-Tools</title>
+    <meta name="description" content="High-quality CDN links for any Discord emoji or sticker — name, ID, animated status and direct download URLs.">
+    <meta name="keywords" content="discord emoji stealer, download discord emoji, discord emoji downloader, steal discord emojis, emoji stealer, discord emoji download">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://disc-tools.de/tools/emoji-stealer/">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/tools.css">
+    <link rel="stylesheet" href="/static/css/user-lookup.css">
+    <link rel="stylesheet" href="/static/css/emoji-stealer.css?v=1">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
 </head>
-
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link active">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="/tools/">Tools</a>
-        <span>/</span>
-        <a href="./" class="current">Emoji & Sticker Stealer</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="lookup-page">
+    <div class="container">
 
-    <main class="tool-page">
-        <div class="tool-layout-single">
-            <div class="tool-container">
-                <section class="tool-hero" style="position: relative;">
-                    <span class="hero-tag">// assets / cdn</span>
-                    <h1>Emoji & Sticker <em>Stealer</em></h1>
-                    <p>Download any high-quality Discord emoji or sticker asset directly.</p>
-                    <a href="/guides/emoji-stealer/" class="help-link">
-                        <i class="fa-solid fa-circle-question"></i> How to?
-                    </a>
-                </section>
+        <a href="/tools/" class="back-link"><i class="fa-solid fa-arrow-left"></i> All tools</a>
 
-                <div class="stealer-container">
-                    <div class="toggle-group">
-                        <button id="mode-emoji" class="toggle-btn active" onclick="setMode('emoji')">Emoji</button>
-                        <button id="mode-sticker" class="toggle-btn" onclick="setMode('sticker')">Sticker</button>
-                    </div>
+        <section class="tool-hero">
+            <h1>Emoji <em>Stealer</em></h1>
+            <p>High-quality CDN links for any Discord emoji or sticker — paste an emoji, a sticker or its ID and grab the direct download URLs.</p>
+        </section>
 
-                    <div class="input-card">
-                        <div class="input-group">
-                            <input type="text" id="assetInput" placeholder="Enter Emoji/Sticker ID or raw format <:name:id>...">
-                            <button id="stealBtn" onclick="stealAsset()">Steal Asset</button>
-                        </div>
-                        <p class="input-hints">Hint: You can paste the raw emoji format directly from Discord.</p>
-                    </div>
+    <!-- TrustBox - visible -->
+        <div id="gate"></div>
 
-                    <div id="result" class="result-area">
-                        <div class="empty-state">
-                            <i class="fa-solid fa-face-grin-stars"></i>
-                            <p>Enter an ID to fetch the direct CDN links and previews.</p>
-                        </div>
-                    </div>
-                </div>
+        <form id="lookup-form" class="lookup-form" hidden>
+            <div class="lookup-input-wrap">
+                <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                <input type="text" id="lookup-input" placeholder="Paste an emoji or ID, e.g. <:DiscTools:1502521062544506940>" autocomplete="off">
+                <button type="submit" class="btn btn-primary" id="lookup-submit"><i class="fa-solid fa-download"></i> Get links</button>
             </div>
+            <p class="lookup-hint">Paste <button type="button" class="hint-example" data-value="<:DiscTools:1502521062544506940>">&lt;:DiscTools:1502521062544506940&gt;</button> or <button type="button" class="hint-example" data-value="1502521062544506940">just the ID</button></p>
+        </form>
+
+        <div id="result" class="result"></div>
+
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-    </main>
-
-    <div class="toast" id="toast"></div>
-
-        <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-
-
-    <script src="/js/emoji-stealer.js" defer></script>
-    <script src="/js/main.js?v=3" defer></script>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/user-lookup/">User Lookup</a>
+            <a href="/tools/server-lookup/">Server Lookup</a>
+            <a href="/tools/invite-lookup/">Invite Lookup</a>
+            <a href="/tools/alt-account-lookup/">Alt Account Lookup</a>
+            <a href="/tools/emoji-stealer/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/emoji-stealer.js?v=2" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
-
 </html>

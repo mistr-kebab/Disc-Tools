@@ -1,0 +1,822 @@
+/* ============================================================
+   Disc-Tools: Landing Page
+   Design: Blurple #5865f2 als CTA/Fokus-Akzent, tiefer Anthrazit-
+   Hintergrund (kein #000), warmes Grün als Erfolgs-Akzent.
+   Typo: Space Grotesk (Display) / Onest (Body) / JetBrains Mono.
+   Navbar-Pill: ausschließlich transform/opacity (kein Layout-Jank).
+   ============================================================ */
+
+/* ---------- Webfonts (variabel, lokal) ---------- */
+@font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/static/fonts/SpaceGrotesk/SpaceGrotesk.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Onest';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/static/fonts/Onest/Onest.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/static/fonts/JetBrainsMono/JetBrainsMono.woff2') format('woff2');
+}
+/* ---------- Design-Tokens ---------- */
+:root {
+    --bg: #0a0d13;
+    --surface: #12161f;
+    --surface-2: #171c29;
+    --border: #232c40;
+
+    --text: #edf1fa;
+    --text-muted: #9aa5bc;
+
+    --blurple: #5865f2;
+    --blurple-strong: #4752c4;
+    --blurple-soft: #7c85f0;
+    --success: #4ecb8d;
+
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Onest', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --nav-h: 76px;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --radius: 14px;
+
+    /* Pill-Breite = Skalierungsfaktor des Nav-BG relativ zur Viewport-Breite.
+       Faktoren sind so gewählt, dass die Pill den Nav-Inhalt
+       (min(1160px, 100vw-48px)) immer komplett abdeckt. */
+    --pill-sx: 0.98;
+}
+@media (min-width: 1000px) { :root { --pill-sx: 0.97; } }
+@media (min-width: 1200px) { :root { --pill-sx: 0.97; } }
+@media (min-width: 1400px) { :root { --pill-sx: 0.85; } }
+@media (min-width: 1600px) { :root { --pill-sx: 0.73; } }
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+/* Dezente, nicht-flächige Hero-Deko: zwei schwache Glows statt Verlaufsfläche */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(720px 460px at 88% -60px, rgba(88, 101, 242, 0.10), transparent 65%),
+        radial-gradient(560px 420px at -8% 38%, rgba(78, 203, 141, 0.05), transparent 60%);
+}
+
+::selection {
+    background: var(--blurple);
+    color: #fff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--blurple-soft);
+    text-underline-offset: 3px;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-display);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+}
+
+p {
+    margin: 0;
+}
+
+.container {
+    width: min(1160px, calc(100% - 48px));
+    margin-inline: auto;
+}
+/* ---------- Fokus-Sichtbarkeit (auch im Pill-Zustand) ---------- */
+:focus {
+    outline: none;
+}
+:focus-visible {
+    outline: 3px solid var(--blurple);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.skip-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 300;
+    padding: 10px 16px;
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-weight: 600;
+    transform: translateY(-200%);
+    transition: transform 0.2s var(--ease-out);
+}
+.skip-link:focus-visible {
+    transform: translateY(0);
+}
+/* ---------- Scrollbar (PC/Chromium/Firefox) ---------- */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(88, 101, 242, 0.55);
+    border-radius: 999px;
+    border: 3px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blurple);
+}
+html {
+    scrollbar-color: rgba(88, 101, 242, 0.55) var(--bg);
+    scrollbar-width: thin;
+}
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s var(--ease-out), background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn-lg {
+    min-height: 52px;
+    padding: 15px 26px;
+    font-size: 16.5px;
+}
+.btn-sm {
+    min-height: 44px;
+    padding: 9px 16px;
+    font-size: 14.5px;
+}
+.btn-block {
+    width: 100%;
+}
+
+.btn-primary {
+    background: var(--blurple);
+    color: #fff;
+}
+.btn-primary:hover {
+    background: var(--blurple-strong);
+    transform: translateY(-1px);
+}
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-ghost {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+}
+.btn-ghost:hover {
+    border-color: var(--blurple);
+    background: rgba(88, 101, 242, 0.08);
+    transform: translateY(-1px);
+}
+/* ---------- Navbar (Pill) ---------- */
+.nav-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-h);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hintergrund-Layer: Skalierung nur über transform, transform-origin
+   top center; die Pill zieht sich horizontal zur Mitte zusammen, ohne
+   dass der Inhalt (Logo/Links/CTA) mitverkleinert oder neu umbricht. */
+.nav-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 13, 19, 0.72);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+    transform-origin: top center;
+    transition:
+        transform 0.4s var(--ease-out),
+        border-radius 0.4s var(--ease-out),
+        box-shadow 0.4s var(--ease-out),
+        border-color 0.4s var(--ease-out);
+}
+
+.nav-shell.is-pill .nav-bg {
+    transform: translateY(14px) scaleX(var(--pill-sx)) scaleY(0.9);
+    border-radius: 999px;
+    border-bottom-color: transparent;
+    box-shadow: 0 16px 40px rgba(3, 6, 12, 0.55);
+}
+
+/* Inhalt faehrt mit der Pill mit: Breite exakt auf Pill-Breite
+   (100% * var(--pill-sx)), dadurch liegen Logo/Login im Pill-Zustand
+   immer sauber innerhalb der Pill. Nur die Pill selbst bleibt
+   transform-only; der Inhalt animiert per width (einmalig pro
+   Zustandswechsel, nicht beim Scrollen). */
+.nav-shell.is-pill .nav-inner {
+    width: calc(100% * var(--pill-sx) - 32px);
+    transform: translateY(10px);
+}
+
+/* Nav-Inhalt: ganz oben bündig an den Bildschirmrändern (Logo ganz
+   links, Login ganz rechts). Beim Scrollen fährt der Inhalt mit
+   translateY + width-Transition in die schmalere Pill. */
+.nav-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: calc(100% - 32px);
+    transform: translateY(0);
+    transition: width 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    text-decoration: none;
+    color: var(--text);
+}
+.brand-mark {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+}
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.nav-links a:not(.btn) {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 44px;
+    padding: 0 14px;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+.nav-links a:not(.btn) i {
+    font-size: 14px;
+    opacity: 0.8;
+}
+.nav-links a:not(.btn):hover {
+    color: var(--text);
+    text-shadow:
+        0 0 14px rgba(124, 133, 240, 0.55),
+        0 0 30px rgba(124, 133, 240, 0.25);
+}
+
+/* Nav Dropdowns */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a { cursor: default; }
+.nav-dropdown > a i { font-size: 10px; margin-left: 2px; transition: transform 0.2s; }
+.nav-dropdown:hover > a i { transform: rotate(180deg); }
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    min-width: 200px;
+    background: rgba(18, 22, 31, 0.97);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s, visibility 0.18s, transform 0.18s;
+    z-index: 210;
+    box-shadow: 0 16px 48px rgba(3,6,12,0.6);
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(8px);
+}
+.nav-dropdown-menu a {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px !important;
+    border-radius: 10px;
+    min-height: 0 !important;
+    font-size: 14px !important;
+    white-space: nowrap;
+    transition: background 0.12s !important;
+    text-shadow: none !important;
+}
+.nav-dropdown-menu a:hover {
+    background: rgba(255,255,255,0.06);
+    color: var(--text) !important;
+    text-shadow: none !important;
+}
+.nav-dropdown-menu a i { width: 16px; text-align: center; }
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Hamburger */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4.5px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-2);
+    cursor: pointer;
+}
+.nav-toggle-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text);
+    transition: transform 0.25s var(--ease-out), opacity 0.2s;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile-Menü (Overlay) */
+.mobile-menu {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    padding: 20px 24px 40px;
+    background: rgba(10, 13, 19, 0.97);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    overflow-y: auto;
+}
+.mobile-menu[hidden] {
+    display: none !important;
+}
+.mobile-menu nav {
+    display: grid;
+    gap: 8px;
+}
+.mobile-menu nav > a {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.mobile-menu nav .btn {
+    margin-top: 10px;
+    border-bottom: none;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--success);
+    margin: 0 0 18px;
+}
+.soon-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+/* ---------- Cookie banner ---------- */
+.cookie-banner {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: auto;
+    z-index: 300;
+    width: min(380px, calc(100% - 32px));
+    padding: 20px;
+    background: rgba(18, 22, 31, 0.96);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(3, 6, 12, 0.6);
+}
+.cookie-banner[hidden] {
+    display: none;
+}
+.cookie-title {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text);
+}
+.cookie-text {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+.cookie-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+.cookie-panel {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 10px;
+}
+.cookie-panel[hidden] {
+    display: none;
+}
+.cookie-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(10, 13, 19, 0.5);
+    cursor: pointer;
+}
+.cookie-row strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text);
+}
+.cookie-row small {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 12.5px;
+}
+.cookie-row input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--blurple);
+}
+.cookie-row input:disabled {
+    cursor: not-allowed;
+}
+.switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 42px;
+    height: 24px;
+}
+.switch input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+.switch-track {
+    display: block;
+    width: 42px;
+    height: 24px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-2);
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.switch-track::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: transform 0.2s var(--ease-out), background-color 0.2s;
+}
+.switch input:checked + .switch-track {
+    background: var(--blurple);
+    border-color: var(--blurple);
+}
+.switch input:checked + .switch-track::after {
+    transform: translateX(18px);
+    background: #fff;
+}
+.switch input:focus-visible + .switch-track {
+    outline: 2px solid var(--blurple);
+    outline-offset: 2px;
+}
+.switch input:disabled + .switch-track {
+    opacity: 0.55;
+}
+.switch input:disabled {
+    cursor: not-allowed;
+}
+.cookie-panel .btn {
+    justify-self: start;
+}
+.footer-col .cookie-settings-link {
+    display: block;
+    padding: 4px 0;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--text-muted);
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.footer-col .cookie-settings-link:hover {
+    color: var(--text);
+}
+/* ---------- Footer ---------- */
+main#main, main[class] {
+    flex: 1;
+}
+
+.footer {
+    margin-top: auto;
+    padding: 64px 0 48px;
+    border-top: 1px solid var(--border);
+    background: rgba(10, 13, 19, 0.6);
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+    gap: 32px;
+}
+.footer-brand p {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 34ch;
+}
+.footer-note {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+.footer-social {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0;
+}
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: none;
+    color: var(--text-muted);
+    font-size: 17px;
+    text-decoration: none;
+    transition: color 0.2s, transform 0.15s;
+}
+.footer-social a:hover {
+    color: var(--blurple-soft);
+    transform: translateY(-2px);
+}
+.footer-col h3 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+.footer-col a {
+    display: block;
+    padding: 4px 0;
+    font-size: 14.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-col a:hover {
+    color: var(--text);
+}
+.page-intro {
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 62ch;
+}
+/* ---------- Back to top ---------- */
+.back-to-top {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 250;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(18, 22, 31, 0.92);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    color: var(--text-muted);
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s, color 0.2s, border-color 0.2s;
+}
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.back-to-top:hover {
+    color: var(--text);
+    border-color: var(--blurple);
+}
+.back-to-top:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+    .tool-list a:hover,
+    .learn-card:hover,
+    .community-links a:hover,
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* ---------- Cookie banner Animation ---------- */
+.cookie-banner:not([hidden]) {
+    animation: cookie-in 0.5s var(--ease-out);
+}
+@keyframes cookie-in {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Responsive (global) ---------- */
+@media (max-width: 1120px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 880px) {
+    .nav-links {
+        display: none;
+    }
+    .nav-actions .btn {
+        display: none;
+    }
+    .nav-toggle {
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        width: calc(100% - 32px);
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Pill auf Mobile: dezente Einrückung + Rundung, gleiche Technik. */
+@media (max-width: 880px) {
+    .nav-shell.is-pill .nav-bg {
+        transform: translateY(10px) scaleX(0.98) scaleY(0.92);
+    }
+    .nav-shell.is-pill .nav-inner {
+        transform: translateY(7px);
+    }
+}

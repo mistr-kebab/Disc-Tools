@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phishing Detection | Disc-Tools</title>
+    <meta name="description" content="How to spot fake login pages, scam links, and social engineering on Discord.">
+    <meta name="keywords" content="discord phishing, phishing discord, discord scam, discord fake login, discord phishing link">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="canonical" href="https://disc-tools.de/security-articles/phishing/">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+    <style>
+        .page { padding: calc(var(--nav-h) + 56px) 0 120px; }
+        .hero { max-width: 720px; }
+        .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); }
+        .hero h1 em { color: #f04747; font-style: normal; }
+        .article { max-width: 780px; margin-top: 40px; }
+        .article h2 { font-size: 1.4rem; margin: 48px 0 12px; }
+        .article h2:first-of-type { margin-top: 0; }
+        .article p { color: var(--text-muted); font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
+        .article ul { color: var(--text-muted); font-size: 15px; line-height: 1.75; padding-left: 20px; margin-bottom: 16px; }
+        .article ul li { margin-bottom: 6px; }
+        .article strong { color: var(--text); }
+        .article code { font-family: var(--font-mono); font-size: 13px; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; }
+        .tip { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; }
+        .tip h3 { font-size: 16px; margin-bottom: 6px; color: var(--blurple-soft); }
+        .tip p { margin-bottom: 0; }
+        .red { background: rgba(240,71,71,0.08); border-color: rgba(240,71,71,0.25); }
+        .red h3 { color: #f04747; }
+        .back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 14px; margin-bottom: 24px; transition: color 0.15s; }
+        .back:hover { color: var(--text); }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
+            <div class="nav-dropdown">
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
+                </div>
+            </div>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="/partner/" class="btn btn-ghost btn-block"><i class="fa-solid fa-handshake" aria-hidden="true"></i> Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="page">
+    <div class="container">
+        <a href="/security-articles/" class="back"><i class="fa-solid fa-arrow-left"></i> All Security Articles</a>
+        <div class="hero">
+            <h1>Discord <em>Phishing</em> Detection</h1>
+            <p class="team-intro">How to spot fake login pages, scam links, and social engineering before it's too late.</p>
+        </div>
+
+        <div class="article">
+
+            <h2>Common Discord Phishing Tactics</h2>
+            <p>Attackers use increasingly sophisticated methods to trick Discord users. Here are the most common patterns you need to recognize:</p>
+
+            <div class="tip red">
+                <h3>&#x26A0; Fake Login Pages</h3>
+                <p>You receive a link claiming to be Discord. The page looks <em>identical</em> to the real login screen — same colors, fonts, layout. You enter your email and password, and nothing happens (or you get an "error"). Your credentials have just been sent to the attacker. <strong>Always check the URL:</strong> the real Discord login is at <code>discord.com/login</code>. Scammers use domains like <code>discord-nitro.com</code>, <code>discordgift.xyz</code>, <code>dlscord.com</code> (notice the L instead of I).</p>
+            </div>
+
+            <div class="tip red">
+                <h3>&#x26A0; Free Nitro Scams</h3>
+                <p>"Free 3 months of Nitro!" or "Claim your Nitro gift!" messages with a link. There is no free Nitro. Discord's actual promotions are always announced through the official Discord blog or in-app notifications, never through random DMs or server messages. Clicking the link leads to a phishing page that asks for your Discord login — or worse, your credit card details.</p>
+            </div>
+
+            <div class="tip red">
+                <h3>&#x26A0; QR Code Login Theft</h3>
+                <p>An attacker sends you a QR code and asks you to scan it — often framed as "verification" or "claiming a reward." That QR code is actually a Discord login QR. Scanning it grants the attacker instant access to your account. <strong>Only scan QR codes from the official Discord login screen.</strong></p>
+            </div>
+
+            <div class="tip red">
+                <h3>&#x26A0; "Test My Game" Scam</h3>
+                <p>Someone DMs you asking to "test their new game" or "try their project." They send a file (usually <code>.exe</code>, <code>.msi</code>, or <code>.scr</code>). Running this file installs malware that steals your Discord token, browser passwords, and cryptocurrency wallets. <strong>Never run executables from strangers.</strong></p>
+            </div>
+
+            <div class="tip red">
+                <h3>&#x26A0; Fake Discord Staff / Support</h3>
+                <p>Someone claims to be from "Discord Trust &amp; Safety" or "Discord Support" and says your account has been reported. They ask you to "verify" your account by providing your password, token, or by changing your email to one they control. Discord staff will <strong>never</strong> ask for your password or token in DMs. They communicate through email from <code>@discord.com</code> or the official in-app system.</p>
+            </div>
+
+            <h2>Red Flags &mdash; How to Spot a Scam</h2>
+            <ul>
+                <li><strong>Urgency:</strong> "Act now or your account will be deleted!" Legitimate services rarely use urgent threats.</li>
+                <li><strong>Too good to be true:</strong> Free Nitro, free Steam games, free cryptocurrency — if it sounds too good, it's a scam.</li>
+                <li><strong>Suspicious URLs:</strong> Hover over links before clicking. Look for typos (<code>dlscord</code> instead of <code>discord</code>), wrong domains (<code>.xyz</code>, <code>.tk</code>, <code>.cf</code>), or unfamiliar subdomains.</li>
+                <li><strong>Unexpected DMs:</strong> Random people messaging you with links or files is the most common attack vector.</li>
+                <li><strong>"Verify your age" / "Verify you're human":</strong> These are almost always phishing. Discord already knows your age from your account settings.</li>
+                <li><strong>Grammar and spelling:</strong> Many scams originate from non-English speaking countries. Obvious grammar errors are a red flag — but not always, as AI tools are making scams more polished.</li>
+            </ul>
+
+            <h2>What to Do If You Clicked a Phishing Link</h2>
+            <ol style="color:var(--text-muted);font-size:15px;line-height:1.75;padding-left:20px;margin-bottom:16px">
+                <li style="margin-bottom:8px"><strong>Change your password immediately</strong> — go to Discord Settings &rarr; My Account &rarr; Change Password.</li>
+                <li style="margin-bottom:8px"><strong>Enable 2FA</strong> — Settings &rarr; My Account &rarr; Enable Two-Factor Authentication.</li>
+                <li style="margin-bottom:8px"><strong>Log out all sessions</strong> — Settings &rarr; Devices &rarr; "Log Out All Known Devices." This invalidates any stolen tokens.</li>
+                <li style="margin-bottom:8px"><strong>Check authorized apps</strong> — Settings &rarr; Authorized Apps. Remove anything you don't recognize.</li>
+                <li style="margin-bottom:8px"><strong>Run a malware scan</strong> — Use Windows Defender or Malwarebytes if you ran any downloaded files.</li>
+                <li style="margin-bottom:8px"><strong>Contact Discord Support</strong> — Report the incident at <a href="https://support.discord.com">support.discord.com</a>.</li>
+            </ol>
+
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
+        </div>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/consent.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+</body>
+</html>

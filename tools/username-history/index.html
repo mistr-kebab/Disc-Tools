@@ -1,197 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Username History | Discord Name Changes | Disc-Tools</title>
-
-    <!-- Meta Tags for Discord/Social Media Embeds -->
-    <meta name="description" content="Look up the username history of any Discord user. Track name changes over time.">
-    <meta name="theme-color" content="#5865F2">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Discord Username History",
-      "operatingSystem": "Web",
-      "applicationCategory": "DeveloperApplication",
-      "description": "Look up the username history of any Discord user and track name changes over time.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
-    <meta property="og:title" content="Username History - Disc-Tools">
-    <meta property="og:description" content="Look up the username history of any Discord user. Track name changes over time.">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Disc-Tools">
-    <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Username History | Disc-Tools</title>
+    <meta name="description" content="Look up past usernames and display names of any Discord user by ID.">
+    <meta name="keywords" content="discord username history, discord name history, discord past usernames, discord username change history, discord name lookup">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://disc-tools.de/tools/username-history/">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/tools.css">
+    <link rel="stylesheet" href="/static/css/user-lookup.css">
+    <link rel="stylesheet" href="/static/css/username-history.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
 </head>
-
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link active">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="/tools/">Tools</a>
-        <span>/</span>
-        <a href="./" class="current">Username History</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="lookup-page">
+    <div class="container">
 
-    <main class="tool-page" id="tool-page">
-        <div class="tool-layout-single">
-            <div class="tool-container">
-                <section class="tool-hero" style="position: relative;">
-                    <span class="hero-tag">// user / history</span>
-                    <h1>Username <em>History</em></h1>
-                    <p>Look up the username history of any Discord user and track name changes over time.</p>
-                </section>
+        <a href="/tools/" class="back-link"><i class="fa-solid fa-arrow-left"></i> All tools</a>
 
-                <a href="/invite/bot/disc-tools/" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:16px;padding:8px 16px;background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.2);border-radius:8px;transition:.2s;" onmouseover="this.style.background='rgba(88,101,242,.2)'" onmouseout="this.style.background='rgba(88,101,242,.1)'">
-                    <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Also available as <code style="font-size:12px;">/username-history</code> on Discord
-                </a>
+        <section class="tool-hero">
+            <h1>Username <em>History</em></h1>
+            <p>See every past username of any Discord user by ID.</p>
+            <span class="uh-premium-tag"><i class="fa-solid fa-crown"></i> Premium</span>
+        </section>
 
-                <div id="tool-content">
-                    <div class="decoder-card">
-                        <div id="eligibilityLocked" style="display:none; text-align:center; padding:30px;">
-                            <i class="fa-solid fa-lock" style="font-size:40px; opacity:0.3; margin-bottom:15px;"></i>
-                            <div id="eligibilityMessage"></div>
-                        </div>
-                        <div id="toolMainContent">
-                            <div class="input-group">
-                                <input type="text" id="userIdInput" class="snowflake-input" placeholder="Enter Discord User ID (e.g. 175928847299117056)">
-                                <button class="decode-btn" onclick="lookupUsernameHistory()">Look Up</button>
-                            </div>
-                            <div id="freeSearchCounter" style="text-align:right; font-size:12px; color:var(--muted); margin-top:6px; min-height:16px;"><i class="fa-solid fa-spinner fa-spin"></i></div>
-
-                            <div id="userInfo" style="display:none; margin-top:20px; padding:15px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid var(--border);">
-                                <div style="display:flex; align-items:center; gap:15px;">
-                                    <img id="userAvatar" src="" alt="" style="width:48px; height:48px; border-radius:50%;">
-                                    <div>
-                                        <div id="userDisplayName" style="font-weight:600; font-size:16px;"></div>
-                                        <div id="userUsername" style="color:var(--muted); font-size:13px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="resultsContainer" style="margin-top:20px; display:none;">
-                                <div id="noData" style="text-align:center; padding:30px; color:var(--muted);">
-                                    <i class="fa-solid fa-clock-rotate-left" style="font-size:32px; opacity:0.3; margin-bottom:10px;"></i>
-                                    <p>No username changes recorded for this user.</p>
-                                </div>
-                                <div id="historyTable" style="display:none;">
-                                    <table style="width:100%; border-collapse:collapse;">
-                                        <thead>
-                                            <tr style="border-bottom:1px solid var(--border);">
-                                                <th style="padding:10px 12px; text-align:left; color:var(--muted); font-size:12px; text-transform:uppercase;">Old Username</th>
-                                                <th style="padding:10px 12px; text-align:left; color:var(--muted); font-size:12px; text-transform:uppercase;">New Username</th>
-                                                <th style="padding:10px 12px; text-align:left; color:var(--muted); font-size:12px; text-transform:uppercase;">Changed</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="historyBody"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div id="historyEmptyState" class="empty-state" style="margin-top:20px;">
-                                <i class="fa-solid fa-clock-rotate-left" style="font-size:40px; opacity:0.1; margin-bottom:15px;"></i>
-                                <p>Enter a Discord User ID to see their username history.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- TrustBox - visible -->
+        <form id="history-form" class="lookup-form">
+            <div class="lookup-input-wrap">
+                <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                <input type="text" id="history-input" placeholder="Enter a Discord user ID (17-20 digits)" autocomplete="off" inputmode="numeric" pattern="\d{17,20}">
+                <button type="submit" class="btn btn-primary" id="history-submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
             </div>
+            <p class="lookup-hint">Enter any user ID — e.g. <button type="button" class="hint-example" data-id="483395775464734763">483395775464734763</button></p>
+        </form>
+
+        <div id="gate" class="uh-gate"></div>
+
+        <div id="result" class="result"></div>
+
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-    </main>
-
-    <div class="toast" id="toast"></div>
-
-        <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-
-
-    <script src="/js/username-history.js?v=5" defer></script>
-    <script src="/js/main.js?v=5" defer></script>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/user-lookup/">User Lookup</a>
+            <a href="/tools/username-history/">Username History</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/username-history.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
-
 </html>

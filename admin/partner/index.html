@@ -44,11 +44,12 @@
         .btn-sm:hover { background: #e74c3c; color: white; }
         .btn-danger { background: rgba(231, 76, 60, 0.1); color: #e74c3c; border-color: rgba(231, 76, 60, 0.2); }
         .btn-danger:hover { background: #e74c3c; color: white; }
+        .btn-edit { background: rgba(52, 152, 219, 0.1); color: #3498db; border-color: rgba(52, 152, 219, 0.2); }
+        .btn-edit:hover { background: #3498db; color: white; }
         .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; color: var(--muted); text-align: center; }
         .empty-state i { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
         .empty-state p { margin: 0; font-size: 16px; }
         .partners-container { min-height: 300px; }
-        .add-partner-form { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 30px; display: none; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .form-group { margin-bottom: 15px; }
         .form-group.full { grid-column: 1 / -1; }
@@ -58,6 +59,7 @@
         .form-actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-submit { padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
         .btn-cancel { background: rgba(255, 255, 255, 0.1); color: var(--text); border: 1px solid var(--border); }
+        .partner-row { cursor: pointer; transition: background 0.15s; }
         @media (max-width: 768px) {
             .form-grid { grid-template-columns: 1fr; }
             .partners-table { font-size: 13px; }
@@ -145,8 +147,12 @@
                             <input type="url" name="discordServer" placeholder="https://discord.gg/...">
                         </div>
                         <div class="form-group">
-                            <label>User ID (for edit access) *</label>
-                            <input type="text" name="user_id" required placeholder="Discord User ID">
+                            <label>User IDs (comma-separated) *</label>
+                            <input type="text" name="user_ids" required placeholder="175928847299117056, 123456789012345678">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (days, empty = permanent)</label>
+                            <input type="number" name="duration" placeholder="30" min="1">
                         </div>
                         <div class="form-group full">
                             <label>Description</label>
@@ -210,10 +216,13 @@
             });
         });
 
+        let partnersCache = [];
+
         async function loadPartners() {
             try {
                 const res = await fetch('/api/admin/partners');
                 const partners = await res.json();
+                partnersCache = partners;
 
                 const tbody = document.getElementById('partnersBody');
                 const table = document.getElementById('partnersTable');
@@ -228,8 +237,8 @@
                 table.style.display = '';
                 emptyState.style.display = 'none';
 
-                tbody.innerHTML = partners.map(p => `
-                    <tr>
+                tbody.innerHTML = partners.map((p, i) => `
+                    <tr class="partner-row">
                         <td>
                             <div class="partner-name">
                                 <div class="partner-logo">
@@ -238,16 +247,19 @@
                                 <strong>${escapeHtml(p.name)}</strong>
                             </div>
                         </td>
-                        <td>${escapeHtml(p.description.substring(0, 50))}...</td>
+                        <td>${escapeHtml((p.description || '').substring(0, 50))}${p.description && p.description.length > 50 ? '...' : ''}</td>
                         <td>
                             <div style="display: flex; gap: 5px;">
-                                ${p.website ? `<a href="${escapeHtml(p.website)}" target="_blank" rel="noopener noreferrer" class="btn-sm"><i class="fa-solid fa-globe"></i></a>` : ''}
-                                ${p.discordServer ? `<a href="${escapeHtml(p.discordServer)}" target="_blank" rel="noopener noreferrer" class="btn-sm"><i class="fa-brands fa-discord"></i></a>` : ''}
+                                ${p.website ? `<a href="${escapeHtml(p.website)}" target="_blank" rel="noopener noreferrer" class="btn-sm" onclick="event.stopPropagation()"><i class="fa-solid fa-globe"></i></a>` : ''}
+                                ${p.discord_server ? `<a href="${escapeHtml(p.discord_server)}" target="_blank" rel="noopener noreferrer" class="btn-sm" onclick="event.stopPropagation()"><i class="fa-brands fa-discord"></i></a>` : ''}
                             </div>
                         </td>
-                        <td><span style="color: #2ecc71;">Active</span></td>
-                        <td>
-                            <button class="btn-sm btn-danger delete-partner-btn" data-partner-id="${escapeHtml(p.id)}">
+                        <td>${p.expired ? '<span style="color:#e74c3c;">Expired</span>' : '<span style="color:#2ecc71;">Active</span>'}</td>
+                        <td style="display: flex; gap: 5px;">
+                            <a href="/admin/partner/manage/?slug=${escapeHtml(p.slug)}" class="btn-sm btn-edit">
+                                <i class="fa-solid fa-pen"></i> Edit
+                            </a>
+                            <button class="btn-sm btn-danger delete-partner-btn" data-index="${i}">
                                 <i class="fa-solid fa-trash"></i> Delete
                             </button>
                         </td>
@@ -255,14 +267,14 @@
                 `).join('');
 
                 tbody.querySelectorAll('.delete-partner-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.getAttribute('data-partner-id');
-                        deletePartner(id);
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const i = parseInt(this.getAttribute('data-index'));
+                        deletePartner(partnersCache[i].id);
                     });
                 });
             } catch (err) {
                 console.error('Failed to load partners:', err);
-                alert('Failed to load partners');
             }
         }
 
@@ -274,11 +286,28 @@
 
         async function submitAddPartner(e) {
             e.preventDefault();
-            const data = Object.fromEntries(new FormData(e.target));
-            const btn = e.target.querySelector('button[type="submit"]');
+            const rawData = Object.fromEntries(new FormData(e.target));
+            const userIdsRaw = rawData.user_ids || '';
+            const user_ids = userIdsRaw.split(',').map(s => s.trim()).filter(Boolean);
+            const durVal = rawData.duration;
+
+            const data = {
+                name: rawData.name,
+                logo: rawData.logo || null,
+                description: rawData.description || null,
+                website: rawData.website || null,
+                discordServer: rawData.discordServer || null,
+                user_ids: user_ids,
+                user_id: user_ids[0] || null,
+                duration: durVal ? parseInt(durVal) : null
+            };
 
             if (!data.website && !data.discordServer) {
                 alert('You must provide either a Website or a Discord Server link.');
+                return;
+            }
+            if (user_ids.length === 0) {
+                alert('At least one User ID is required.');
                 return;
             }
 

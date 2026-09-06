@@ -1,71 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disc-Tools | Professional Discord Utilities</title>
-    
-    
-    
-    <!-- Meta Tags for Discord/Social Media Embeds -->
-    <meta name="description" content="Secure and fast utilities for Discord developers and users.">
-    <meta name="theme-color" content="#5865F2">
-    <meta property="og:title" content="About Us - Disc-Tools">
-    <meta property="og:description" content="Learn more about Disc-Tools, our mission, and the people behind the project.">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Disc-Tools">
-    <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <link rel="canonical" href="https://disc-tools.de">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us | Disc-Tools</title>
+    <meta name="description" content="About Us - Disc-Tools">
+    <meta name="keywords" content="disc-tools about, about discord tools, discord tools info, discord tools wer wir sind">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+    <style>
+        /* Fix: Content was too high — same top padding as team/legal/tools pages (nav is fixed) */
+        #main{padding:calc(var(--nav-h) + 56px) 0 100px}
+        @media(max-width:640px){#main{padding:calc(var(--nav-h) + 36px) 0 80px}}
+        /* Revenue allocation bar — clean, financial-report style, matching --surface / --border */
+        .revenue-section{margin:44px 0 56px}
+        .revenue-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;overflow:hidden}
+        .revenue-box::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px 220px at 0 0, rgba(88,101,242,0.06), transparent 70%)}
+        .revenue-title{font-family:var(--font-display);font-size:clamp(1.35rem,2.2vw,1.85rem);font-weight:700;letter-spacing:-0.015em;position:relative}
+        .revenue-sub{color:var(--text-muted);font-size:15.5px;line-height:1.55;margin-top:10px;max-width:62ch;position:relative}
+        .revenue-bar-wrap{margin-top:26px;position:relative}
+        .revenue-bar{display:flex;height:46px;width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--surface-2);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04)}
+        .revenue-seg{position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:0.02em;color:#edf1fa;line-height:1;transition:filter .18s var(--ease-out);border-right:1px solid rgba(10,13,19,0.55)}
+        .revenue-seg:last-child{border-right:none}
+        .revenue-seg:focus-visible{outline:2px solid var(--blurple);outline-offset:2px;z-index:3}
+        /* Subtle tones — distinguishable without traffic-light colors */
+        .seg-server{background:#2e3d5c} /* Server / Infrastructure — slate-blue */
+        .seg-team{background:#414eb8} /* Team / Development — muted blurple */
+        .seg-spenden{background:#2a6b5a} /* Donations — muted teal/green */
+        .revenue-seg:hover{filter:brightness(1.08)}
+        .seg-label{position:relative;white-space:nowrap;padding:0 6px;text-shadow:0 1px 2px rgba(0,0,0,0.35)}
+        /* Tooltip — rein CSS, via data-tip */
+        .revenue-seg::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(4px);background:rgba(18,22,31,0.98);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:13px;font-weight:500;line-height:1.45;letter-spacing:0;padding:10px 12px;border-radius:10px;width:max-content;max-width:280px;white-space:normal;text-align:left;box-shadow:0 16px 40px rgba(3,6,12,0.6);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s var(--ease-out),transform .18s var(--ease-out),visibility .18s;z-index:10}
+        .revenue-seg::before{content:'';position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--border);opacity:0;visibility:hidden;transition:opacity .18s,visibility .18s}
+        .revenue-seg:hover::after,.revenue-seg:focus-visible::after{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+        .revenue-seg:hover::before,.revenue-seg:focus-visible::before{opacity:1;visibility:visible}
+        .revenue-legend{display:flex;flex-wrap:wrap;gap:16px 24px;margin-top:16px;position:relative}
+        .legend-item{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--text-muted)}
+        .legend-item strong{color:var(--text);font-weight:700;font-family:var(--font-mono);font-size:13.5px}
+        .legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08)}
+        .dot-server{background:#2e3d5c}
+        .dot-team{background:#414eb8}
+        .dot-spenden{background:#2a6b5a}
+        .revenue-updated{margin-top:14px;color:var(--text-muted);font-size:12.5px;font-family:var(--font-mono);letter-spacing:0.02em;opacity:0.9;position:relative}
+        @media(max-width:640px){
+            .revenue-box{padding:24px 20px}
+            .revenue-bar{height:42px;border-radius:10px}
+            .revenue-seg{font-size:12px}
+            /* Hide label on very narrow donation segment, percentage stays visible in legend */
+            .seg-spenden .seg-label{font-size:11px}
+            .revenue-legend{flex-direction:column;gap:10px;align-items:flex-start}
+        }
+        @media(prefers-reduced-motion:reduce){
+            .revenue-seg,.revenue-seg::after{transition:none}
+        }
+    </style>
 </head>
-
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link active">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="./" class="current">About</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="__PAGE_CLASS__">
+    <div class="container">
 
-    <main class="tool-page">
-        <section class="tool-hero">
-            <span class="hero-tag">// our story</span>
+<section class="tool-hero">
             <h1>Love & Hate <em>Discord?</em></h1>
             <div class="centered-content-box mt-30">
                 <p class="mb-20">
@@ -75,8 +121,33 @@
                     <strong>Disc-Tools</strong> was born out of this frustration. We wanted to show Discord that the community is more than just a metric – we are capable, creative, and we won't just sit by while our needs are overlooked. This project is a statement: the community matters, and if the platform won't provide the tools we need, we'll build them ourselves.
                 </p>
                 <p>
-                    This entire platform was envisioned and built by a single individual, <strong style="color: var(--accent2);">kebab</strong> (also known as <strong style="color: var(--accent2);">mistr_kebab</strong>), with the goal of empowering every Discord user and developer with the utilities they deserve.
+                    This entire platform was envisioned and built by a single individual, <strong>kebab</strong> (also known as <strong>mistr_kebab</strong>), with the goal of empowering every Discord user and developer with the utilities they deserve.
                 </p>
+            </div>
+        </section>
+
+        <!-- Revenue allocation — clean & transparent, adjust values in style="width:XX%" + legend -->
+        <section class="revenue-section" aria-labelledby="revenue-title">
+            <div class="revenue-box">
+                <p class="eyebrow" style="position:relative;margin-bottom:8px">Transparency</p>
+                <h2 id="revenue-title" class="revenue-title">How we use your subscription revenue</h2>
+                <p class="revenue-sub">Every euro from Premium subscriptions goes directly into operations, development and charitable causes — no profit maximization, no hidden buckets.</p>
+
+                <div class="revenue-bar-wrap">
+                    <div class="revenue-bar" role="img" aria-label="Revenue distribution: 40% Server &amp; Infrastructure, 50% Team &amp; Development, 10% Donations">
+                        <div class="revenue-seg seg-server" style="width:40%" tabindex="0" data-tip="Covers hosting, CDN, databases, monitoring, backups and DDoS protection for disc-tools.de, API and bots."><span class="seg-label">40%</span></div>
+                        <div class="revenue-seg seg-team" style="width:50%" tabindex="0" data-tip="Development, design, support and operations — goes directly to the team behind Disc-Tools for new tools and maintenance."><span class="seg-label">50%</span></div>
+                        <div class="revenue-seg seg-spenden" style="width:10%" tabindex="0" data-tip="10% of our team share goes to non-profit organizations every quarter, e.g. [Organization] — verified in the quarterly report."><span class="seg-label">10%</span></div>
+                    </div>
+
+                    <div class="revenue-legend" role="list" aria-label="Legend">
+                        <div class="legend-item" role="listitem"><span class="legend-dot dot-server" aria-hidden="true"></span><span class="legend-text">Server &amp; Infrastructure <strong>40%</strong></span></div>
+                        <div class="legend-item" role="listitem"><span class="legend-dot dot-team" aria-hidden="true"></span><span class="legend-text">Team &amp; Development <strong>50%</strong></span></div>
+                        <div class="legend-item" role="listitem"><span class="legend-dot dot-spenden" aria-hidden="true"></span><span class="legend-text">Donations <strong>10%</strong></span></div>
+                    </div>
+
+                    <p class="revenue-updated">Last updated: August 2026 · Values rounded, reviewed quarterly. Changes are documented transparently.</p>
+                </div>
             </div>
         </section>
 
@@ -97,54 +168,65 @@
                     community. No hidden costs.</div>
             </div>
         </div>
-    </main>
-
-
-
-        <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
             </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
 
-    <script src="/js/main.js?v=3" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
-
 </html>

@@ -1,0 +1,299 @@
+/* ============================================================
+   Disc-Tools: Server Lookup
+   Builds on top of user-lookup.css (result card, copy rows, …)
+   ============================================================ */
+
+/* ---------- Page background (server splash, fixed layer) ---------- */
+#server-bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    filter: brightness(1.6) saturate(1.05);
+}
+#server-bg-layer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 13, 19, 0.7);
+}
+
+/* Footer solid — splash stays out of the footer area */
+.footer {
+    background: var(--bg);
+}
+
+/* ---------- Icon (slightly smaller avatar) ---------- */
+.server-icon {
+    width: 92px;
+    height: 92px;
+}
+.server-icon .result-avatar {
+    width: 92px;
+    height: 92px;
+}
+.server-icon .result-avatar-fallback i {
+    font-size: 30px;
+}
+@media (max-width: 640px) {
+    .server-icon {
+        width: 72px;
+        height: 72px;
+    }
+    .server-icon .result-avatar {
+        width: 72px;
+        height: 72px;
+    }
+    .server-icon .result-avatar-fallback i {
+        font-size: 24px;
+    }
+}
+
+/* ---------- Avatar fallback (no icon available) ---------- */
+.result-avatar-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+}
+.result-avatar-fallback i {
+    font-size: 34px;
+    color: var(--blurple-soft);
+}
+
+/* ---------- Description ---------- */
+.server-description {
+    margin-top: 20px;
+    padding: 13px 16px 13px 42px;
+    position: relative;
+    background: rgba(88, 101, 242, 0.07);
+    border: 1px solid rgba(88, 101, 242, 0.22);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+    font-style: italic;
+}
+.server-description::before {
+    content: '\f10d';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 16px;
+    top: 13px;
+    color: var(--blurple-soft);
+    font-size: 13px;
+}
+
+/* ---------- Info grid extras ---------- */
+
+/* ---------- Instant invite ---------- */
+.server-invite {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 26px;
+    padding: 16px 18px;
+    background: rgba(88, 101, 242, 0.08);
+    border: 1px solid rgba(88, 101, 242, 0.35);
+    border-radius: 14px;
+}
+.server-invite-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+.server-invite-main > i {
+    font-size: 30px;
+    color: #5865f2;
+}
+.server-invite-main > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.server-invite-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.server-invite-code {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.server-invite-expiry {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.server-invite-none {
+    justify-content: flex-start;
+    background: rgba(10, 13, 19, 0.4);
+    border-color: var(--border);
+    color: var(--text-muted);
+    font-size: 14px;
+    gap: 12px;
+}
+.server-invite-none i {
+    color: var(--text-muted);
+}
+
+/* ---------- Sections (channels / members) ---------- */
+.server-section {
+    margin-top: 26px;
+    padding-top: 26px;
+    border-top: 1px solid var(--border);
+}
+.server-section .result-links-title {
+    margin-bottom: 16px;
+}
+.server-section .result-links-title i {
+    color: var(--blurple-soft);
+}
+
+.server-list-empty {
+    padding: 22px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    background: rgba(10, 13, 19, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+/* Channels */
+.server-channel-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 8px;
+}
+.server-channel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: rgba(10, 13, 19, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    min-width: 0;
+}
+.server-channel i {
+    color: var(--text-muted);
+    font-size: 12px;
+    flex-shrink: 0;
+}
+.server-channel-name {
+    font-weight: 600;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.server-channel-id {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Members */
+.server-member-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 8px;
+}
+.server-member {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(10, 13, 19, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    min-width: 0;
+}
+.server-member-avatar {
+    position: relative;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+}
+.server-member-avatar img {
+    display: block;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--surface-2);
+}
+.server-member-avatar i {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    font-size: 11px;
+    border: 2.5px solid var(--surface);
+    border-radius: 50%;
+    background: var(--surface);
+}
+.status-online    { color: #23a55a; }
+.status-idle      { color: #f0b232; }
+.status-dnd       { color: #ed4245; }
+.status-offline   { color: #80848e; }
+.status-streaming { color: #593695; }
+
+.server-member-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.server-member-name {
+    font-weight: 600;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.server-member-activity {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .server-invite {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .server-invite .btn {
+        width: 100%;
+    }
+    .server-channel-list,
+    .server-member-list {
+        grid-template-columns: 1fr;
+    }
+}

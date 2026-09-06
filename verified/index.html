@@ -2,136 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Verified - Disc-Tools</title>
-    <meta name="theme-color" content="#2ECC71">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verified | Disc-Tools</title>
+    <meta name="keywords" content="discord verified, discord checkmark, discord verified badge, discord verification">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
     <style>
-        @keyframes checkIn {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .success-icon {
-            font-size: 72px;
-            color: #2ECC71;
-            filter: drop-shadow(0 0 30px rgba(46, 204, 113, 0.3));
-            animation: checkIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 24px;
-        }
-        .verified-title {
-            animation: fadeUp 0.4s 0.2s both;
-        }
-        .verified-desc {
-            animation: fadeUp 0.4s 0.3s both;
-        }
-        .verified-actions {
-            animation: fadeUp 0.4s 0.4s both;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-top: 32px;
-        }
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-family: var(--sans);
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            width: auto;
-            min-width: 200px;
-        }
-        .btn-ghost:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-        .btn-ghost i {
-            font-size: 16px;
-            color: var(--muted);
-            transition: color 0.2s;
-        }
-        .btn-ghost:hover i {
-            color: var(--text);
-        }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .verify-box { text-align: center; padding: 48px 32px; }
+        .verify-box .icon { font-size: 72px; color: var(--success); margin-bottom: 20px; animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275); }
+        @keyframes popIn { 0% { transform:scale(0); opacity:0 } 50% { transform:scale(1.2) } 100% { transform:scale(1); opacity:1 } }
+        .verify-box h1 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 8px; animation: fadeUp 0.4s 0.2s both; }
+        .verify-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; animation: fadeUp 0.4s 0.3s both; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
+        .verify-box .btns { display: flex; flex-direction: column; align-items: center; gap: 10px; animation: fadeUp 0.4s 0.4s both; }
+        .verify-box .btns a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 24px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; min-width: 200px; transition: border-color 0.15s, background 0.15s; }
+        .verify-box .btns a:hover { border-color: var(--blurple); background: rgba(88,101,242,0.08); }
     </style>
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
-        </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
-            <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
-                </div>
-            </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <div class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="/verify/">Verify</a>
-        <span>/</span>
-        <span class="current">Success</span>
-    </div>
-
-    <section class="centered-modal-page">
-        <div class="modal-container" style="padding: 56px 40px;">
-            <div class="success-icon">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h1 class="verified-title" style="background: none; -webkit-text-fill-color: unset; background-clip: unset; color: #fff;">You're verified!</h1>
-            <p class="modal-description verified-desc">
-                You can close this tab and return to Discord.
-            </p>
-            <div class="verified-actions">
-                <a href="/" class="btn-ghost">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Home
-                </a>
-                <a href="/tools/" class="btn-ghost">
-                    <i class="fa-solid fa-bolt"></i> Browse Tools
-                </a>
-            </div>
+    <div class="verify-box">
+        <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h1>You're verified!</h1>
+        <p>You can close this tab and return to Discord.</p>
+        <div class="btns">
+            <a href="/"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <a href="/tools/"><i class="fa-solid fa-bolt"></i> Browse Tools</a>
         </div>
-    </section>
+    </div>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+__**Disc-Tools – One box of tools for everything Discord-related**__ <a:DiscToolsStaff:1529160620421681294>
+
+Looking things up on Discord? **Disc-Tools** has you covered:
+
+**🔍 User Lookup** – badges, account age and details for any user ID
+**📛 Username History** – every past username and discriminator
+**🔗 Invite Lookup** – guild info, member count, inviter and expiry
+**🖼️ Avatar CDN, 🎨 Embed Builder, 🎨 Color Picker, 😀 Emoji Stealer** and more
+
+The core tools are **free**. Premium is optional on top.
+
+> 📢 The main site is getting a **fresh new look** – many tools are not available yet, but the ones above are live and ready!
+
+**🔗 Main site:** https://disc-tools.de/
+**🛠️ Dashboard:** https://dash.disc-tools.de
+**💬 Join the community:** https://discord.gg/rtRs8rhj5u

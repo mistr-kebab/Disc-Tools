@@ -1,128 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="Hide sensitive content behind double pipes. Users click to reveal.">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spoiler | Discord Shortcuts | Disc-Tools</title>
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <link rel="canonical" href="https://disc-tools.de/tips/shortcuts/spoiler/">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://disc-tools.de/tips/shortcuts/spoiler/">
-    <meta property="og:title" content="Spoiler | Discord Shortcuts | Disc-Tools">
-    <meta property="og:description" content="Hide sensitive content behind double pipes. Users click to reveal.">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spoiler Text | Disc-Tools</title>
+    <meta name="keywords" content="discord spoiler, discord spoiler text, discord hide text, discord markdown spoiler">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+        <style>
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .box { max-width: 600px; text-align: center; }
+        .box .icon { font-size: 48px; color: var(--blurple); margin-bottom: 16px; }
+        .box h1 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 8px; }
+        .box .desc { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; }
+        .box .syntax-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 24px; margin-bottom: 16px; }
+        .box .syntax-block .label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 8px; }
+        .box .syntax-block code { font-family: var(--font-mono); font-size: 15px; color: var(--blurple-soft); }
+        .box .result-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 24px; margin-bottom: 16px; }
+        .box .result-block .label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 8px; }
+        .box .note { color: var(--text-muted); font-size: 13px; margin-top: 24px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; }
+        .box .note code { font-family: var(--font-mono); font-size: 12px; background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; }
+        .box .back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 14px; margin-bottom: 24px; transition: color 0.15s; }
+        .box .back:hover { color: var(--text); }
+    </style>
 </head>
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
-        </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
-            <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle active" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/" class="active">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a></div>
-            </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="../">Formatting</a>
-        <span>/</span>
-        <a href="./" class="current">Spoiler</a>
-    </nav>
-
-    <main class="guide-page">
-        <section class="guide-hero">
-            <h1><em>Spoiler</em></h1>
-            <p>Hide sensitive content behind double pipes. Users click to reveal.</p>
-        </section>
-
-        <div class="guide-content">
-            <h2>Syntax</h2>
-            <div class="guide-step-card">
-                <div class="step-number"><i class="fa-solid fa-eye-slash"></i></div>
-                <div class="step-text">
-                    <h3>How it works</h3>
-                    <p></p>
-                    <pre><code><code></code></pre>
-                </div>
-            </div>
-
-            <h2>Examples</h2>
-            text||</code>|Wrap text with two pipes on each side|<div class="guide-step-card"><div class="step-number">1</div><div class="step-text"><h3>Basic Spoiler</h3><pre><code>||Spoiler content here||</code></pre><p>Spoiler tags hide the content until clicked.</p></div></div><div class="guide-step-card"><div class="step-number">2</div><div class="step-text"><h3>With other markup</h3><pre><code>||**Bold spoiler** *italic spoiler*~~strike~~||</code></pre><p>You can combine spoiler with any other formatting.</p></div></div>
-
-            <a href="../" class="back-to-tool">
-                <i class="fa-solid fa-arrow-left"></i> Back to all Formatting tips
-            </a>
+    <div class="box">
+        <a href="/tips/formatting/" class="back"><i class="fa-solid fa-arrow-left"></i> All Formatting Tips</a>
+        <div class="icon"><i class="fa-solid fa-eye-slash"></i></div>
+        <h1>Spoiler Text</h1>
+        <p class="desc">Hide sensitive content behind a clickable spoiler tag using double pipes.</p>
+        <div class="syntax-block">
+            <div class="label"><i class="fa-solid fa-keyboard"></i> Syntax</div>
+            <code>||your text here||</code>
         </div>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
+        <div class="result-block">
+            <div class="label"><i class="fa-solid fa-eye"></i> Result</div>
+            <div><span style="background:#202225;border-radius:3px;padding:0 4px;color:transparent;cursor:pointer" onclick="this.style.color='#dcddde'">your text here</span></div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-    <script src="/js/main.js?v=3" defer></script>
+        <div class="note">Users must click the spoiler to reveal the content. Works on mobile and desktop.</div>
+    </div>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

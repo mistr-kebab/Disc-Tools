@@ -1,0 +1,256 @@
+/* ============================================================
+   Disc-Tools: Team Profile Pages
+   Basis/Design-Tokens/Nav/Footer: siehe base.css
+   ============================================================ */
+
+.profile-page {
+    padding: calc(var(--nav-h) + 56px) 0 120px;
+}
+.profile-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s, gap 0.2s var(--ease-out);
+}
+.profile-back:hover {
+    color: var(--text);
+    gap: 12px;
+}
+
+.profile-card {
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+.profile-banner {
+    height: 180px;
+    background-color: var(--surface-2);
+    background-size: cover;
+    background-position: center;
+}
+.profile-banner.no-banner {
+    background: linear-gradient(135deg, var(--surface-2), var(--bg));
+}
+
+.profile-content {
+    padding: 0 28px 32px;
+}
+
+.profile-head {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    margin-top: -48px;
+    position: relative;
+}
+.profile-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+}
+.profile-avatar {
+    display: block;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 4px solid var(--surface);
+    background: var(--surface);
+    object-fit: cover;
+}
+.profile-avatar-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    contain: paint;
+    pointer-events: none;
+}
+.profile-avatar-decoration img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-main {
+    padding-bottom: 6px;
+}
+.profile-name {
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--text);
+}
+.profile-username {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.profile-bio {
+    margin-top: 18px;
+    font-size: 15.5px;
+    color: var(--text-muted);
+    max-width: 60ch;
+    white-space: pre-line;
+}
+
+/* ---------- Hobbies ---------- */
+.profile-hobbies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+.hobby-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(18, 22, 31, 0.6);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+.hobby-pill i {
+    color: var(--blurple-soft);
+    font-size: 12px;
+}
+
+/* ---------- Links ---------- */
+.profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 28px;
+}
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.18s var(--ease-out), border-color 0.2s, background-color 0.2s;
+}
+.profile-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(88, 101, 242, 0.55);
+    background: rgba(88, 101, 242, 0.05);
+}
+.profile-link-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(88, 101, 242, 0.12);
+    color: var(--blurple-soft);
+    font-size: 15px;
+}
+.profile-link-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+.profile-link-title .verified {
+    color: var(--success);
+    font-size: 11px;
+    font-weight: 600;
+}
+.profile-link-handle {
+    display: block;
+    margin-top: 1px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+}
+
+/* ---------- Team members ---------- */
+.profile-team {
+    margin-top: 32px;
+}
+.profile-team h2 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+}
+.team-members-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.team-member-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px 10px 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(18, 22, 31, 0.6);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.18s var(--ease-out), border-color 0.2s;
+}
+.team-member-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(88, 101, 242, 0.55);
+}
+.team-member-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+    background: var(--surface);
+    object-fit: cover;
+}
+.team-member-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+.team-member-handle {
+    display: block;
+    margin-top: 1px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .profile-page {
+        padding: calc(var(--nav-h) + 32px) 0 80px;
+    }
+    .profile-content {
+        padding: 0 18px 26px;
+    }
+    .profile-links {
+        grid-template-columns: 1fr;
+    }
+    .profile-banner {
+        height: 140px;
+    }
+}

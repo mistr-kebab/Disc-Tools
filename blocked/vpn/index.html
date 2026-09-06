@@ -2,166 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Access Restricted | Disc-Tools</title>
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0d13">
+
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+
     <style>
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg);
-            margin: 0;
-            padding: 20px;
-        }
-        .vpn-container {
-            width: 100%;
-            max-width: 440px;
-            animation: slideUp 0.3s ease forwards;
-        }
-        .vpn-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 48px 36px 36px;
-            text-align: center;
-        }
-        .vpn-icon {
-            width: 72px;
-            height: 72px;
-            background: rgba(231, 76, 60, 0.1);
-            color: #e74c3c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin: 0 auto 24px;
-        }
-        .vpn-card h1 {
-            font-family: var(--sans);
-            font-size: 22px;
-            font-weight: 800;
-            margin: 0 0 12px;
-            color: #fff;
-        }
-        .vpn-card p {
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.6;
-            margin: 0 0 28px;
-        }
-        .vpn-details {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: 4px 0;
-            margin-bottom: 28px;
-            font-size: 13px;
-        }
-        .vpn-details .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-        .vpn-details .row:last-child { border-bottom: none; }
-        .vpn-details .label { color: var(--muted); }
-        .vpn-details .value { color: #e74c3c; font-family: var(--mono); font-weight: 700; }
-        .vpn-btn {
-            display: block;
-            width: 100%;
-            padding: 13px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-family: var(--sans);
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            border: none;
-        }
-        .vpn-btn-primary {
-            background: #e74c3c;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-        .vpn-btn-primary:hover {
-            background: #c0392b;
-            transform: translateY(-1px);
-        }
-        .vpn-btn-discord {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #5865F2;
-            color: #fff;
-        }
-        .vpn-btn-discord:hover {
-            background: #4752c4;
-            transform: translateY(-1px);
-        }
-        .vpn-divider {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin: 16px 0;
-            color: var(--muted);
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .vpn-divider::before,
-        .vpn-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-        .vpn-note {
-            font-size: 12px;
-            color: var(--muted);
-            margin: 16px 0 0;
-        }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; text-align: center; }
+        .blocked-box { position: relative; max-width: 420px; }
+        .blocked-box .icon { width: 96px; height: 96px; background: rgba(240,71,71,0.1); color: #f04747; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 38px; margin: 0 auto 20px; }
+        .blocked-box h1 { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 8px; }
+        .blocked-box p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+        .blocked-box .details { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 24px; }
+        .blocked-box .details .row { display: flex; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+        .blocked-box .details .row:last-child { border-bottom: none; }
+        .blocked-box .details .label { color: var(--text-muted); }
+        .blocked-box .details .value { color: #f04747; font-family: var(--font-mono); font-weight: 700; }
+        .blocked-box .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; border-radius: 12px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; border: none; transition: background 0.2s, transform 0.15s; }
+        .btn-retry { background: #f04747; color: #fff; margin-bottom: 12px; }
+        .btn-retry:hover { background: #d13b3b; }
+        .btn-discord { background: var(--blurple); color: #fff; }
+        .btn-discord:hover { background: var(--blurple-strong); }
+        .divider { display: flex; align-items: center; gap: 14px; margin: 14px 0; color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .note { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
     </style>
-    <link rel="canonical" href="https://disc-tools.de">
-    <meta property="og:title" content="Access Restricted | Disc-Tools">
-    <meta property="og:description" content="VPN/Proxy access restricted.">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
 <body>
-    <div class="glow"></div>
-    <div class="vpn-container">
-        <div class="vpn-card">
-            <div class="vpn-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <h1>Access Restricted</h1>
-            <p>Our security system detected a VPN, Proxy, or Hosting connection. Access is restricted for these connection types.</p>
+    <div class="blocked-box">
+        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h1>Access Restricted</h1>
+        <p>Our security system detected a VPN, Proxy, or Hosting connection. Access is restricted for these connection types.</p>
 
-            <div class="vpn-details">
-                <div class="row"><span class="label">IP Address</span><span class="value" id="ip-addr">—</span></div>
-                <div class="row"><span class="label">Type</span><span class="value" id="conn-type">—</span></div>
-                <div class="row"><span class="label">Provider</span><span class="value" id="provider">—</span></div>
-                <div class="row"><span class="label">ASN</span><span class="value" id="asn">—</span></div>
-            </div>
-
-            <button onclick="window.location.href='/'" class="vpn-btn vpn-btn-primary">Retry Connection</button>
-
-            <div class="vpn-divider">or</div>
-
-            <a href="/api/auth/login" class="vpn-btn vpn-btn-discord"><i class="fa-brands fa-discord"></i> Login with Discord</a>
-            <p class="vpn-note">Logged-in users are exempt from this check.</p>
+        <div class="details">
+            <div class="row"><span class="label">IP Address</span><span class="value" id="ip-addr">-</span></div>
+            <div class="row"><span class="label">Type</span><span class="value" id="conn-type">-</span></div>
+            <div class="row"><span class="label">Provider</span><span class="value" id="provider">-</span></div>
+            <div class="row"><span class="label">ASN</span><span class="value" id="asn">-</span></div>
         </div>
+
+        <a href="/" class="btn btn-retry"><i class="fa-solid fa-rotate-right"></i> Retry</a>
+
+        <div class="divider">or</div>
+
+        <a href="/api/auth/login?redirect=/success/login/" class="btn btn-discord"><i class="fa-brands fa-discord"></i> Login with Discord</a>
+        <p class="note">Logged-in users are exempt from this check.</p>
     </div>
 
     <script>
-        const p = new URLSearchParams(window.location.search);
-        for (const [id, key] of [['ip-addr','ip'],['conn-type','type'],['provider','provider'],['asn','asn']]) {
-            document.getElementById(id).textContent = p.get(key) || '—';
-        }
+        var p = new URLSearchParams(location.search);
+        var map = [['ip-addr','ip'],['conn-type','type'],['provider','provider'],['asn','asn']];
+        map.forEach(function (pair) {
+            document.getElementById(pair[0]).textContent = p.get(pair[1]) || '-';
+        });
     </script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

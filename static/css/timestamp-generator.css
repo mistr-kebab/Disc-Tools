@@ -1,0 +1,246 @@
+/* Disc-Tools: Timestamp Generator */
+
+.lookup-page {
+    padding: calc(var(--nav-h) + 40px) 0 100px;
+}
+
+.tg-card {
+    background: var(--surface, #12161f);
+    border: 1px solid var(--border, #232c40);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+}
+
+.tg-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    margin: 0 0 1rem;
+    color: var(--text, #edf1fa);
+}
+
+.tg-card-title i {
+    color: var(--blurple, #5865f2);
+}
+
+/* ---------- Controls ---------- */
+.tg-controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.tg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.tg-field-grow {
+    flex: 1;
+    min-width: 220px;
+}
+
+.tg-field label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted, #9aa5bc);
+}
+
+.tg-field input,
+.tg-field select {
+    background: var(--surface-2, #171c29);
+    border: 1px solid var(--border, #232c40);
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    color: var(--text, #edf1fa);
+    font-size: 0.92rem;
+    font-family: inherit;
+    min-height: 44px;
+}
+
+.tg-field input:focus,
+.tg-field select:focus {
+    border-color: var(--blurple, #5865f2);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.18);
+}
+
+.tg-field select {
+    cursor: pointer;
+}
+
+/* ---------- Rows ---------- */
+.tg-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+}
+
+.tg-row {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tg-row-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tg-format-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(88, 101, 242, 0.15);
+    border: 1px solid rgba(88, 101, 242, 0.4);
+    color: var(--blurple-soft, #7c85f0);
+    font-size: 0.8rem;
+    font-weight: 800;
+    flex: 0 0 24px;
+}
+
+.tg-format-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text, #edf1fa);
+    white-space: nowrap;
+}
+
+.tg-row-example {
+    font-size: 0.88rem;
+    color: var(--text-muted, #9aa5bc);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tg-row-code {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.tg-row-code code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem;
+    color: var(--text, #edf1fa);
+    background: var(--surface-2, #171c29);
+    border: 1px solid var(--border, #232c40);
+    border-radius: 8px;
+    padding: 0.35rem 0.6rem;
+    white-space: nowrap;
+}
+
+.tg-copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border, #232c40);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted, #9aa5bc);
+    font-size: 0.8rem;
+    cursor: pointer;
+    flex: 0 0 auto;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.tg-copy:hover {
+    color: var(--text, #edf1fa);
+    border-color: var(--blurple, #5865f2);
+    background: rgba(88, 101, 242, 0.1);
+}
+
+.tg-copy.copied {
+    color: var(--success, #4ecb8d) !important;
+    border-color: rgba(78, 203, 141, 0.5) !important;
+}
+
+/* ---------- Decode ---------- */
+.tg-decode-result {
+    margin-top: 1rem;
+}
+
+.tg-decode-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tg-decode-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tg-decode-label {
+    flex: 0 0 90px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted, #9aa5bc);
+}
+
+.tg-decode-value {
+    flex: 1;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+    color: var(--text, #edf1fa);
+    word-break: break-all;
+}
+
+.tg-error {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    background: rgba(237, 66, 69, 0.08);
+    border: 1px solid rgba(237, 66, 69, 0.35);
+    color: #f6a2a4;
+    font-size: 0.88rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 680px) {
+    .tg-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .tg-row-code {
+        justify-content: space-between;
+    }
+
+    .tg-row-example {
+        white-space: normal;
+    }
+
+    .tg-decode-label {
+        flex-basis: 70px;
+    }
+}

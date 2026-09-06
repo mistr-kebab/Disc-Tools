@@ -2,364 +2,262 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Partners | Disc-Tools</title>
-    <meta name="description" content="Meet our partners — projects and services trusted by the Disc-Tools community.">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=2">
+    <meta name="description" content="Trusted partners of Disc-Tools.">
+    <meta name="keywords" content="discord partner, discord tools partner, discord community partner, disc-tools partner">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="canonical" href="https://disc-tools.de/partner/">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
     <style>
-        .partners-page .partners-header { text-align: center; margin-bottom: 50px; }
-        .partners-page .partners-header h1 { font-size: clamp(28px, 5vw, 42px); }
-        .partners-page .partners-header p { max-width: 500px; margin: 12px auto 0; color: var(--muted); font-size: 14px; }
-        .partners-page .partners-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 12px 28px; background: var(--accent); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.25s; }
-        .partners-page .partners-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(88,101,242,0.3); }
+        .partner-page { padding: calc(var(--nav-h) + 56px) 0 120px; }
+        .partner-hero { max-width: 720px; }
+        .partner-hero h1 { font-size: clamp(2.4rem, 5vw, 3.2rem); }
+        .partner-hero h1 em { color: var(--success); font-style: normal; }
+        .partner-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; margin-top: 40px; }
+        .partner-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 14px; transition: border-color 0.2s, transform 0.2s; }
+        .partner-card:hover { border-color: var(--blurple); transform: translateY(-2px); }
+        .partner-card .head { display: flex; align-items: center; gap: 14px; }
+        .partner-card .head img { width: 48px; height: 48px; border-radius: 12px; object-fit: contain; background: rgba(255,255,255,0.04); }
+        .partner-card .head h3 { font-size: 18px; }
+        .partner-card .desc { color: var(--text-muted); font-size: 14px; line-height: 1.5; flex: 1; }
+        .partner-card .links { display: flex; gap: 12px; }
+        .partner-card .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 13px; text-decoration: none; transition: color 0.15s; }
+        .partner-card .links a:hover { color: var(--blurple-soft); }
+        .cta-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; padding: 10px 22px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: border-color 0.15s, background 0.15s; }
+        .cta-btn:hover { border-color: var(--blurple); background: rgba(88,101,242,0.08); }
+        .empty-state { grid-column: 1/-1; padding: 40px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border); border-radius: 16px; }
+        .empty-state i { font-size: 36px; color: var(--blurple); margin-bottom: 12px; }
+        .empty-state h3 { font-size: 18px; margin-bottom: 6px; }
+        .empty-state p { font-size: 14px; }
 
-        .partners-page .partners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-bottom: 60px; }
-        .partners-page .partner-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: all 0.25s; cursor: pointer; display: flex; flex-direction: column; gap: 14px; }
-        .partners-page .partner-card:hover { border-color: rgba(88,101,242,0.4); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
-        .partners-page .partner-card-top { display: flex; gap: 14px; align-items: center; }
-        .partners-page .partner-logo { width: 48px; height: 48px; border-radius: 10px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--muted); flex-shrink: 0; overflow: hidden; }
-        .partners-page .partner-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
-        .partners-page .partner-card h3 { font-size: 16px; font-weight: 700; color: #fff; margin: 0; }
-        .partners-page .partner-card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; flex-grow: 1; }
-        .partners-page .partner-actions { display: flex; gap: 8px; margin-top: 4px; }
-        .partners-page .partner-actions a { display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; background: rgba(88,101,242,0.08); color: var(--accent2); border: 1px solid rgba(88,101,242,0.15); border-radius: 8px; text-decoration: none; font-size: 12px; font-weight: 600; transition: all 0.2s; flex: 1; justify-content: center; }
-        .partners-page .partner-actions a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-        .partners-page .empty-state { text-align: center !important; padding: 80px 20px; }
-        .partners-page .empty-state i { font-size: 40px; color: var(--muted); opacity: 0.3; margin-bottom: 16px; }
-        .partners-page .empty-state h3 { margin: 0 0 8px; text-align: center; }
-        .partners-page .empty-state p { color: var(--muted); font-size: 14px; margin: 0; text-align: center; max-width: none; }
-
-        .partners-page .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-size: 13px; margin-bottom: 20px; transition: color 0.2s; }
-        .partners-page .back-link:hover { color: #fff; }
-        .partners-page .partner-detail { max-width: 620px; margin: 0 auto; }
-        .partners-page .partner-detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
-        .partners-page .partner-detail-logo { width: 100px; height: 100px; border-radius: 16px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 36px; color: var(--muted); margin: 0 auto 20px; overflow: hidden; }
-        .partners-page .partner-detail-logo img { width: 100%; height: 100%; object-fit: cover; }
-        .partners-page .partner-detail-card h1 { font-size: 26px; margin: 0 0 12px; }
-        .partners-page .partner-detail-card p { color: var(--muted); font-size: 14px; line-height: 1.7; margin: 0 0 24px; }
-        .partners-page .partner-detail-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .partners-page .partner-detail-actions a { padding: 10px 22px; font-size: 13px; flex: 0 1 auto; }
-
-        @media (max-width: 600px) {
-            .partners-page .partners-grid { grid-template-columns: 1fr; }
-            .partners-page .partner-detail-card { padding: 24px 16px; }
-            .partners-page .partner-detail-logo { width: 72px; height: 72px; font-size: 28px; }
-        }
+        .detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px; text-align: center; max-width: 560px; margin: 0 auto; }
+        .detail-card img { width: 80px; height: 80px; border-radius: 16px; object-fit: contain; background: rgba(255,255,255,0.04); margin-bottom: 16px; }
+        .detail-card h2 { font-size: 1.5rem; margin-bottom: 8px; }
+        .detail-card .desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+        .detail-card .detail-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+        .detail-card .detail-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: border-color 0.15s, background 0.15s; }
+        .detail-card .detail-links a:hover { border-color: var(--blurple); background: rgba(88,101,242,0.08); }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 14px; margin-bottom: 24px; transition: color 0.15s; }
+        .back-link:hover { color: var(--text); }
+        .hidden { display: none !important; }
     </style>
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
-<body class="partners-page">
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link active">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="/partner/" id="breadcrumb-partner" class="current">Partner</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
-
-    <main class="tool-page">
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="/partner/" class="btn btn-ghost btn-block"><i class="fa-solid fa-handshake" aria-hidden="true"></i> Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="partner-page">
+    <div class="container">
         <div id="listingView">
-            <div class="partners-header">
-                <span class="hero-tag">// collaboration</span>
+            <div class="partner-hero">
                 <h1>Our <em>Partners</em></h1>
-                <p>Projects and services we trust, working together to enhance the Discord ecosystem.</p>
-                <a href="/partner/request/" class="partners-cta"><i class="fa-solid fa-handshake"></i> Become a Partner</a>
+                <p class="team-intro">Projects and services we trust, working together to enhance the Discord ecosystem.</p>
+                <a href="/partner/request/" class="cta-btn"><i class="fa-solid fa-handshake"></i> Become a Partner</a>
             </div>
-            <div id="partnersContainer" class="partners-grid"></div>
-            <div id="emptyState" class="empty-state" style="display: none;">
+            <div id="partnersContainer" class="partner-grid"></div>
+            <div id="emptyState" class="empty-state hidden">
                 <i class="fa-solid fa-star"></i>
                 <h3>No Active Partners Yet</h3>
-                <p>Be the first to join our partnership program!</p>
+                <p>Be the first to join!</p>
             </div>
         </div>
-
-        <div id="detailView" style="display: none;">
-            <a href="/partner/" class="back-link" id="backToList"><i class="fa-solid fa-arrow-left"></i> All Partners</a>
-            <div class="partner-detail">
-                <div class="partner-detail-card" id="partnerDetailCard"></div>
-            </div>
+        <div id="detailView" class="hidden">
+            <a href="javascript:showListing()" class="back-link"><i class="fa-solid fa-arrow-left"></i> All Partners</a>
+            <div class="detail-card" id="partnerDetailCard"></div>
         </div>
-        <div id="editView" class="partner-edit-section" style="display:none;">
-            <div class="partner-detail" style="margin-top:60px;">
-                <div class="partner-detail-card" style="text-align:left;">
-                    <h2 style="margin:0 0 24px;text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Your Page</h2>
-                    <form id="partnerEditForm">
-                        <div style="margin-bottom:16px;">
-                            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Description</label>
-                            <textarea name="description" id="edit-description" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:#fff;font-size:14px;font-family:var(--sans);box-sizing:border-box;min-height:100px;resize:vertical;" placeholder="Tell visitors about your project..."></textarea>
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Website URL</label>
-                            <input type="url" name="website" id="edit-website" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:#fff;font-size:14px;font-family:var(--sans);box-sizing:border-box;" placeholder="https://yoursite.com">
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Discord Invite</label>
-                            <input type="url" name="discord_server" id="edit-discord" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:#fff;font-size:14px;font-family:var(--sans);box-sizing:border-box;" placeholder="https://discord.gg/...">
-                        </div>
-                        <div style="margin-bottom:16px;">
-                            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Logo URL</label>
-                            <input type="url" name="logo" id="edit-logo" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:#fff;font-size:14px;font-family:var(--sans);box-sizing:border-box;" placeholder="https://example.com/logo.png">
-                        </div>
-                        <button type="submit" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;font-size:15px;cursor:pointer;transition:all 0.2s;"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
-                        <div id="saveFeedback" style="text-align:center;margin-top:12px;font-size:14px;font-weight:600;display:none;"></div>
-                    </form>
-                </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
             </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-    </main>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/consent.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script>
+(function () {
+    'use strict';
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
+    var listingView = document.getElementById('listingView');
+    var detailView = document.getElementById('detailView');
+    var container = document.getElementById('partnersContainer');
+    var emptyState = document.getElementById('emptyState');
 
-    <script src="/js/main.js?v=3" defer></script>
-    <script>
-        function escapeHtml(str) {
-            if (str === null || str === undefined) return '';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
+    function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
 
-        const slug = window.location.pathname.replace('/partner/', '').replace(/\/$/, '');
+    function showListing() {
+        listingView.classList.remove('hidden');
+        detailView.classList.add('hidden');
+        history.pushState(null, '', '/partner/');
+    }
 
-        async function loadPartners() {
-            try {
-                const response = await fetch('/api/partners');
-                const partners = await response.json();
+    function showDetail(p) {
+        listingView.classList.add('hidden');
+        detailView.classList.remove('hidden');
+        var card = document.getElementById('partnerDetailCard');
+        card.innerHTML =
+            '<img src="' + esc(p.logo) + '" alt="" onerror="this.style.display=\'none\'">' +
+            '<h2>' + esc(p.name) + '</h2>' +
+            '<p class="desc">' + esc(p.description) + '</p>' +
+            '<div class="detail-links">' +
+            (p.website ? '<a href="' + esc(p.website) + '" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> Website</a>' : '') +
+            (p.discord_server ? '<a href="' + esc(p.discord_server) + '" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>' : '') +
+            '</div>';
+        history.pushState(null, '', '/partner/' + p.slug + '/');
+    }
 
-                const container = document.getElementById('partnersContainer');
-                const emptyState = document.getElementById('emptyState');
+    window.showListing = showListing;
 
-                if (partners.length === 0) {
-                    emptyState.style.display = 'block';
-                    container.style.display = 'none';
-                    return;
-                }
+    window.addEventListener('popstate', function () {
+        loadView();
+    });
 
-                container.innerHTML = partners.map(partner => `
-                    <div class="partner-card" data-slug="${escapeHtml(partner.slug)}">
-                        <div class="partner-card-top">
-                            <div class="partner-logo">
-                                ${partner.logo ? `<img src="${escapeHtml(partner.logo)}" alt="${escapeHtml(partner.name)}">` : '<i class="fa-solid fa-building"></i>'}
-                            </div>
-                            <h3>${escapeHtml(partner.name)}</h3>
-                        </div>
-                        <p>${escapeHtml(partner.description || '')}</p>
-                        <div class="partner-actions">
-                            ${partner.website ? `<a href="${escapeHtml(partner.website)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i> Website</a>` : ''}
-                            ${partner.discordServer ? `<a href="${escapeHtml(partner.discordServer)}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>` : ''}
-                        </div>
-                    </div>
-                `).join('');
-
-                container.querySelectorAll('.partner-card').forEach(card => {
-                    card.addEventListener('click', function(e) {
-                        if (e.target.closest('.partner-actions')) return;
-                        const s = this.getAttribute('data-slug');
-                        if (s) window.location = '/partner/' + s;
-                    });
-                });
-            } catch (error) {
-                console.error('Failed to load partners:', error);
-            }
-        }
-
-        async function loadPartnerDetail(slug) {
-            try {
-                const response = await fetch(`/api/partner/${slug}`);
-                if (!response.ok) {
-                    document.getElementById('listingView').style.display = 'block';
-                    return;
-                }
-                const partner = await response.json();
-
-                document.getElementById('listingView').style.display = 'none';
-                document.getElementById('detailView').style.display = 'block';
-
-                document.getElementById('partnerDetailCard').innerHTML = `
-                    <div class="partner-detail-logo">
-                        ${partner.logo ? `<img src="${escapeHtml(partner.logo)}" alt="${escapeHtml(partner.name)}">` : '<i class="fa-solid fa-building"></i>'}
-                    </div>
-                    <h1>${escapeHtml(partner.name)}</h1>
-                    <p>${escapeHtml(partner.description || '')}</p>
-                    <div class="partner-detail-actions">
-                        ${partner.website ? `<a href="${escapeHtml(partner.website)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i> Website</a>` : ''}
-                        ${partner.discordServer ? `<a href="${escapeHtml(partner.discordServer)}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>` : ''}
-                    </div>
-                `;
-
-                document.getElementById('breadcrumb-partner').textContent = partner.name;
-                document.getElementById('breadcrumb-partner').href = `/partner/${partner.slug}`;
-                document.title = `${partner.name} | Disc-Tools Partners`;
-            } catch (error) {
-                console.error('Failed to load partner:', error);
-                document.getElementById('listingView').style.display = 'block';
-            }
-        }
-
-        if (slug && slug !== '') {
-            loadPartnerDetail(slug);
-            checkOwnPartner(slug);
+    function loadView() {
+        var path = location.pathname.replace(/\/$/, '');
+        var parts = path.split('/');
+        if (parts.length === 3 && parts[1] === 'partner' && parts[2]) {
+            var slug = parts[2];
+            fetch('/api/partner/' + slug)
+                .then(function (r) { return r.json(); })
+                .then(function (p) { if (p && p.name) showDetail(p); else showListing(); })
+                .catch(function () { showListing(); });
         } else {
-            loadPartners();
+            showListing();
         }
+    }
 
-        async function checkOwnPartner(slug) {
-            try {
-                const authRes = await fetch('/api/auth/me');
-                const auth = await authRes.json();
-                if (!auth.authenticated) return;
-
-                let partnerData = null;
-                let isAdmin = false;
-
-                try {
-                    const adminRes = await fetch('/api/admin/check');
-                    isAdmin = (await adminRes.json()).isAdmin;
-                } catch (e) {}
-
-                if (isAdmin) {
-                    const allRes = await fetch('/api/admin/partners');
-                    const all = await allRes.json();
-                    partnerData = all.find(p => p.slug === slug);
-                }
-
-                if (!partnerData) {
-                    const partnerRes = await fetch('/api/user/partner');
-                    if (partnerRes.ok) {
-                        const myPartner = await partnerRes.json();
-                        if (myPartner.slug === slug) partnerData = myPartner;
-                    }
-                }
-
-                if (!partnerData) return;
-
-                document.getElementById('editView').style.display = 'block';
-                document.getElementById('edit-description').value = partnerData.description || '';
-                document.getElementById('edit-website').value = partnerData.website || '';
-                document.getElementById('edit-discord').value = partnerData.discord_server || '';
-                document.getElementById('edit-logo').value = partnerData.logo || '';
-            } catch (e) {}
-        }
-
-        async function savePartner(data) {
-            let isAdmin = false;
-            try { isAdmin = (await (await fetch('/api/admin/check')).json()).isAdmin; } catch (e) {}
-            if (isAdmin) {
-                const all = await (await fetch('/api/admin/partners')).json();
-                const p = all.find(x => x.slug === slug);
-                if (p) return await fetch(`/api/admin/partners/${p.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    fetch('/api/partners')
+        .then(function (r) { return r.json(); })
+        .then(function (partners) {
+            if (!partners.length) {
+                emptyState.classList.remove('hidden');
+                return;
             }
-            return await fetch('/api/user/partner', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-        }
+            var html = '';
+            partners.forEach(function (p) {
+                html += '<a href="/partner/' + esc(p.slug) + '/" class="partner-card" onclick="event.preventDefault();loadPartner(\'' + esc(p.slug) + '\')">' +
+                    '<div class="head">' +
+                    '<img src="' + esc(p.logo) + '" alt="" onerror="this.style.display=\'none\'">' +
+                    '<h3>' + esc(p.name) + '</h3>' +
+                    '</div>' +
+                    '<p class="desc">' + esc(p.description) + '</p>' +
+                    '<div class="links">' +
+                    (p.website ? '<span><i class="fa-solid fa-globe"></i> ' + esc(p.website.replace(/^https?:\/\//, '')) + '</span>' : '') +
+                    '</div>' +
+                    '</a>';
+            });
+            container.innerHTML = html;
+        })
+        .catch(function () {});
 
-        document.getElementById('partnerEditForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const feedback = document.getElementById('saveFeedback');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch loading"></i> Saving...';
-            feedback.style.display = 'none';
-            try {
-                const res = await savePartner({
-                    description: document.getElementById('edit-description').value || null,
-                    website: document.getElementById('edit-website').value || null,
-                    discord_server: document.getElementById('edit-discord').value || null,
-                    logo: document.getElementById('edit-logo').value || null
-                });
-                if (res.ok) {
-                    feedback.textContent = 'Changes saved successfully!';
-                    feedback.style.cssText = 'text-align:center;margin-top:12px;font-size:14px;font-weight:600;display:block;color:#2ecc71;';
-                    loadPartnerDetail(slug);
-                } else {
-                    const err = await res.json().catch(() => ({}));
-                    feedback.textContent = err.error || 'Failed to save changes.';
-                    feedback.style.cssText = 'text-align:center;margin-top:12px;font-size:14px;font-weight:600;display:block;color:#e74c3c;';
-                }
-            } catch (err) {
-                feedback.textContent = 'Failed to save changes.';
-                feedback.style.cssText = 'text-align:center;margin-top:12px;font-size:14px;font-weight:600;display:block;color:#e74c3c;';
-            }
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
-        });
-    </script>
+    window.loadPartner = function (slug) {
+        fetch('/api/partner/' + slug)
+            .then(function (r) { return r.json(); })
+            .then(function (p) { if (p && p.name) showDetail(p); })
+            .catch(function () {});
+    };
+
+    loadView();
+})();
+</script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

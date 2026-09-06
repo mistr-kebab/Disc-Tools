@@ -1,220 +1,166 @@
 <div align="center">
-  <img src="https://disc-tools.de/assets/img/logo.png" alt="Disc-Tools Logo" width="80">
+  <img src="https://disc-tools.de/static/assets/img/logo.png" alt="Disc-Tools Logo" width="80">
   <h1>Disc-Tools</h1>
   <p><strong>The ultimate collection of free Discord utilities</strong></p>
   <p>
     <a href="https://disc-tools.de">Website</a> •
+    <a href="https://disc-tools.de/tools/">All Tools</a> •
     <a href="https://discord.gg/rtRs8rhj5u">Discord</a> •
-    <a href="https://github.com/mistr-kebab/Disc-Tools">GitHub</a>
+    <a href="https://github.com/Disc-Tools/disc-tools.de">GitHub</a>
   </p>
 </div>
 
 ## Overview
 
-Disc-Tools is a comprehensive web application providing free tools, guides, and educational content for the Discord community. Built with vanilla HTML, CSS, and JavaScript on the frontend and a Node.js/Express API backend with PostgreSQL.
+Disc-Tools is a web application providing free tools, guides and educational content for the Discord community. The frontend is built with vanilla HTML, CSS and JavaScript; the backend is a Node.js/Express API with PostgreSQL.
 
 **Live at:** [disc-tools.de](https://disc-tools.de)
 
-> **Note:** The frontend was developed with AI assistance, while the backend is entirely custom-built.
+## Tools
 
-## Features
+Twelve utilities in three categories:
 
-### Tools (11)
-| Tool | Description |
-|------|-------------|
-| [Avatar CDN](https://disc-tools.de/tools/avatar-cdn/) | Generate direct CDN links for any Discord avatar in all sizes & formats |
-| [Color Picker](https://disc-tools.de/tools/color-picker/) | Pick and convert colors between HEX, RGB, HSL and more |
-| [Embed Builder](https://disc-tools.de/tools/embed-builder/) | Build and preview Discord embeds visually |
-| [Emoji Stealer](https://disc-tools.de/tools/emoji-stealer/) | Download any custom Discord emoji or sticker |
-| [Invite Lookup](https://disc-tools.de/tools/invite-lookup/) | Look up Discord invite codes and get server info |
-| [Markdown Generator](https://disc-tools.de/tools/markdown-generator/) | Write and preview Discord markdown formatting |
-| [Nitro Checker](https://disc-tools.de/tools/nitro-checker/) | Check if a Nitro gift code is valid |
-| [Server Lookup](https://disc-tools.de/tools/server-lookup/) | Get detailed information about any Discord server |
-| [Snowflake Decoder](https://disc-tools.de/tools/snowflake-decoder/) | Decode Discord snowflakes into timestamps and metadata |
-| [Timestamp Generator](https://disc-tools.de/tools/timestamp-generator/) | Generate Discord-formatted timestamps for any date |
-| [Webhook Manager](https://disc-tools.de/tools/webhook-manager/) | Send, edit, and manage Discord webhooks |
+**Look things up**
+- User Lookup — badges, account age and details for any user ID
+- Username History — every past username and discriminator of an account
+- Server Lookup — members, channels and invites via Discord's widget API
+- Invite Lookup — guild info, member count, inviter and expiry of any invite
+- Snowflake Decoder — creation date, worker, process and increment from any ID
 
-### Learn Section
-- **Guides** — Step-by-step tutorials for all 11 tools
-- **Formatting Tips** — 15 Discord markdown topics (bold, italic, code blocks, mentions, timestamps, etc.)
-- **Shortcuts** — Discord keyboard shortcuts (quick switcher, navigation, emoji picker, etc.)
-- **Security Articles** — In-depth security content (token grabber scams, etc.)
+**Create & format**
+- Embed Builder — design embeds visually, export the ready JSON payload
+- Markdown Generator — format messages with live preview and quick copy
+- Timestamp Generator — all `<t:>` formats for any date and timezone
+- Color Picker — role colors as HEX, RGB, HSL and integer values
 
-### User Features
-- Discord OAuth2 authentication
-- User profiles with avatar, badges, account info
-- Server dashboard with search & filtering
-- Favorite tools (persisted in localStorage)
-- Dark/light theme toggle
-- Global search (Ctrl+K / Ctrl+F)
-- Live popularity stats (auto-updates every 30s)
-- Mobile-responsive design with slide-in navigation
-- Cookie consent banner
+**Manage & extract**
+- Webhook Manager — send messages and delete webhooks without a bot
+- Emoji Stealer — high-quality links for any emoji or sticker
+- Avatar CDN — direct CDN links for any avatar, every size and format
 
-### Additional Pages
-- **Team** — Team members with roles from Discord guild
-- **Partners** — Partner showcase + partner request system
-- **Announcements** — Site announcements with bell notification
-- **Status** — System status page with uptime monitoring
-- **Admin Panel** — Discord OAuth-protected admin dashboard with announcements, member management, logs, system stats, Umami analytics
-- **Legal** — Privacy policy, terms of service, imprint
+> Tools launch progressively — new tools are announced on the site and in the Discord.
+
+## Learn section
+
+- **Guides** — step-by-step tutorials
+- **Formatting Tips** — Discord markdown topics (bold, italic, code blocks, mentions, timestamps, …)
+- **Shortcuts** — Discord keyboard shortcuts
+- **Security Articles** — in-depth security content (phishing, token grabbers, account security)
+
+## Pages
+
+- **Team** — team members with roles from the Discord guild
+- **Partners** — partner showcase + partner request system
+- **Announcements** — site announcements
+- **Premium** — premium subscription page
+- **Profile** — user profile with linked accounts
+- **GIFs** — community GIF gallery with upload and moderation
+- **Legal** — privacy policy, terms of service, imprint
+- **Status** — [status.disc-tools.de](https://status.disc-tools.de)
 
 ## Tech Stack
 
-### Frontend
-- Vanilla HTML, CSS, JavaScript (no frameworks)
-- Self-hosted fonts: Inter, JetBrains Mono, Outfit
-- Font Awesome 6.5.0 (icons)
-- Custom service worker for offline caching
-- Open Graph / Twitter Card meta tags for rich embeds
-- JSON-LD structured data for SEO
+**Frontend**
+- Vanilla HTML, CSS, JavaScript — no frameworks
+- Self-hosted fonts (Inter) and Font Awesome icons
+- Service worker for offline caching
+- Open Graph / Twitter Cards / JSON-LD for rich embeds
 
-### Backend
-- **Runtime:** Node.js
-- **Framework:** Express 5
-- **Database:** PostgreSQL (via `pg` with connection pooling)
-- **Auth:** Discord OAuth2 with JWT sessions
-- **Bot:** discord.js 14 for Discord API interactions
-- **External APIs:** Spotify OAuth, proxycheck.io (VPN detection)
+**Backend**
+- Node.js / Express 5
+- PostgreSQL
+- Discord OAuth2 with JWT sessions
+- discord.js bot integration
 
 ## Project Structure
 
 ```
-├── index.html                    # Home page
-├── about/                        # About page
-├── admin/                        # Admin panel (11 sections)
-├── announcements/                # Site announcements
-├── api/                          # Express backend
-│   ├── index.js                  # Server entry point (port 3000)
-│   ├── db.js                     # PostgreSQL connection pool
-│   ├── middleware/
-│   │   ├── auth.js               # JWT auth middleware
-│   │   ├── cors.js               # CORS configuration
-│   │   └── rateLimiter.js        # Rate limiting
-│   └── routes/
-│       ├── auth.js               # Discord OAuth2 login/callback/logout
-│       ├── discord.js            # Discord API proxy endpoints
-│       ├── stats.js              # Tool usage & page view tracking
-│       ├── admin.js              # Admin panel operations
-│       ├── partners.js           # Partner listing
-│       ├── profiles.js           # User profile CRUD
-│       └── verify.js             # Bot/email verification
-├── blocked/vpn/                  # VPN/proxy blocked page
-├── css/
-│   └── style.css                 # Main stylesheet (5200+ lines)
-├── fonts/                        # Self-hosted woff2 fonts
-├── guides/                       # 11 tool-specific guides
-├── invite/bot/disc-tools/        # Bot invite landing page
-├── js/
-│   ├── main.js                   # Core app logic (820 lines)
-│   ├── avatar-cdn.js             # Tool-specific scripts
-│   ├── embed-builder.js
-│   ├── ... (12 tool JS files)
-├── learn/                        # Learn hub page
-├── legal/                        # Privacy policy, ToS, imprint
-├── mobile/                       # Mobile redirect page
-├── partner/                      # Partner showcase page
-├── profile/                      # User profile dashboard
-├── scripts/
-│   └── regenerate_team_pages.js  # Team page generator
-├── security-articles/            # Security educational content
-├── servers/                      # User's servers dashboard
-├── sitemap.xml                   # XML sitemap for SEO
-├── sw.js                         # Service Worker
-├── team/                         # Team member pages
-├── tips/
-│   ├── formatting/               # 15 Discord formatting topics
-│   └── shortcuts/                # 7 Discord shortcut topics
-├── tools/                        # 11 tool pages
-├── verify/                       # Verification page
-└── verified/                     # Verification success page
+├── index.html                 # Home page
+├── 404.html                   # Error page
+├── about/                     # About page
+├── admin/                     # OAuth-protected admin panel
+├── announcements/             # Site announcements
+├── api/                       # Express backend
+│   ├── index.js               # Server entry point (port 3000)
+│   ├── db.js                  # PostgreSQL connection pool
+│   ├── middleware/            # Auth, CORS, rate limiting, VPN check
+│   ├── routes/                # API route handlers
+│   └── utils/                 # Discord, IP and Spotify helpers
+├── blocked/                   # Banned / VPN blocked pages
+├── gifs/                      # GIF gallery
+├── guides/                    # Guides overview
+├── learn/                     # Learn hub
+├── legal/                     # Privacy policy, ToS, imprint
+├── partner/                   # Partner showcase
+├── premium/                   # Premium page
+├── profile/                   # User profile
+├── security-articles/         # Security content
+├── success/                   # Post-login/logout pages
+├── team/                      # Team page
+├── tips/                      # Formatting + shortcuts
+├── tools/                     # All tools grid
+├── static/
+│   ├── assets/img/            # Images and logos
+│   ├── css/                   # Stylesheets
+│   ├── fa-icons/              # Font Awesome
+│   ├── fonts/                 # Self-hosted fonts
+│   └── js/                    # Page scripts
+├── sw.js                      # Service worker
+├── sitemap.xml
+└── robots.txt
 ```
 
 ## Getting Started
 
-### Prerequisites
-- Node.js 18+
-- PostgreSQL database
-- Discord application (for OAuth2 & bot)
-
-### Installation
+The frontend is fully static — serve the root directory with any static server:
 
 ```bash
-git clone https://github.com/mistr-kebab/Disc-Tools.git
-cd Disc-Tools
+git clone https://github.com/Disc-Tools/disc-tools.de.git
+cd disc-tools.de
+# e.g. with nginx, point `root` at this directory
 ```
-
-**Frontend:** Serve the root directory with any static server (Apache, Nginx, etc.).
 
 **Backend:**
 
 ```bash
 cd api
 npm install
-cp .env.example .env   # Configure environment variables
+cp .env.example .env   # fill in your credentials
 node index.js
 ```
 
 ### Environment Variables
 
-The API requires the following environment variables in `api/.env`:
+The API reads its configuration from `api/.env`:
 
 | Variable | Description |
 |----------|-------------|
 | `PORT` | API server port (default: 3000) |
+| `HOST` | Bind address (default: 127.0.0.1) |
 | `JWT_SECRET` | Secret for signing JWT tokens |
-| `DISCORD_CLIENT_ID` | Discord OAuth2 client ID |
-| `DISCORD_CLIENT_SECRET` | Discord OAuth2 client secret |
+| `DISCORD_CLIENT_ID` / `DISCORD_CLIENT_SECRET` | Discord OAuth2 credentials |
 | `DISCORD_REDIRECT_URI` | OAuth2 callback URL |
 | `DISCORD_BOT_TOKEN` | Discord bot token |
-| `GUILD_ID` | Discord server ID for team/roles |
+| `GUILD_ID` | Discord guild ID |
 | `DISCORD_INVITE` | Discord server invite link |
 | `DB_HOST` / `DB_PORT` / `DB_NAME` / `DB_USER` / `DB_PASSWORD` | PostgreSQL connection |
-
-### API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/auth/login` | GET | Discord OAuth2 login redirect |
-| `/api/auth/callback` | GET | OAuth2 callback handler |
-| `/api/auth/logout` | GET | Clear session |
-| `/api/auth/me` | GET | Current user info |
-| `/api/user/guilds` | GET | User's Discord servers |
-| `/api/user/profile` | GET/PUT | User profile |
-| `/api/user/partner` | GET | Partner status check |
-| `/api/guild/:id` | GET | Guild lookup |
-| `/api/user/:id` | GET | User lookup |
-| `/api/invite/:code` | GET | Invite lookup |
-| `/api/bot-info` | GET | Bot information |
-| `/api/stats/track` | POST | Track tool usage |
-| `/api/stats/popular` | GET | Popular tools |
-| `/api/track/view` | POST | Track page view |
-| `/api/team` | GET | Team members |
-| `/api/announcements` | GET | Active announcements |
-| `/api/security/vpn-check` | GET | VPN/proxy detection |
-| `/api/admin/check` | GET | Admin whitelist check |
-| `/api/verify` | POST | User verification |
-
-## SEO
-
-- Comprehensive meta tags (Open Graph, Twitter Cards) on every page
-- JSON-LD structured data (WebSite, WebApplication, BreadcrumbList, FAQ)
-- XML sitemap with prioritized URLs
-- Robots.txt with API disallow
-- Canonical URLs
-- Semantic HTML with breadcrumb navigation
+| `IP_HASH_SALT` | Salt for IP hashing |
+| `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` / `SPOTIFY_REDIRECT_URI` | Spotify OAuth |
+| `TWITCH_CLIENT_ID` / `TWITCH_CLIENT_SECRET` / `TWITCH_REDIRECT_URI` | Twitch OAuth |
+| `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` / `GITHUB_REDIRECT_URI` | GitHub OAuth |
+| `GIFS_INTERNAL_SECRET` | Internal secret for the GIFs service |
 
 ## Contributing
 
-Contributions are welcome! Feel free to:
+Contributions are welcome!
 
-- Open an [issue](https://github.com/mistr-kebab/Disc-Tools/issues) for bugs or feature requests
-- Submit a [pull request](https://github.com/mistr-kebab/Disc-Tools/pulls)
+- Open an [issue](https://github.com/Disc-Tools/disc-tools.de/issues) for bugs or feature requests
+- Submit a [pull request](https://github.com/Disc-Tools/disc-tools.de/pulls)
 - Star the repo to show support
 
 ## License
 
-This project is open source. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 

@@ -1,116 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
+  <url>
     <loc>https://disc-tools.de/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <priority>1.0</priority>
   </url>
-<url>
+  <url>
     <loc>https://disc-tools.de/tools/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.9</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/tools/webhook-manager/</loc>
-    <lastmod>2026-05-09</lastmod>
+  <url>
+    <loc>https://disc-tools.de/tools/user-lookup/</loc>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/tools/snowflake-decoder/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.8</priority>
-  </url>
-<url>
-    <loc>https://disc-tools.de/tools/invite-lookup/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.8</priority>
-  </url>
-<url>
+  <url>
     <loc>https://disc-tools.de/tools/server-lookup/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/tools/avatar-cdn/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.7</priority>
+  <url>
+    <loc>https://disc-tools.de/tools/invite-lookup/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
   </url>
-<url>
+  <url>
+    <loc>https://disc-tools.de/tools/alt-account-lookup/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tools/account-checker/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tools/username-history/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://disc-tools.de/tools/emoji-stealer/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.7</priority>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/tools/markdown-generator/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.7</priority>
+  <url>
+    <loc>https://disc-tools.de/tools/avatar-cdn/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/guides/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.6</priority>
-  </url>
-<url>
-    <loc>https://disc-tools.de/about/</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.5</priority>
-  </url>
-<url>
-    <loc>https://disc-tools.de/team/</loc>
-    <lastmod>2026-05-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-<url>
+  <url>
     <loc>https://disc-tools.de/tools/color-picker/</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/guides/color-picker/</loc>
-    <lastmod>2026-05-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-<url>
-    <loc>https://disc-tools.de/tools/nitro-checker/</loc>
-    <lastmod>2026-05-10</lastmod>
+  <url>
+    <loc>https://disc-tools.de/tools/snowflake-decoder/</loc>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/guides/nitro-checker/</loc>
-    <lastmod>2026-05-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-<url>
+  <url>
     <loc>https://disc-tools.de/tools/timestamp-generator/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/guides/timestamp-generator/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <priority>0.6</priority>
+  <url>
+    <loc>https://disc-tools.de/tools/markdown-generator/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/partner/</loc>
-    <lastmod>2026-05-16</lastmod>
-    <priority>0.7</priority>
+  <url>
+    <loc>https://disc-tools.de/tools/link-cleaner/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
   </url>
-<url>
-    <loc>https://disc-tools.de/partner/request/</loc>
-    <lastmod>2026-05-16</lastmod>
+  <url>
+    <loc>https://disc-tools.de/tools/collectibles-inspector/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/learn/</loc>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://disc-tools.de/legal/imprint/</loc>
-  </url>
-<url>
-    <loc>https://disc-tools.de/tools/embed-builder/</loc>
-    <lastmod>2026-05-23</lastmod>
-    <priority>0.8</priority>
-  </url>
-<url>
-    <loc>https://disc-tools.de/guides/embed-builder/</loc>
-    <lastmod>2026-05-23</lastmod>
+    <loc>https://disc-tools.de/tips/</loc>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/bold/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/italic/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/underline/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/strikethrough/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/quote/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/code/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/code-block/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/spoiler/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/subtext/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/timestamp/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/user-mention/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/channel-mention/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/role-mention/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/formatting/custom-emoji/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/tips/shortcuts/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/security-articles/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/security-articles/account-security/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/security-articles/phishing/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/security-articles/token-grabber/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/security-articles/nightcord/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/team/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/partner/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/announcements/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/premium/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/about/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/gifs/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/verified/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/legal/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/legal/imprint/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/legal/privacy-policy/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://disc-tools.de/legal/terms-of-service/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

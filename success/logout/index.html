@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logged out | Disc-Tools</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0d13">
+
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+
+    <meta http-equiv="refresh" content="5; url=/">
+
+    <style>
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .success-box { text-align: center; padding: 48px 32px; }
+        .success-box .icon { font-size: 56px; color: var(--success); margin-bottom: 20px; }
+        .success-box h1 { font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 8px; }
+        .success-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
+        .redirect-note { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <div class="success-box">
+        <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h1>Successfully logged out</h1>
+        <p>You will be redirected to the homepage in a moment.</p>
+        <p class="redirect-note">Redirecting in <span id="countdown">5</span> seconds&hellip;</p>
+    </div>
+    <script>
+        var n = 5;
+        var el = document.getElementById('countdown');
+        setInterval(function () { n--; if (n >= 0) el.textContent = n; }, 1000);
+    </script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+</body>
+</html>

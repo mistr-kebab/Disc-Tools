@@ -1,0 +1,215 @@
+/* ============================================================
+   Disc-Tools: Landing Page
+   Design: Blurple #5865f2 als CTA/Fokus-Akzent, tiefer Anthrazit-
+   Hintergrund (kein #000), warmes Grün als Erfolgs-Akzent.
+   Typo: Space Grotesk (Display) / Onest (Body) / JetBrains Mono.
+   Navbar-Pill: ausschließlich transform/opacity (kein Layout-Jank).
+   ============================================================ */
+/* ---------- Tools page ---------- */
+.tools-page {
+    padding: calc(var(--nav-h) + 56px) 0 120px;
+}
+.page-intro {
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 62ch;
+}
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 34px 0 28px;
+}
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+.filter-chip:hover {
+    color: var(--text);
+    border-color: var(--blurple);
+}
+.filter-chip.active {
+    color: #fff;
+    border-color: var(--blurple);
+    background: var(--blurple);
+}
+.fav-count {
+    min-width: 20px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 12px;
+    text-align: center;
+}
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+.tool-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: transform 0.2s var(--ease-out), border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+.tool-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(124, 133, 240, 0.45);
+    box-shadow: 0 12px 32px rgba(3, 6, 12, 0.4);
+}
+.tool-card.hidden {
+    display: none;
+}
+.star-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(10, 13, 19, 0.6);
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, transform 0.15s;
+}
+.star-btn:hover,
+.star-btn:focus-visible {
+    color: #f2c94c;
+    border-color: rgba(242, 201, 76, 0.5);
+}
+.star-btn:active {
+    transform: scale(0.92);
+}
+.tool-card.starred .star-btn {
+    color: #f2c94c;
+    border-color: rgba(242, 201, 76, 0.45);
+}
+.tool-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(88, 101, 242, 0.14);
+    color: var(--blurple-soft);
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+.tool-card-name {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 700;
+    padding-right: 34px;
+}
+.tool-card-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    flex-grow: 1;
+}
+.empty-state {
+    margin-top: 40px;
+    padding: 48px 24px;
+    text-align: center;
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+}
+.empty-state.hidden {
+    display: none;
+}
+.empty-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(242, 201, 76, 0.12);
+    color: #f2c94c;
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+.empty-state h2 {
+    font-size: 20px;
+}
+.empty-state p {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+.empty-state .btn {
+    margin-top: 20px;
+}
+.tool-card .soon-badge {
+    margin-top: auto;
+    align-self: flex-start;
+}
+.tool-open-link {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1px solid var(--blurple);
+    border-radius: 999px;
+    background: rgba(88, 101, 242, 0.10);
+    color: var(--blurple-soft);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+.tool-open-link:hover {
+    background: var(--blurple);
+    color: #fff;
+}
+.tool-card-live {
+    border-color: rgba(88, 101, 242, 0.40);
+}
+.tool-card-live .star-btn {
+    z-index: 3;
+}
+
+/* Premium badge on tool cards */
+.premium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    vertical-align: middle;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #f0b232;
+    background: rgba(240, 178, 50, 0.12);
+    border: 1px solid rgba(240, 178, 50, 0.35);
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+    margin-left: 0.35rem;
+    transform: translateY(-1px);
+}

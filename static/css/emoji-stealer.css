@@ -1,0 +1,311 @@
+/* Disc-Tools: Emoji Stealer — premium-only CDN links for emojis & stickers */
+
+/* ---------- Premium gate ---------- */
+.es-gate {
+    background: linear-gradient(145deg, rgba(34, 40, 55, 0.95), rgba(20, 24, 34, 0.95));
+    border: 1px solid rgba(240, 178, 50, 0.25);
+    border-radius: 14px;
+    padding: 2.4rem 2rem 2.2rem;
+    text-align: center;
+    max-width: 500px;
+    margin: 1.5rem auto 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+.es-gate-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    color: #f0b232;
+    background: rgba(240, 178, 50, 0.12);
+    border: 1px solid rgba(240, 178, 50, 0.35);
+    border-radius: 50%;
+    box-shadow: 0 0 24px rgba(240, 178, 50, 0.25);
+}
+
+.es-gate h2 {
+    font-size: 1.35rem;
+    margin: 0 0 0.5rem;
+    color: var(--text, #f2f3f5);
+}
+
+.es-gate-text {
+    color: var(--text-secondary, #9aa3b2);
+    font-size: 0.95rem;
+    margin: 0 0 1.1rem;
+    line-height: 1.55;
+}
+
+.es-gate-features {
+    list-style: none;
+    margin: 0 0 1.4rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+}
+
+.es-gate-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    font-size: 0.88rem;
+    color: var(--text, #f2f3f5);
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.025);
+    line-height: 1.45;
+}
+
+.es-gate-features li i {
+    color: #f0b232;
+    margin-top: 0.15rem;
+    flex: 0 0 auto;
+}
+
+.es-gate-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- Result grid ---------- */
+.es-grid {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    margin: 1.2rem 0 0;
+}
+
+.es-preview-wrap {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.es-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.es-meta {
+    flex: 1;
+    min-width: 220px;
+}
+
+.es-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.3rem;
+}
+
+.es-name {
+    font-size: 1.35rem;
+    margin: 0;
+    color: var(--text, #f2f3f5);
+    word-break: break-word;
+}
+
+.es-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    white-space: nowrap;
+}
+
+.es-badge-emoji {
+    color: #f0b232;
+    background: rgba(240, 178, 50, 0.12);
+    border: 1px solid rgba(240, 178, 50, 0.35);
+}
+
+.es-badge-sticker {
+    color: #eb459e;
+    background: rgba(235, 69, 158, 0.12);
+    border: 1px solid rgba(235, 69, 158, 0.35);
+}
+
+.es-badge-animated {
+    color: #23a55a;
+    background: rgba(35, 165, 90, 0.12);
+    border: 1px solid rgba(35, 165, 90, 0.35);
+}
+
+.es-id {
+    font-size: 0.85rem;
+    color: var(--text-secondary, #9aa3b2);
+    margin: 0 0 0.25rem;
+}
+
+.es-id code,
+.es-guild code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 0.1rem 0.4rem;
+}
+
+.es-guild {
+    font-size: 0.85rem;
+    color: var(--text-secondary, #9aa3b2);
+    margin: 0 0 0.25rem;
+}
+
+.es-guild a {
+    color: var(--primary, #5865f2);
+}
+
+.es-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary, #9aa3b2);
+    margin: 0.25rem 0 0;
+    line-height: 1.5;
+}
+
+.es-note {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: #f0b232;
+    margin: 0.4rem 0 0;
+}
+
+/* ---------- Markup copy row ---------- */
+.es-copy-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin: 1.1rem 0 0;
+}
+
+.es-copy-input {
+    flex: 1;
+    min-width: 180px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+    color: var(--text, #f2f3f5);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+}
+
+/* ---------- Links list ---------- */
+.es-links {
+    margin: 1.5rem 0 0;
+}
+
+.es-links-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    margin: 0 0 0.6rem;
+    color: var(--text, #f2f3f5);
+}
+
+.es-links-title i {
+    color: var(--primary, #5865f2);
+}
+
+.es-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.es-link-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.es-link-format {
+    flex: 0 0 auto;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #f0b232;
+    background: rgba(240, 178, 50, 0.1);
+    border: 1px solid rgba(240, 178, 50, 0.3);
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.es-link-url {
+    flex: 1;
+    min-width: 160px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78rem;
+    color: var(--text-secondary, #9aa3b2);
+    word-break: break-all;
+    text-decoration: none;
+}
+
+.es-link-url:hover {
+    color: var(--primary, #5865f2);
+}
+
+.es-link-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 0 0 auto;
+}
+
+.es-copy-btn.copied {
+    color: #23a55a !important;
+    border-color: rgba(35, 165, 90, 0.5) !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px) {
+    .es-grid {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .es-name-row {
+        justify-content: center;
+    }
+
+    .es-link-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .es-link-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

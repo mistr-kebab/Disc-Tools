@@ -1,519 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIFs | Upload & Share | Disc-Tools</title>
-    
-    <!-- Meta Tags for Discord/Social Media Embeds -->
-    <meta name="description" content="Upload and share GIFs with ease on Disc-Tools.">
-    <meta name="theme-color" content="#5865F2">
-    <meta property="og:title" content="GIFs - Disc-Tools">
-    <meta property="og:description" content="Upload and share GIFs with ease.">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Disc-Tools">
-    <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GIFs | Disc-Tools</title>
+    <meta name="description" content="GIFs - Disc-Tools">
+    <meta name="keywords" content="discord gifs, discord gif tools, discord animated gifs, discord gif collection">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://disc-tools.de/gifs/">
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
-    <style>
-        :root { --text-secondary: #c0c0cc; }
-        .gifs-grid {
-            font-size: 0;
-            margin: 30px -10px 0;
-        }
-        .gifs-grid .gif-card {
-            display: inline-block;
-            width: calc(25% - 20px);
-            margin: 0 10px 20px;
-            font-size: 16px;
-            vertical-align: top;
-        }
-        @media (max-width: 1100px) {
-            .gifs-grid .gif-card { width: calc(33.33% - 20px); }
-        }
-        @media (max-width: 800px) {
-            .gifs-grid .gif-card { width: calc(50% - 20px); }
-        }
-        @media (max-width: 500px) {
-            .gifs-grid .gif-card { width: calc(100% - 20px); }
-        }
-        .gif-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .gif-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        .gif-card img {
-            width: 100%;
-            display: block;
-            background: #1a1a2e;
-        }
-        .gif-card .gif-info {
-            padding: 14px 16px;
-        }
-        .gif-card .gif-name {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .gif-card .gif-meta {
-            font-size: 12px;
-            color: #fff;
-        }
-        .gif-tag {
-            display: inline-block;
-            background: rgba(88,101,242,0.15);
-            color: var(--accent);
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            margin: 2px 2px 0 0;
-        }
-        .nsfw-badge {
-            background: #ed4245;
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .upload-area {
-            text-align: center;
-            padding: 2rem;
-            border: 2px dashed var(--border);
-            border-radius: 14px;
-            margin-top: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .upload-area:hover {
-            border-color: var(--accent);
-            background: rgba(88,101,242,0.05);
-        }
-        .upload-area.has-file {
-            border-color: #57F287;
-            background: rgba(87,242,135,0.05);
-        }
-        .gif-viewer {
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 24px;
-            margin-top: 30px;
-            align-items: start;
-        }
-        .gif-viewer-main img {
-            max-width: 100%;
-            border-radius: 14px;
-            background: #1a1a2e;
-            display: block;
-        }
-        .gif-viewer-side {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            position: sticky;
-            top: 30px;
-        }
-        .gif-info-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px;
-        }
-        .gif-info-card h2 {
-            margin: 0 0 8px 0;
-            font-size: 18px;
-        }
-        .gif-info-card .action-btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 8px;
-        }
-        .gif-more-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .gif-more-grid a {
-            display: block;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-        .gif-more-grid a:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .gif-more-grid img {
-            width: 100%;
-            display: block;
-            background: #1a1a2e;
-        }
-        .hidden { display: none !important; }
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        .modal-content h2 { margin-top: 0; }
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-secondary);
-        }
-        .form-group input[type="text"],
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        .form-group textarea { resize: vertical; min-height: 60px; }
-        .form-group input[type="file"] { width: 100%; }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 30px;
-        }
-        .pagination button {
-            padding: 8px 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            cursor: pointer;
-        }
-        .pagination button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .pagination button:hover:not(:disabled) {
-            border-color: var(--accent);
-        }
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-secondary);
-        }
-        .empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
-        .loading-spinner {
-            text-align: center;
-            padding: 4rem;
-            color: var(--text-secondary);
-        }
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 14px 20px;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 14px;
-            z-index: 2000;
-            animation: slideIn 0.3s ease;
-        }
-        .toast.success { background: #57F287; color: #000; }
-        .toast.error { background: #ED4245; }
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .nav-tabs button {
-            padding: 10px 20px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-        .nav-tabs button.active {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(88,101,242,0.1);
-        }
-        .nav-tabs button:hover { border-color: var(--accent); }
-        .filter-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .filter-bar input {
-            padding: 8px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 13px;
-            flex: 1;
-            min-width: 200px;
-        }
-        .gif-single-url {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 13px;
-            word-break: break-all;
-            user-select: all;
-        }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { opacity: 0.9; }
-        .btn-danger { background: #ED4245; color: #fff; }
-        .btn-danger:hover { opacity: 0.9; }
-        .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-        .btn-secondary:hover { border-color: var(--accent); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .drop-zone {
-            border: 2px dashed var(--border);
-            border-radius: 14px;
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--bg);
-            position: relative;
-        }
-        .drop-zone:hover, .drop-zone.drag-over {
-            border-color: var(--accent);
-            background: rgba(88,101,242,0.05);
-        }
-        .drop-zone.has-file {
-            border-color: #57F287;
-            background: rgba(87,242,135,0.05);
-            padding: 1rem;
-        }
-        .drop-zone-content { transition: opacity 0.3s ease; }
-        .drop-zone.has-file .drop-zone-content { display: none; }
-        .drop-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            opacity: 0.5;
-            margin-bottom: 0.5rem;
-        }
-        .drop-text { font-size: 14px; color: var(--text-secondary); margin: 0 0 4px; }
-        .drop-link { color: var(--accent); text-decoration: underline; }
-        .drop-hint { font-size: 11px; color: var(--text-secondary); opacity: 0.6; margin: 0; }
-        .drop-preview { text-align: center; }
-        .drop-preview img {
-            max-width: 100%;
-            max-height: 180px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-        .preview-name { font-size: 13px; font-weight: 600; margin: 0; color: var(--text); }
-        .preview-size { font-size: 11px; color: var(--text-secondary); margin: 2px 0 0; }
-        .form-group .toggle-wrap {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            user-select: none;
-            flex-direction: row;
-            margin-bottom: 0;
-        }
-        .toggle-wrap input { display: none; }
-        .toggle-track {
-            width: 42px;
-            height: 24px;
-            background: var(--border);
-            border-radius: 12px;
-            position: relative;
-            transition: background 0.25s ease;
-            flex-shrink: 0;
-        }
-        .toggle-track::after {
-            content: '';
-            position: absolute;
-            top: 3px; left: 3px;
-            width: 18px; height: 18px;
-            background: #fff;
-            border-radius: 50%;
-            transition: transform 0.25s ease;
-        }
-        .toggle-wrap input:checked + .toggle-track {
-            background: #ed4245;
-        }
-        .toggle-wrap input:checked + .toggle-track::after {
-            transform: translateX(18px);
-        }
-        .toggle-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        .toggle-wrap input:checked ~ .toggle-label {
-            color: #ed4245;
-            font-weight: 600;
-        }
-        .nsfw-toggle-wrap {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            user-select: none;
-            padding: 6px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        .nsfw-toggle-wrap:hover {
-            border-color: var(--accent);
-        }
-        .nsfw-toggle-wrap:has(input:checked) {
-            border-color: #ed4245;
-            background: rgba(237,66,69,0.08);
-        }
-        .nsfw-toggle-wrap input { display: none; }
-        .nsfw-toggle-track {
-            width: 32px;
-            height: 18px;
-            background: var(--border);
-            border-radius: 9px;
-            position: relative;
-            transition: background 0.25s ease;
-            flex-shrink: 0;
-        }
-        .nsfw-toggle-track::after {
-            content: '';
-            position: absolute;
-            top: 2px; left: 2px;
-            width: 14px; height: 14px;
-            background: #fff;
-            border-radius: 50%;
-            transition: transform 0.25s ease;
-        }
-        .nsfw-toggle-wrap input:checked + .nsfw-toggle-track {
-            background: #ed4245;
-        }
-        .nsfw-toggle-wrap input:checked + .nsfw-toggle-track::after {
-            transform: translateX(14px);
-        }
-        .nsfw-toggle-wrap input:checked ~ .nsfw-toggle-text {
-            color: #ed4245;
-            font-weight: 600;
-        }
-        .nsfw-toggle-text {
-            font-size: 13px;
-            transition: color 0.25s ease;
-        }
-    </style>
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/css/gifs.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
 </head>
-
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-        <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link active">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="./" class="current">GIFs</a>
-        <span id="breadcrumb-extra" class="hidden"></span>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="__PAGE_CLASS__">
+    <div class="container">
 
-    <main class="tool-page">
-        <div class="tool-layout-single">
+<div class="tool-layout-single">
             <div class="tool-container">
 
                 <!-- Gallery View -->
                 <div id="gallery-view">
-                    <section class="tool-hero" style="position: relative;">
-                        <span class="hero-tag">// upload / share</span>
+                    <section class="tool-hero">
                         <h1>GIF <em>Uploads</em></h1>
                         <p>Upload and share your favorite GIFs with the community.</p>
                     </section>
@@ -538,7 +96,7 @@
 
                 <!-- Single GIF View -->
                 <div id="single-view" class="hidden">
-                    <button class="btn btn-secondary" onclick="showGallery()" style="margin-bottom:20px;">
+                    <button class="btn btn-secondary" onclick="showGallery()">
                         <i class="fa-solid fa-arrow-left"></i> Back to Gallery
                     </button>
                     <div id="single-content"></div>
@@ -569,7 +127,7 @@
                                         <img id="preview-img" alt="Preview">
                                         <p class="preview-name" id="preview-name"></p>
                                         <p class="preview-size" id="preview-size"></p>
-                                        <button type="button" class="btn btn-secondary" onclick="clearDropZone()" style="font-size:12px;padding:6px 12px;margin-top:6px;">Remove</button>
+                                        <button type="button" class="btn btn-secondary" onclick="clearDropZone()">Remove</button>
                                     </div>
                                     <input type="file" id="gif-file" accept=".gif,image/gif" hidden>
                                 </div>
@@ -581,7 +139,7 @@
                                     <span class="toggle-label">Mark as NSFW</span>
                                 </label>
                             </div>
-                            <div style="display:flex;gap:10px;justify-content:flex-end;">
+                            <div>
                                 <button type="button" class="btn btn-secondary" onclick="hideUpload()">Cancel</button>
                                 <button type="submit" class="btn btn-primary" id="upload-submit-btn">Upload</button>
                             </div>
@@ -591,16 +149,16 @@
 
                 <!-- Birthday Modal -->
                 <div id="birthday-modal" class="modal-overlay hidden">
-                    <div class="modal-content" style="max-width:380px;">
+                    <div class="modal-content">
                         <h2>Age Verification</h2>
-                        <p style="color:var(--text-secondary);margin-bottom:20px;font-size:14px;">
+                        <p>
                             You need to confirm your age to view NSFW content.
                         </p>
                         <div class="form-group">
                             <label for="birthday-input">Date of Birth</label>
-                            <input type="date" id="birthday-input" required style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;box-sizing:border-box;">
+                            <input type="date" id="birthday-input" required>
                         </div>
-                        <div style="display:flex;gap:10px;justify-content:flex-end;">
+                        <div>
                             <button type="button" class="btn btn-secondary" onclick="closeBirthdayModal()">Cancel</button>
                             <button type="button" class="btn btn-primary" onclick="saveBirthday()">Confirm</button>
                         </div>
@@ -608,564 +166,75 @@
                 </div>
 
                 <!-- Age Restricted Banner -->
-                <div id="age-restricted-banner" class="hidden" style="text-align:center;padding:1.5rem;background:rgba(237,66,69,0.1);border:1px solid rgba(237,66,69,0.3);border-radius:14px;margin-top:20px;">
-                    <i class="fa-solid fa-lock" style="color:#ed4245;font-size:1.5rem;margin-bottom:8px;"></i>
-                    <p style="color:var(--text-secondary);font-size:14px;margin:0;">
+                <div id="age-restricted-banner" class="hidden">
+                    <i class="fa-solid fa-lock"></i>
+                    <p>
                         NSFW content is hidden due to age restrictions.
                     </p>
                 </div>
 
             </div>
         </div>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
             </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-
-    <script src="/js/main.js?v=3" defer></script>
-    <script>
-        let currentPage = 1;
-        let currentUser = null;
-        let searchTimeout;
-
-        async function checkAuth() {
-            try {
-                const res = await fetch('/api/auth/me');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.authenticated) currentUser = data.user;
-                }
-            } catch {}
-        }
-
-        function getPathInfo() {
-            const path = window.location.pathname.replace(/\/+$/, '') + '/';
-            const match = path.match(/^\/gifs\/(\d{17,20})\/([^/]+)\/$/);
-            return match ? { userId: match[1], gifId: match[2] } : null;
-        }
-
-        function showToast(msg, type = 'success') {
-            const t = document.createElement('div');
-            t.className = `toast ${type}`;
-            t.textContent = msg;
-            document.body.appendChild(t);
-            setTimeout(() => t.remove(), 4000);
-        }
-
-        async function init() {
-            await checkAuth();
-
-            // Event delegation for dynamic buttons
-            document.getElementById('gifs-container').addEventListener('click', (e) => {
-                const btn = e.target.closest('.empty-upload-btn');
-                if (btn) showUpload();
-            });
-
-            document.getElementById('upload-btn-header').addEventListener('click', showUpload);
-
-            const gif = getPathInfo();
-            if (gif) {
-                loadSingleGIF(gif.gifId);
-            } else {
-                loadGIFs();
-            }
-            initDropZone();
-            checkBirthday();
-        }
-
-        // ─── Gallery ───
-
-        async function loadGIFs(page = 1) {
-            currentPage = page;
-            const container = document.getElementById('gifs-container');
-            container.innerHTML = '<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br>Loading GIFs...</div>';
-
-            const query = document.getElementById('search-input').value.trim();
-            const showNsfw = document.getElementById('nsfw-toggle').checked;
-
-            let url = `/api/gifs?page=${page}`;
-
-            // @ prefix = user search, otherwise tag search
-            if (query.startsWith('@')) {
-                const userId = query.slice(1).trim();
-                if (/^\d{17,20}$/.test(userId)) url += `&user=${userId}`;
-            } else {
-                if (query) url += `&tags=${encodeURIComponent(query)}`;
-            }
-
-            if (!showNsfw) url += '&nsfw=false';
-
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error('Failed to load');
-                const data = await res.json();
-
-                document.getElementById('pagination').classList.remove('hidden');
-
-                if (data.gifs.length === 0) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fa-solid fa-images"></i>
-                            <h3>No GIFs found</h3>
-                            <p>${query ? 'No GIFs match your search. Try different tags.' : 'No GIFs uploaded yet. Be the first!'}</p>
-                            ${!query && currentUser ? '<button class="btn btn-primary empty-upload-btn" style="margin-top:16px;padding:6px 16px;font-size:12px;"><i class="fa-solid fa-upload"></i> Upload GIF</button>' : ''}
-                        </div>`;
-                    return;
-                }
-
-                container.innerHTML = `<div class="gifs-grid">${data.gifs.map(g => `
-                    <a href="/gifs/${g.user_id}/${g.id}/" class="gif-card" onclick="event.preventDefault(); navigateTo('${g.user_id}','${g.id}')">
-                        <img src="${g.url}" alt="${g.name}" loading="lazy">
-                        <div class="gif-info">
-                            <div class="gif-name">${escHtml(g.name)}</div>
-                            <div class="gif-meta">Uploaded by ${escHtml(g.uploader_name || g.user_id)}</div>
-                        </div>
-                    </a>
-                `).join('')}</div>`;
-
-                // Pagination
-                const totalPages = Math.ceil(data.total / data.limit);
-                const pagination = document.getElementById('pagination');
-                if (totalPages <= 1) {
-                    pagination.innerHTML = '';
-                } else {
-                    pagination.innerHTML = `
-                        <button ${page <= 1 ? 'disabled' : ''} onclick="loadGIFs(${page - 1})">Previous</button>
-                        <span style="color:var(--text-secondary);padding:8px;">Page ${page} / ${totalPages}</span>
-                        <button ${page >= totalPages ? 'disabled' : ''} onclick="loadGIFs(${page + 1})">Next</button>
-                    `;
-                }
-            } catch (err) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fa-solid fa-images"></i>
-                        <h3>No GIFs available</h3>
-                        <p>Nothing here yet. Be the first to upload!</p>
-                        ${currentUser ? '<button class="btn btn-primary empty-upload-btn" style="margin-top:16px;padding:6px 16px;font-size:12px;"><i class="fa-solid fa-upload"></i> Upload GIF</button>' : ''}
-                    </div>`;
-            }
-        }
-
-        function debouncedSearch() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => loadGIFs(), 400);
-        }
-
-        // ─── Single GIF ───
-
-        async function loadSingleGIF(gifId) {
-            document.getElementById('gallery-view').classList.add('hidden');
-            document.getElementById('single-view').classList.remove('hidden');
-
-            const extra = document.getElementById('breadcrumb-extra');
-            extra.classList.remove('hidden');
-
-            const container = document.getElementById('single-content');
-            container.innerHTML = '<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br>Loading...</div>';
-
-            try {
-                const res = await fetch(`/api/gifs/${gifId}`);
-                if (!res.ok) throw new Error('Not found');
-                const gif = await res.json();
-
-                extra.innerHTML = `<span>/</span> <a href="/gifs/${gif.user_id}/${gif.id}/" class="current">${escHtml(gif.name)}</a>`;
-
-                const isOwner = currentUser && currentUser.id === gif.user_id;
-                const gifUrl = `https://disc-tools.de/uploads/gifs/${gif.user_id}/${gif.id}.gif`;
-                const pageUrl = `https://disc-tools.de/gifs/${gif.user_id}/${gif.id}/`;
-
-                container.innerHTML = `
-                    <div class="gif-viewer">
-                        <div class="gif-viewer-main">
-                            <img src="${gif.url}" alt="${escHtml(gif.name)}">
-                            <div class="gif-info-card" style="margin-top:20px;">
-                                <div style="font-size:14px;font-weight:600;margin-bottom:10px;">More from ${escHtml(gif.uploader_name || gif.user_id)}</div>
-                                <div id="more-from-user"><div class="loading-spinner" style="padding:1rem;"><i class="fa-solid fa-spinner fa-spin"></i></div></div>
-                            </div>
-                        </div>
-                        <div class="gif-viewer-side">
-                            <div class="gif-info-card">
-                                <h2>${escHtml(gif.name)}</h2>
-                                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
-                                    ${gif.nsfw ? '<span class="nsfw-badge">NSFW</span>' : ''}
-                                    ${gif.tags.map(t => `<span class="gif-tag">${escHtml(t)}</span>`).join('')}
-                                </div>
-                                <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
-                                    <div>Uploaded by <strong>${escHtml(gif.uploader_name || gif.user_id)}</strong></div>
-                                    <div>${gif.width} × ${gif.height}</div>
-                                    <div>${(gif.file_size / 1024 / 1024).toFixed(2)} MB</div>
-                                    <div>${gif.views} views</div>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-primary action-btn" onclick="copyGifUrl('${gifUrl}','Link')">
-                                <i class="fa-solid fa-link"></i> Copy Link
-                            </button>
-
-                            ${currentUser ? `
-                                <button class="btn btn-secondary action-btn" onclick="reportGIF('${gif.id}')">
-                                    <i class="fa-solid fa-flag"></i> Report
-                                </button>
-                            ` : ''}
-
-                            ${isOwner ? `
-                                <button class="btn btn-danger action-btn" onclick="deleteGIF('${gif.id}')">
-                                    <i class="fa-solid fa-trash"></i> Delete
-                                </button>
-                            ` : ''}
-                        </div>
-                    </div>`;
-
-                // Load more GIFs from same user
-                loadMoreFromUser(gif.user_id, gif.id);
-            } catch (err) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <h3>GIF not found</h3>
-                        <p>This GIF may have been removed or is pending moderation.</p>
-                    </div>`;
-            }
-        }
-
-        async function loadMoreFromUser(userId, excludeId) {
-            const container = document.getElementById('more-from-user');
-            try {
-                const res = await fetch(`/api/gifs?user=${userId}&limit=6`);
-                if (!res.ok) throw new Error();
-                const data = await res.json();
-                const others = data.gifs.filter(g => g.id !== excludeId);
-
-                if (others.length === 0) {
-                    container.innerHTML = '<div style="font-size:13px;color:var(--text-secondary);">No other GIFs from this user.</div>';
-                    return;
-                }
-
-                container.innerHTML = '<div class="gif-more-grid">' + others.map(g => `
-                    <a href="/gifs/${g.user_id}/${g.id}/" onclick="event.preventDefault(); navigateTo('${g.user_id}','${g.id}')">
-                        <img src="${g.url}" alt="${escHtml(g.name)}" loading="lazy">
-                    </a>
-                `).join('') + '</div>';
-            } catch {
-                container.innerHTML = '<div style="font-size:13px;color:var(--text-secondary);">Failed to load.</div>';
-            }
-        }
-
-        function copyGifUrl(url, label) {
-            navigator.clipboard.writeText(url).then(() => {
-                showToast((label || 'GIF URL') + ' copied to clipboard!');
-            }).catch(() => {
-                showToast('Failed to copy', 'error');
-            });
-        }
-
-        function navigateTo(userId, gifId) {
-            const url = `/gifs/${userId}/${gifId}/`;
-            window.history.pushState({}, '', url);
-            document.getElementById('breadcrumb-extra').classList.remove('hidden');
-            loadSingleGIF(gifId);
-        }
-
-        function showGallery() {
-            const extra = document.getElementById('breadcrumb-extra');
-            extra.classList.add('hidden');
-            extra.innerHTML = '';
-            window.history.pushState({}, '', '/gifs/');
-            document.getElementById('single-view').classList.add('hidden');
-            document.getElementById('gallery-view').classList.remove('hidden');
-            loadGIFs();
-        }
-
-        window.addEventListener('popstate', () => {
-            const gif = getPathInfo();
-            if (gif) {
-                loadSingleGIF(gif.gifId);
-            } else {
-                showGallery();
-            }
-        });
-
-        // ─── Upload ───
-
-        let droppedFile = null;
-
-        function showUpload() {
-            if (!currentUser) {
-                window.location.href = '/api/auth/login';
-                return;
-            }
-            document.getElementById('upload-modal').classList.remove('hidden');
-            document.getElementById('gif-name').focus();
-        }
-
-        function hideUpload() {
-            document.getElementById('upload-modal').classList.add('hidden');
-            document.getElementById('upload-form').reset();
-            clearDropZone();
-        }
-
-        function clearDropZone() {
-            droppedFile = null;
-            document.getElementById('gif-file').value = '';
-            document.getElementById('drop-zone').classList.remove('has-file');
-            document.getElementById('drop-zone-content').classList.remove('hidden');
-            document.getElementById('drop-preview').classList.add('hidden');
-        }
-
-        function handleDropFile(file) {
-            if (!file.type.startsWith('image/gif') && !file.name.toLowerCase().endsWith('.gif')) {
-                showToast('Only .gif files are allowed', 'error');
-                return false;
-            }
-            if (file.size > 8 * 1024 * 1024) {
-                showToast('File too large (max 8MB)', 'error');
-                return false;
-            }
-
-            droppedFile = file;
-            const zone = document.getElementById('drop-zone');
-            zone.classList.add('has-file');
-            document.getElementById('drop-zone-content').classList.add('hidden');
-
-            const preview = document.getElementById('drop-preview');
-            preview.classList.remove('hidden');
-            document.getElementById('preview-img').src = URL.createObjectURL(file);
-            document.getElementById('preview-name').textContent = file.name;
-            document.getElementById('preview-size').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
-            return true;
-        }
-
-        function initDropZone() {
-            const zone = document.getElementById('drop-zone');
-            const fileInput = document.getElementById('gif-file');
-
-            zone.addEventListener('click', () => fileInput.click());
-
-            fileInput.addEventListener('change', () => {
-                if (fileInput.files[0]) handleDropFile(fileInput.files[0]);
-            });
-
-            zone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                zone.classList.add('drag-over');
-            });
-
-            zone.addEventListener('dragleave', () => {
-                zone.classList.remove('drag-over');
-            });
-
-            zone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                zone.classList.remove('drag-over');
-                const file = e.dataTransfer.files[0];
-                if (file) handleDropFile(file);
-            });
-        }
-
-        // ─── NSFW Toggle + Birthday ───
-
-        async function checkBirthday() {
-            if (!currentUser) return;
-            try {
-                const res = await fetch('/api/user/birthday');
-                if (!res.ok) return;
-                const data = await res.json();
-                if (data.birthday) {
-                    localStorage.setItem('gifs_birthday', data.birthday);
-                    localStorage.setItem('gifs_is_adult', data.isAdult);
-                }
-            } catch {}
-        }
-
-        async function onNsfwToggle() {
-            const toggle = document.getElementById('nsfw-toggle');
-            const banner = document.getElementById('age-restricted-banner');
-
-            if (!currentUser) {
-                toggle.checked = false;
-                showToast('Please log in to view NSFW content', 'error');
-                loadGIFs();
-                return;
-            }
-
-            if (!toggle.checked) {
-                loadGIFs();
-                banner.classList.add('hidden');
-                return;
-            }
-
-            // Check stored birthday
-            const savedBirthday = localStorage.getItem('gifs_birthday');
-            const isAdult = localStorage.getItem('gifs_is_adult');
-
-            if (savedBirthday) {
-                if (isAdult === 'true') {
-                    loadGIFs();
-                    banner.classList.add('hidden');
-                } else {
-                    toggle.checked = false;
-                    banner.classList.remove('hidden');
-                    showToast('NSFW content is hidden due to age restrictions', 'error');
-                }
-                return;
-            }
-
-            // No birthday saved → show modal
-            toggle.checked = false;
-            document.getElementById('birthday-modal').classList.remove('hidden');
-        }
-
-        function closeBirthdayModal() {
-            document.getElementById('birthday-modal').classList.add('hidden');
-        }
-
-        async function saveBirthday() {
-            const input = document.getElementById('birthday-input');
-            const date = input.value;
-            if (!date) {
-                showToast('Please select your date of birth', 'error');
-                return;
-            }
-
-            try {
-                const res = await fetch('/api/user/birthday', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ birthday: date })
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Failed to save');
-
-                localStorage.setItem('gifs_birthday', date);
-                localStorage.setItem('gifs_is_adult', data.isAdult);
-                closeBirthdayModal();
-
-                if (data.isAdult) {
-                    document.getElementById('nsfw-toggle').checked = true;
-                    document.getElementById('age-restricted-banner').classList.add('hidden');
-                    loadGIFs();
-                } else {
-                    document.getElementById('age-restricted-banner').classList.remove('hidden');
-                    showToast('NSFW content is hidden due to age restrictions', 'error');
-                }
-            } catch (err) {
-                showToast(err.message, 'error');
-            }
-        }
-
-        async function submitUpload(e) {
-            e.preventDefault();
-            const btn = document.getElementById('upload-submit-btn');
-            btn.disabled = true;
-            btn.textContent = 'Uploading...';
-
-            const file = droppedFile || document.getElementById('gif-file').files[0];
-            if (!file) { showToast('Please select a GIF file', 'error'); btn.disabled = false; btn.textContent = 'Upload'; return; }
-            if (!file.name.toLowerCase().endsWith('.gif')) { showToast('Only .gif files are allowed', 'error'); btn.disabled = false; btn.textContent = 'Upload'; return; }
-            if (file.size > 8 * 1024 * 1024) { showToast('File too large (max 8MB)', 'error'); btn.disabled = false; btn.textContent = 'Upload'; return; }
-
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('name', document.getElementById('gif-name').value.trim());
-            formData.append('tags', document.getElementById('gif-tags').value.trim());
-            formData.append('nsfw', document.getElementById('gif-nsfw').checked ? 'true' : 'false');
-
-            try {
-                const res = await fetch('/api/gifs/upload', { method: 'POST', body: formData });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Upload failed');
-
-                const msg = data.moderation_status === 'approved'
-                    ? 'GIF uploaded successfully! It is now live.'
-                    : 'GIF uploaded successfully! It will appear after moderation.';
-                showToast(msg);
-                hideUpload();
-                loadGIFs();
-            } catch (err) {
-                showToast(err.message, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Upload';
-            }
-        }
-
-        // ─── Actions ───
-
-        async function deleteGIF(gifId) {
-            if (!confirm('Are you sure you want to delete this GIF?')) return;
-            try {
-                const res = await fetch(`/api/gifs/${gifId}/delete`, { method: 'POST' });
-                if (!res.ok) throw new Error('Failed to delete');
-                showToast('GIF deleted');
-                showGallery();
-            } catch (err) {
-                showToast(err.message, 'error');
-            }
-        }
-
-        async function reportGIF(gifId) {
-            const reason = prompt('Why are you reporting this GIF?');
-            if (!reason) return;
-            try {
-                const res = await fetch(`/api/gifs/${gifId}/report`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ reason })
-                });
-                if (!res.ok) throw new Error('Failed to report');
-                showToast('GIF reported. Thank you.');
-            } catch (err) {
-                showToast(err.message, 'error');
-            }
-        }
-
-        function escHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        init();
-    </script>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/gifs.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
-
 </html>

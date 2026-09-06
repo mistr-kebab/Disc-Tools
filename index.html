@@ -1,531 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Disc-Tools | Professional Discord Utilities</title>
-    <meta name="description" content="Secure and fast utilities for Discord developers and users.">
-    <meta name="theme-color" content="#5865F2">
-    
-    <!-- Verification Tags -->
-    <meta name="google-site-verification" content="GSC_VERIFICATION_PLACEHOLDER">
-    <meta name="msvalidate.01" content="BING_VERIFICATION_PLACEHOLDER">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://disc-tools.de/">
-    <meta property="og:title" content="Disc-Tools | Professional Discord Utilities">
-    <meta property="og:description" content="The ultimate collection of professional Discord utilities. Secure, fast, and privacy-focused.">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://disc-tools.de/">
-    <meta property="twitter:title" content="Disc-Tools | Professional Discord Utilities">
-    <meta property="twitter:description" content="The ultimate collection of professional Discord utilities. Secure, fast, and privacy-focused.">
-
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <meta name="keywords" content="Discord Tools, Discord Utilities, Token Info, Discord Invite Lookup, Discord Server Lookup, Discord Developer Tools, Disc-Tools">
-    <meta name="author" content="Disc-Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Disc-Tools: Free tools for Discord</title>
+    <meta name="description" content="Sixteen free Discord utilities: decode snowflakes, build embeds, look up users, steal emojis and manage webhooks. No signup, no install, no paywall.">
+    <meta name="keywords" content="discord tools, discord utilities, discord user lookup, discord emoji stealer, discord timestamp generator, discord tools online, discord tools kostenlos, discord hilfe tools">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://disc-tools.de">
-    <link rel="icon" type="image/png" href="assets/img/logo.png">
-    <style>
-        :root {
-            --bg: #0b0e14;
-            --surface: #151921;
-            --text: #ffffff;
-            --muted: #8b949e;
-            --accent: #5865F2;
-            --accent2: #4752c4;
-            --border: rgba(255, 255, 255, 0.08);
-            --sans: 'Outfit', sans-serif;
-            --mono: 'JetBrains Mono', monospace;
-        }
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--sans);
-            overflow-x: hidden;
-        }
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .main-logo { width: 40px; height: 40px; }
-        .logo { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-        .logo span { color: var(--accent); }
-        .marquee-wrapper {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 40px 0;
-            overflow: hidden;
-            position: relative;
-            z-index: 5;
-        }
-        .marquee-track {
-            display: flex;
-            gap: 0;
-            overflow: hidden;
-            mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
-        }
-        .marquee-group {
-            display: flex;
-            flex-shrink: 0;
-            gap: 0;
-        }
-        .marquee-left {
-            animation: marquee 50s linear infinite;
-        }
-        .marquee-right {
-            animation: marquee 50s linear infinite;
-            animation-direction: reverse;
-        }
-        .marquee-wrapper:hover .marquee-group {
-            animation-play-state: paused;
-        }
-        .marquee-group span {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            font-family: var(--mono);
-            font-size: 14px;
-            color: var(--muted);
-            white-space: nowrap;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin: 0 10px;
-            background: var(--surface);
-            transition: all 0.2s;
-        }
-        .marquee-group span i {
-            font-size: 18px;
-            color: var(--accent);
-        }
-        .marquee-group span:hover {
-            border-color: var(--accent);
-            color: #fff;
-        }
-        @keyframes marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-    </style>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="canonical" href="https://disc-tools.de/">
+    <meta name="theme-color" content="#0a0d13">
 
-    <!-- Structured Data for Google -->
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+
+    <!-- OpenGraph / Discord / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Disc-Tools">
+    <meta property="og:title" content="Disc-Tools: Free tools for Discord">
+    <meta property="og:description" content="Decode snowflakes, build embeds, look up users, steal emojis and manage webhooks: sixteen free utilities for Discord. No signup, no paywall.">
+    <meta property="og:url" content="https://disc-tools.de/">
+    <meta property="og:image" content="https://disc-tools.de/static/assets/img/og-v2.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Disc-Tools: Free tools for Discord">
+    <meta name="twitter:description" content="Sixteen free utilities for Discord: snowflake decoder, embed builder, user lookup, webhook manager and more.">
+    <meta name="twitter:image" content="https://disc-tools.de/static/assets/img/og-v2.png">
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/landing.css?v=1">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://disc-tools.de/",
-      "name": "Disc-Tools",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://disc-tools.de/tools/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Disc-Tools",
+        "url": "https://disc-tools.de/",
+        "description": "Free Discord utilities: snowflake decoder, embed builder, user lookup, webhook manager and more."
     }
     </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Disc-Tools",
-      "url": "https://disc-tools.de/",
-      "description": "The ultimate collection of Discord utilities. Secure, fast, and developer focused.",
-      "applicationCategory": "Utility",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
-<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
 </head>
-
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
-        </a>
-        <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
-            <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
-                </div>
-            </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"><a href="/api/auth/login" class="login-btn"><i class="fa-brands fa-discord"></i> Login</a></span>
-    </header>
 
-    <section class="hero desktop-hero">
-        <div class="hero-content">
-            <span class="hero-tag">// professional discord suite</span>
-            <h1>Tools for <em>Discord</em><br>developers & users</h1>
-            <p>The ultimate collection of high-performance utilities. Secure, privacy-focused, and designed for professional workflows.</p>
-            <div class="hero-btns">
-                <a href="tools/" class="hero-btn-primary">Explore All Tools <i class="fa-solid fa-bolt"></i></a>
-                <a href="#popular" class="hero-btn-secondary">Popular Utilities</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
+            <div class="nav-dropdown">
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
+                </div>
             </div>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
         </div>
-        <div class="hero-visual">
-            <div class="visual-card">
-                <div class="visual-header">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <span>Token_Inspector.exe</span>
+
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+
+<div style="margin-top:var(--nav-h);background:rgba(88,101,242,0.15);border-bottom:1px solid var(--blurple);padding:14px 24px;text-align:center;font-size:15px;color:var(--text);line-height:1.5">
+    <strong>We are currently overhauling the website.</strong><br>
+    Errors can and will occur frequently. We are working on it and are aware of the issues.
+</div>
+
+<main id="main">
+
+    <!-- ============ Hero + Signature Element ============ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-copy">
+                <p class="eyebrow">Free Discord utilities | no install</p>
+                <h1>Discord tools that actually do the job.</h1>
+                <p class="hero-sub">Decode snowflakes, build embeds, look up users and manage webhooks: sixteen utilities in one place. Most run without an account, some need a Discord login, a few are Premium. Nothing needs an install.</p>
+                <div class="hero-actions">
+                    <a href="/tools" class="interactive-btn"><span class="ib-dot" aria-hidden="true"></span><span class="ib-label">Browse the tools</span><span class="ib-hover">Browse the tools<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
+                    <a href="https://discord.gg/rtRs8rhj5u" class="btn btn-ghost btn-lg" rel="noopener">Join the Discord <i class="fa-brands fa-discord" aria-hidden="true"></i></a>
                 </div>
-                <div class="visual-body">
-                    <div class="mock-line" style="--w: 80%;"></div>
-                    <div class="mock-line" style="--w: 60%;"></div>
-                    <div class="mock-line accent" style="--w: 90%;"></div>
-                    <div class="mock-line" style="--w: 70%;"></div>
-                </div>
+                <ul class="hero-stats" aria-label="Facts about Disc-Tools">
+                    <li><span class="stat-num" data-count="16">16</span><span class="stat-label">tools</span></li>
+                    <li><span class="stat-num" id="memberCount">-</span><span class="stat-label">Community members</span></li>
+                    <li><span class="stat-num" data-count="7">7</span><span class="stat-label">shortcuts</span></li>
+                    <li><span class="stat-num" data-count="0" data-prefix="$">$0</span><span class="stat-label">core is free</span></li>
+                </ul>
             </div>
-            <div class="visual-card floating">
-                <div class="visual-header">
-                    <span>Webhook_Manager</span>
+
+        </div>
+    </section>
+    <!-- ============ Toolbelt ============ -->
+    <section class="section tools" id="tools">
+        <div class="container">
+            <p class="eyebrow">The toolbelt</p>
+            <h2>One box of tools for everything Discord.</h2>
+            <p class="section-intro">Every tool runs in your browser and answers one concrete question. Most run without an account, some need a Discord login, and a few are Premium, available on <a href="https://dash.disc-tools.de">the dashboard</a>.</p>
+
+            <div class="tool-groups">
+                <div class="tool-group">
+                    <h3 class="tool-group-title"><span class="tool-group-index">01</span> Look things up</h3>
+                    <ul class="tool-list">
+                        <li>
+                            <a href="/tools/user-lookup/">
+                                <span class="tool-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+                                <span class="tool-name">User Lookup</span>
+                                <span class="tool-desc">Badges, account age and details for any user ID.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/username-history/">
+                                <span class="tool-icon"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i></span>
+                                <span class="tool-name">Username History <span class="home-premium-tag"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</span></span>
+                                <span class="tool-desc">Every past username and discriminator of an account.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/server-lookup/">
+                                <span class="tool-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span>
+                                <span class="tool-name">Server Lookup</span>
+                                <span class="tool-desc">Members, channels and invites via Discord&rsquo;s widget API.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/invite-lookup/">
+                                <span class="tool-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></span>
+                                <span class="tool-name">Invite Lookup</span>
+                                <span class="tool-desc">Guild info, member count, inviter and expiry of any invite.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/alt-account-lookup/">
+                                <span class="tool-icon"><i class="fa-solid fa-user-secret" aria-hidden="true"></i></span>
+                                <span class="tool-name">Alt Account Lookup <span class="home-premium-tag"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</span></span>
+                                <span class="tool-desc">Find alt accounts linked to a user via IP hash history.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/account-checker/">
+                                <span class="tool-icon"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i></span>
+                                <span class="tool-name">Account Checker</span>
+                                <span class="tool-desc">Account quality score from age, badges and profile signals.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/snowflake-decoder/">
+                                <span class="tool-icon"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></span>
+                                <span class="tool-name">Snowflake Decoder</span>
+                                <span class="tool-desc">Creation date, worker, process and increment from any ID.</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="visual-body">
-                    <div class="mock-line accent" style="--w: 100%;"></div>
+
+                <div class="tool-group">
+                    <h3 class="tool-group-title"><span class="tool-group-index">02</span> Create &amp; format</h3>
+                    <ul class="tool-list">
+                        <li>
+                            <a class="tool-soon" aria-disabled="true">
+                                <span class="tool-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                                <span class="tool-name">Embed Builder</span>
+                                <span class="tool-desc">Design embeds visually, export the ready JSON payload.</span><span class="soon-badge">Coming soon</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/markdown-generator/">
+                                <span class="tool-icon"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i></span>
+                                <span class="tool-name">Markdown Generator</span>
+                                <span class="tool-desc">Format messages with live preview and quick copy.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/timestamp-generator/">
+                                <span class="tool-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></span>
+                                <span class="tool-name">Timestamp Generator</span>
+                                <span class="tool-desc">All &lt;t:&gt; formats for any date and timezone.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/color-picker/">
+                                <span class="tool-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
+                                <span class="tool-name">Color Picker</span>
+                                <span class="tool-desc">Role colors as HEX, RGB, HSL and integer values.</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tool-group">
+                    <h3 class="tool-group-title"><span class="tool-group-index">03</span> Manage &amp; extract</h3>
+                    <ul class="tool-list">
+                        <li>
+                            <a class="tool-soon" aria-disabled="true">
+                                <span class="tool-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+                                <span class="tool-name">Webhook Manager</span>
+                                <span class="tool-desc">Send messages and delete webhooks without a bot.</span><span class="soon-badge">Coming soon</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/emoji-stealer/">
+                                <span class="tool-icon"><i class="fa-solid fa-face-smile" aria-hidden="true"></i></span>
+                                <span class="tool-name">Emoji Stealer</span>
+                                <span class="tool-desc">High-quality links for any emoji or sticker.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/avatar-cdn/">
+                                <span class="tool-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></span>
+                                <span class="tool-name">Avatar CDN</span>
+                                <span class="tool-desc">Direct CDN links for any avatar, every size and format.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/collectibles-inspector/">
+                                <span class="tool-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span>
+                                <span class="tool-name">Collectibles Inspector</span>
+                                <span class="tool-desc">Avatar, banner, decoration, nameplate &amp; clan tag — all CDN links.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tools/link-cleaner/">
+                                <span class="tool-icon"><i class="fa-solid fa-link-slash" aria-hidden="true"></i></span>
+                                <span class="tool-name">Link Cleaner</span>
+                                <span class="tool-desc">Strip fbclid, ttclid, utm_*, is_from_webapp &amp; 60+ trackers. TikTok-ready, bulk.</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="marquee-wrapper">
-        <div class="marquee-track">
-            <div class="marquee-group marquee-left">
-                <a href="/tools/invite-lookup/"><span><i class="fa-solid fa-link"></i> Invite Lookup</span></a>
-                <a href="/tools/server-lookup/"><span><i class="fa-solid fa-server"></i> Server Lookup</span></a>
-                <a href="/tips/formatting/bold/"><span><i class="fa-solid fa-bold"></i> Bold</span></a>
-                <a href="/tools/webhook-manager/"><span><i class="fa-solid fa-robot"></i> Webhook Manager</span></a>
-                <a href="/tips/formatting/spoiler/"><span><i class="fa-solid fa-eye-slash"></i> Spoiler</span></a>
-                <a href="/tools/emoji-stealer/"><span><i class="fa-solid fa-face-grin-stars"></i> Emoji Stealer</span></a>
-                <a href="/tips/formatting/code-block/"><span><i class="fa-solid fa-terminal"></i> Code Block</span></a>
-                <a href="/tools/avatar-cdn/"><span><i class="fa-solid fa-image"></i> Avatar CDN</span></a>
-                <a href="/tips/formatting/timestamp/"><span><i class="fa-solid fa-clock"></i> Timestamp</span></a>
-                <a href="/tools/snowflake-decoder/"><span><i class="fa-solid fa-snowflake"></i> Snowflake Decoder</span></a>
-                <a href="/tips/shortcuts/quick-switcher/"><span><i class="fa-solid fa-bolt"></i> Quick Switcher</span></a>
-                <a href="/tools/nitro-checker/"><span><i class="fa-solid fa-gift"></i> Nitro Checker</span></a>
-            </div>
-            <div class="marquee-group marquee-left">
-                <a href="/tools/invite-lookup/"><span><i class="fa-solid fa-link"></i> Invite Lookup</span></a>
-                <a href="/tools/server-lookup/"><span><i class="fa-solid fa-server"></i> Server Lookup</span></a>
-                <a href="/tips/formatting/bold/"><span><i class="fa-solid fa-bold"></i> Bold</span></a>
-                <a href="/tools/webhook-manager/"><span><i class="fa-solid fa-robot"></i> Webhook Manager</span></a>
-                <a href="/tips/formatting/spoiler/"><span><i class="fa-solid fa-eye-slash"></i> Spoiler</span></a>
-                <a href="/tools/emoji-stealer/"><span><i class="fa-solid fa-face-grin-stars"></i> Emoji Stealer</span></a>
-                <a href="/tips/formatting/code-block/"><span><i class="fa-solid fa-terminal"></i> Code Block</span></a>
-                <a href="/tools/avatar-cdn/"><span><i class="fa-solid fa-image"></i> Avatar CDN</span></a>
-                <a href="/tips/formatting/timestamp/"><span><i class="fa-solid fa-clock"></i> Timestamp</span></a>
-                <a href="/tools/snowflake-decoder/"><span><i class="fa-solid fa-snowflake"></i> Snowflake Decoder</span></a>
-                <a href="/tips/shortcuts/quick-switcher/"><span><i class="fa-solid fa-bolt"></i> Quick Switcher</span></a>
-                <a href="/tools/nitro-checker/"><span><i class="fa-solid fa-gift"></i> Nitro Checker</span></a>
+    <!-- ============ Learn ============ -->
+    <section class="section learn" id="learn">
+        <div class="container">
+            <p class="eyebrow">Learn</p>
+            <h2>Deep dives, not filler.</h2>
+            <p class="section-intro">Shortcuts, formatting rules and security basics. Written for people who actually use Discord.</p>
+
+             <div class="learn-grid">
+                <article class="learn-card">
+                    <span class="learn-icon"><i class="fa-solid fa-highlighter" aria-hidden="true"></i></span>
+                    <h3><a href="/tips/formatting/">Formatting tips</a></h3>
+                    <p>15 topics: bold, italics, spoilers, code blocks, timestamps and more.</p>
+                    <a href="/tips/formatting/" class="learn-more">Start formatting <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="learn-card">
+                    <span class="learn-icon"><i class="fa-solid fa-keyboard" aria-hidden="true"></i></span>
+                    <h3><a href="/tips/shortcuts/">Shortcuts</a></h3>
+                    <p>7 keyboard shortcuts that make you noticeably faster in Discord.</p>
+                    <a href="/tips/shortcuts/" class="learn-more">Get faster <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="learn-card">
+                    <span class="learn-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                    <h3><a href="/security-articles/">Security articles</a></h3>
+                    <p>In-depth looks at token grabbers, scam servers and how to spot them.</p>
+                    <a href="/security-articles/" class="learn-more">Read the articles <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="marquee-wrapper">
-        <div class="marquee-track">
-            <div class="marquee-group marquee-right">
-                <a href="/tips/formatting/underline/"><span><i class="fa-solid fa-underline"></i> Underline</span></a>
-                <a href="/tools/markdown-generator/"><span><i class="fa-solid fa-pen-nib"></i> Markdown Gen</span></a>
-                <a href="/tips/shortcuts/emoji-picker/"><span><i class="fa-solid fa-face-smile"></i> Emoji Picker</span></a>
-                <a href="/tools/embed-builder/"><span><i class="fa-solid fa-code"></i> Embed Builder</span></a>
-                <a href="/tips/formatting/quote/"><span><i class="fa-solid fa-quote-left"></i> Quote</span></a>
-                <a href="/tools/color-picker/"><span><i class="fa-solid fa-palette"></i> Color Picker</span></a>
-                <a href="/tips/shortcuts/search/"><span><i class="fa-solid fa-magnifying-glass"></i> Search</span></a>
-                <a href="/tools/timestamp-generator/"><span><i class="fa-solid fa-calendar-day"></i> Timestamp Gen</span></a>
-                <a href="/tips/formatting/strikethrough/"><span><i class="fa-solid fa-strikethrough"></i> Strikethrough</span></a>
-                <a href="/tips/shortcuts/upload/"><span><i class="fa-solid fa-upload"></i> Upload</span></a>
-                <a href="/tips/formatting/channel-mention/"><span><i class="fa-solid fa-hashtag"></i> Channel Mention</span></a>
-                <a href="/tools/nitro-checker/"><span><i class="fa-solid fa-gift"></i> Nitro Checker</span></a>
-            </div>
-            <div class="marquee-group marquee-right">
-                <a href="/tips/formatting/underline/"><span><i class="fa-solid fa-underline"></i> Underline</span></a>
-                <a href="/tools/markdown-generator/"><span><i class="fa-solid fa-pen-nib"></i> Markdown Gen</span></a>
-                <a href="/tips/shortcuts/emoji-picker/"><span><i class="fa-solid fa-face-smile"></i> Emoji Picker</span></a>
-                <a href="/tools/embed-builder/"><span><i class="fa-solid fa-code"></i> Embed Builder</span></a>
-                <a href="/tips/formatting/quote/"><span><i class="fa-solid fa-quote-left"></i> Quote</span></a>
-                <a href="/tools/color-picker/"><span><i class="fa-solid fa-palette"></i> Color Picker</span></a>
-                <a href="/tips/shortcuts/search/"><span><i class="fa-solid fa-magnifying-glass"></i> Search</span></a>
-                <a href="/tools/timestamp-generator/"><span><i class="fa-solid fa-calendar-day"></i> Timestamp Gen</span></a>
-                <a href="/tips/formatting/strikethrough/"><span><i class="fa-solid fa-strikethrough"></i> Strikethrough</span></a>
-                <a href="/tips/shortcuts/upload/"><span><i class="fa-solid fa-upload"></i> Upload</span></a>
-                <a href="/tips/formatting/channel-mention/"><span><i class="fa-solid fa-hashtag"></i> Channel Mention</span></a>
-                <a href="/tools/nitro-checker/"><span><i class="fa-solid fa-gift"></i> Nitro Checker</span></a>
-            </div>
+    <!-- ============ Security band ============ -->
+    <section class="section security-band" id="security">
+        <div class="container">
+            <p class="eyebrow">Built responsibly</p>
+            <h2>Tools you can trust with your account.</h2>
+            <ul class="security-list">
+                <li>
+                    <span class="security-icon"><i class="fa-solid fa-gift" aria-hidden="true"></i></span>
+                    <div>
+                        <h3>Tools run without an account</h3>
+                        <p>Most utilities answer right away. No email, no profile, no tracking wall.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="security-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
+                    <div>
+                        <h3>Only Discord OAuth2</h3>
+                        <p>Logins happen exclusively through Discord OAuth2. We never see or store your password.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="security-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></span>
+                    <div>
+                        <h3>All data visible</h3>
+                        <p>Everything we store about you is listed in the dashboard: view it, export it, delete it. No hidden data, no hidden profiles.</p>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
+    </section>
 
-    <style>
-        .marquee-wrapper + .marquee-wrapper { margin-top: 16px; }
-        .marquee-group a { text-decoration: none; }
-        @media (max-width: 768px) {
-            .marquee-group span { font-size: 12px; padding: 10px 18px; }
-            .marquee-group span i { font-size: 14px; }
-            .marquee-wrapper { padding: 0 20px; }
-        }
-    </style>
-
-    <div class="section-header">
-        <div class="section-title">
-            <span>recommended</span>
-            Popular Tools
-        </div>
-        <a href="tools/" class="view-all">View All Tools <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-
-    <div class="tools-grid" id="popular-tools-container">
-        <a href="tools/invite-lookup/" class="tool-card card-invite" data-category="Invite" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-link"></i></span>
-            <div class="tool-card-title">Invite Lookup</div>
-            <div class="tool-card-desc">Inspect any invite link &mdash; guild info, member count, inviter & expiry.</div>
-            <div class="card-footer">
-                <span class="category-badge">Invite</span>
-            </div>
-        </a>
-        <a href="tools/server-lookup/" class="tool-card card-server" data-category="Server" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-server"></i></span>
-            <div class="tool-card-title">Server Lookup</div>
-            <div class="tool-card-desc">Fetch public server info via Discord's Widget API. Members, channels & invites.</div>
-            <div class="card-footer">
-                <span class="category-badge">Server</span>
-            </div>
-        </a>
-        <a href="tools/webhook-manager/" class="tool-card card-bot" data-category="Admin" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-robot"></i></span>
-            <div class="tool-card-title">Webhook Manager</div>
-            <div class="tool-card-desc">Send messages, override names or delete webhooks without a bot.</div>
-            <div class="card-footer">
-                <span class="category-badge">Admin</span>
-            </div>
-        </a>
-        <a href="tools/emoji-stealer/" class="tool-card card-image" data-category="User" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-face-grin-stars"></i></span>
-            <div class="tool-card-title">Emoji Stealer</div>
-            <div class="tool-card-desc">Get direct high-quality links for any Discord emoji or sticker.</div>
-            <div class="card-footer">
-                <span class="category-badge">User</span>
-            </div>
-        </a>
-        <a href="tools/markdown-generator/" class="tool-card card-user" data-category="User" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-pen-nib"></i></span>
-            <div class="tool-card-title">Markdown Gen</div>
-            <div class="tool-card-desc">Easily format your Discord messages with live preview and quick-copy.</div>
-            <div class="card-footer">
-                <span class="category-badge">User</span>
-            </div>
-        </a>
-        <a href="tools/snowflake-decoder/" class="tool-card card-dev" data-category="Developer" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-snowflake"></i></span>
-            <div class="tool-card-title">Snowflake Decoder</div>
-            <div class="tool-card-desc">Decode any Discord Snowflake into timestamp, worker, process & increment.</div>
-            <div class="card-footer">
-                <span class="category-badge">Developer</span>
-            </div>
-        </a>
-        <a href="tools/avatar-cdn/" class="tool-card card-image" data-category="User" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-image"></i></span>
-            <div class="tool-card-title">Avatar CDN</div>
-            <div class="tool-card-desc">Generate direct CDN links for any user avatar in all sizes & formats.</div>
-            <div class="card-footer">
-                <span class="category-badge">User</span>
-            </div>
-        </a>
-        <a href="tools/embed-builder/" class="tool-card card-dev" data-category="Developer" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-code"></i></span>
-            <div class="tool-card-title">Embed Builder</div>
-            <div class="tool-card-desc">Visual Discord embed builder with live preview and JSON export.</div>
-            <div class="card-footer">
-                <span class="category-badge">Developer</span>
-            </div>
-        </a>
-        <a href="tools/timestamp-generator/" class="tool-card card-dev" data-category="Developer" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-calendar-day"></i></span>
-            <div class="tool-card-title">Timestamp Generator</div>
-            <div class="tool-card-desc">Generate Discord timestamps in all formats for any date and timezone.</div>
-            <div class="card-footer">
-                <span class="category-badge">Developer</span>
-            </div>
-        </a>
-        <a href="tools/color-picker/" class="tool-card card-dev" data-category="Developer" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-palette"></i></span>
-            <div class="tool-card-title">Color Picker</div>
-            <div class="tool-card-desc">Discord role colors as HEX, RGB, HSL and Integer values.</div>
-            <div class="card-footer">
-                <span class="category-badge">Developer</span>
-            </div>
-        </a>
-        <a href="tools/nitro-checker/" class="tool-card card-invite" data-category="Invite" style="display:none">
-            <span class="tool-card-icon"><i class="fa-solid fa-gift"></i></span>
-            <div class="tool-card-title">Nitro Gift Checker</div>
-            <div class="tool-card-desc">Check the validity and status of Nitro gift links without claiming.</div>
-            <div class="card-footer">
-                <span class="category-badge">Invite</span>
-            </div>
-        </a>
-    </div>
-
-    <div class="section-header mt-40">
-        <div class="section-title">
-            <span>upcoming</span>
-            New Features
-        </div>
-    </div>
-
-    <div class="tools-grid">
-        <a class="tool-card card-user" data-category="User" onclick="ping()">
-            <span class="tool-card-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-            <div class="tool-card-title">User Lookup</div>
-            <div class="tool-card-desc">Look up any Discord user by ID. Avatar, badges, account age & more.</div>
-            <div class="card-footer">
-                <span class="category-badge">User</span>
-                <span class="soon-badge">soon</span>
-            </div>
-        </a>
-        <a href="tools/snowflake-decoder/" class="tool-card card-dev" data-category="Developer">
-            <span class="tool-card-icon"><i class="fa-solid fa-snowflake"></i></span>
-            <div class="tool-card-title">Snowflake Decoder</div>
-            <div class="tool-card-desc">Decode any Discord Snowflake into timestamp, worker, process & increment.</div>
-            <div class="card-footer">
-                <span class="category-badge">Developer</span>
-            </div>
-        </a>
-        <a href="tools/avatar-cdn/" class="tool-card card-image" data-category="User">
-            <span class="tool-card-icon"><i class="fa-solid fa-image"></i></span>
-            <div class="tool-card-title">Avatar CDN</div>
-            <div class="tool-card-desc">Generate direct CDN links for any user's avatar in all sizes & formats.</div>
-            <div class="card-footer">
-                <span class="category-badge">User</span>
-            </div>
-        </a>
-    </div>
-
-    <div class="section-header mt-40">
-        <div class="section-title">
-            <span>tips</span>
-            Discord Shortcuts
-        </div>
-        <a href="tips/formatting/" class="view-all">All Formatting Tips <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-
-    <div class="tools-grid">
-        <a href="tips/formatting/bold/" class="tool-card" style="--card-accent:#2ecc71">
-            <span class="tool-card-icon"><i class="fa-solid fa-bold"></i></span>
-            <div class="tool-card-title">Bold</div>
-            <div class="tool-card-desc">Make text stand out with <code>**double asterisks**</code>. The most used formatting shortcut on Discord.</div>
-            <div class="card-footer">
-                <span class="category-badge">Formatting</span>
-            </div>
-        </a>
-        <a href="tips/formatting/spoiler/" class="tool-card" style="--card-accent:#9b59b6">
-            <span class="tool-card-icon"><i class="fa-solid fa-eye-slash"></i></span>
-            <div class="tool-card-title">Spoiler</div>
-            <div class="tool-card-desc">Hide content behind <code>||double pipes||</code> — click to reveal. Perfect for spoilers and sensitive info.</div>
-            <div class="card-footer">
-                <span class="category-badge">Formatting</span>
-            </div>
-        </a>
-        <a href="tips/formatting/code-block/" class="tool-card" style="--card-accent:#e74c3c">
-            <span class="tool-card-icon"><i class="fa-solid fa-terminal"></i></span>
-            <div class="tool-card-title">Code Block</div>
-            <div class="tool-card-desc">Multi-line code with syntax highlighting using <code>```triple backticks```</code>. Supports JS, Python, JSON & more.</div>
-            <div class="card-footer">
-                <span class="category-badge">Formatting</span>
-            </div>
-        </a>
-    </div>
-
-    <div class="toast" id="toast"><i class="fa-solid fa-triangle-exclamation"></i> Not available yet &mdash; check back soon.
-    </div>
-    
-
-        <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
+    <!-- ============ Community ============ -->
+    <section class="section community" id="community">
+        <div class="container">
+            <div class="community-card">
+                <div class="community-copy">
+                    <p class="eyebrow">Community</p>
+                    <h2>Built with a community behind it.</h2>
+                    <p class="section-intro">Questions, feature ideas or just hanging out? The Discord server is where the tools get shaped.</p>
+                    <div class="hero-actions">
+                        <a href="https://discord.gg/rtRs8rhj5u" class="btn btn-primary btn-lg" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i> Join the Discord</a>
+                    </div>
+                </div>
+                <ul class="community-links" aria-label="More about Disc-Tools">
+                    <li><a href="/team/"><i class="fa-solid fa-users" aria-hidden="true"></i> Meet the team</a></li>
+                    <li><a href="/partner/"><i class="fa-solid fa-handshake" aria-hidden="true"></i> Our partners</a></li>
+                    <li><a href="/announcements/"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Announcements</a></li>
+                    <li><a href="https://status.disc-tools.de/status/main-site" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
+    </section>
+
+    <!-- ============ Final CTA ============ -->
+    <section class="section cta">
+        <div class="container cta-box">
+            <h2>The core is free. Premium on top.</h2>
+            <p>Sixteen tools, nothing to install. The core is free, some need a Discord login, and a few are Premium, available on the dashboard. If a tool saves you five minutes, it has done its job.</p>
+            <div class="hero-actions">
+                <a href="/tools" class="interactive-btn"><span class="ib-dot" aria-hidden="true"></span><span class="ib-label">Browse the tools</span><span class="ib-hover">Browse the tools<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
+                <a href="https://discord.gg/rtRs8rhj5u" class="btn btn-ghost btn-lg" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i> Join the Discord</a>
+                <a href="https://dash.disc-tools.de/premium" class="btn btn-ghost btn-lg" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Get Premium</a>
+            </div>
         </div>
-    </footer>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
+        </div>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+                        <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+            <button type="button" class="cookie-settings-link">Cookie settings</button>
+        </nav>
+    </div>
+</footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
 
 
-    <script src="js/main.js?v=3" defer></script>
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie settings" hidden>
+        <div class="cookie-banner-inner">
+            <span class="cookie-title">We respect your privacy</span>
+            <p class="cookie-text">This site uses essential cookies to keep it working, plus optional cookies for analytics and preferences. You decide what we may store.</p>
+            <div class="cookie-actions">
+                <button class="btn btn-ghost btn-sm" data-consent="essential">Only essentials</button>
+                <button class="btn btn-primary btn-sm" data-consent="all">Accept all</button>
+                <button class="btn btn-ghost btn-sm" id="cookieSelectBtn">Select <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            </div>
+            <div class="cookie-panel" id="cookiePanel" hidden>
+                <label class="cookie-row">
+                    <span class="cookie-row-text"><strong>Essential</strong><small>Required for login and core functions. Always on.</small></span>
+                    <span class="switch">
+                        <input type="checkbox" checked disabled aria-label="Essential cookies always on">
+                        <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                </label>
+                <label class="cookie-row">
+                    <span class="cookie-row-text"><strong>Analytics</strong><small>Helps us understand how the tools are used.</small></span>
+                    <span class="switch">
+                        <input type="checkbox" data-cat="analytics" aria-label="Analytics cookies">
+                        <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                </label>
+                <label class="cookie-row">
+                    <span class="cookie-row-text"><strong>Preferences</strong><small>Remembers your favorites and settings on this device.</small></span>
+                    <span class="switch">
+                        <input type="checkbox" data-cat="preferences" aria-label="Preference cookies">
+                        <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                </label>
+                <button class="btn btn-primary btn-sm" id="cookieSaveBtn">Save selection</button>
+            </div>
+        </div>
+    </div>
+
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/consent.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script>
+(function () {
+    var el = document.getElementById('memberCount');
+    if (!el) return;
+    fetch('/api/guilds/1502369884322136326')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+            if (!d.approximate_member_count) return;
+            var target = d.approximate_member_count;
+            var text = target >= 1000 ? (target / 1000).toFixed(1) + 'k' : String(target);
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                el.textContent = text;
+                return;
+            }
+            var duration = 1800;
+            var start = null;
+            function frame(ts) {
+                if (!start) start = ts;
+                var p = Math.min((ts - start) / duration, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                var v = Math.round(target * eased);
+                el.textContent = v >= 1000 ? (v / 1000).toFixed(1) + 'k' : String(v);
+                if (p < 1) requestAnimationFrame(frame);
+                else el.textContent = text;
+            }
+            el.textContent = '0';
+            requestAnimationFrame(frame);
+        })
+        .catch(function () {});
+})();
+</script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
-
 </html>

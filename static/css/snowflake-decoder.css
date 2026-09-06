@@ -1,0 +1,191 @@
+/* Disc-Tools: Snowflake Decoder */
+
+.sd-card {
+    background: var(--surface, #12161f);
+    border: 1px solid var(--border, #232c40);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    margin-top: 1rem;
+}
+
+/* ---------- Date hero ---------- */
+.sd-date {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sd-date > i {
+    font-size: 1.8rem;
+    color: var(--blurple, #5865f2);
+    flex: 0 0 auto;
+}
+
+.sd-date-main {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text, #edf1fa);
+}
+
+.sd-date-sub {
+    font-size: 0.82rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--text-muted, #9aa5bc);
+    margin-top: 0.15rem;
+}
+
+.sd-date .sd-copy {
+    margin-left: auto;
+}
+
+/* ---------- Stats grid ---------- */
+.sd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8rem;
+}
+
+.sd-stat {
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sd-stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted, #9aa5bc);
+}
+
+.sd-stat-value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.sd-stat-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.95rem;
+    color: var(--text, #edf1fa);
+    word-break: break-all;
+}
+
+/* ---------- Copy button ---------- */
+.sd-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--border, #232c40);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted, #9aa5bc);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    flex: 0 0 auto;
+}
+
+.sd-copy:hover {
+    color: var(--text, #edf1fa);
+    border-color: var(--blurple, #5865f2);
+    background: rgba(88, 101, 242, 0.1);
+}
+
+.sd-copy.copied {
+    color: var(--success, #4ecb8d) !important;
+    border-color: rgba(78, 203, 141, 0.5) !important;
+}
+
+/* ---------- Bit breakdown ---------- */
+.sd-bits-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text, #edf1fa);
+    margin-bottom: 0.7rem;
+}
+
+.sd-bits-title i {
+    color: var(--blurple, #5865f2);
+}
+
+.sd-bits {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78rem;
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+    background: var(--surface-2, #171c29);
+    border: 1px solid var(--border, #232c40);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    user-select: all;
+}
+
+.sd-bits span {
+    padding: 0.1rem 0.15rem;
+    border-radius: 4px;
+}
+
+.sd-bits-ts { color: #7c85f0; }
+.sd-bits-worker { color: #4ecb8d; }
+.sd-bits-process { color: #f0b232; }
+.sd-bits-inc { color: #ed4245; }
+
+.sd-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 0.7rem;
+    font-size: 0.78rem;
+    color: var(--text-muted, #9aa5bc);
+}
+
+.sd-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.sd-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.sd-dot-ts { background: #7c85f0; }
+.sd-dot-worker { background: #4ecb8d; }
+.sd-dot-process { background: #f0b232; }
+.sd-dot-inc { background: #ed4245; }
+
+.sd-bits-copy {
+    margin-top: 0.8rem;
+}
+
+/* ---------- Error ---------- */
+.sd-error {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    background: rgba(237, 66, 69, 0.08);
+    border: 1px solid rgba(237, 66, 69, 0.35);
+    color: #f6a2a4;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 560px) {
+    .sd-grid {
+        grid-template-columns: 1fr;
+    }
+}

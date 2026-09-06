@@ -2,547 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Timestamp Generator | All Formats | Disc-Tools</title>
-    <meta name="description" content="Generate Discord timestamp codes for any date and timezone. All 7 formats: Relative, Short Time, Long Date/Time and more. One-click copy.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Timestamp Generator | Disc-Tools</title>
+    <meta name="description" content="Generate all Discord <t:> timestamp formats for any date and timezone, or decode an existing timestamp.">
+    <meta name="keywords" content="discord timestamp generator, discord t timestamp, discord time format, discord timestamp codes, unix timestamp converter, discord date format">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://disc-tools.de/tools/timestamp-generator/">
-    <meta property="og:title" content="Discord Timestamp Generator – Disc-Tools">
-    <meta property="og:description" content="Generate Discord timestamps in all 7 formats for any date and timezone.">
-    <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Discord Timestamp Generator",
-      "url": "https://disc-tools.de/tools/timestamp-generator/",
-      "description": "Generate Discord timestamp codes in all 7 formats for any date and timezone.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Any"
-    }
-    </script>
-    <style>
-        .ts-layout {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        @media (max-width: 900px) {
-            .ts-layout { grid-template-columns: 1fr; }
-        }
-        .input-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 24px;
-        }
-        .input-card h3 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: .05em;
-            margin-bottom: 18px;
-        }
-        .field-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
-        .field label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: .05em;
-            margin-bottom: 8px;
-        }
-        .field input, .field select {
-            width: 100%;
-            background: rgba(255,255,255,.03);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 15px;
-            color: var(--text);
-            font-family: var(--mono);
-            font-size: 14px;
-            transition: border-color .2s;
-            box-sizing: border-box;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        .field input:focus, .field select:focus {
-            border-color: var(--accent);
-            outline: none;
-            background: rgba(255,255,255,.05);
-        }
-        .quick-btns {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
-        }
-        .quick-btn {
-            padding: 7px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: var(--surface2);
-            color: var(--muted);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all .2s;
-        }
-        .quick-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .unix-display {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 12px 16px;
-            background: rgba(88,101,242,.06);
-            border: 1px solid rgba(88,101,242,.2);
-            border-radius: 10px;
-            font-family: var(--mono);
-            font-size: 14px;
-        }
-        .unix-display span { color: var(--muted); font-size: 12px; }
-        .unix-val { color: var(--accent); font-weight: 600; }
-        .formats-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .format-row {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px 20px;
-            display: grid;
-            grid-template-columns: 48px 1fr 1fr auto;
-            align-items: center;
-            gap: 14px;
-            transition: border-color .2s;
-        }
-        .format-row:hover { border-color: var(--accent); }
-        @media (max-width: 700px) {
-            .format-row { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
-            .format-icon { display: none; }
-        }
-        .format-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: rgba(88,101,242,.1);
-            border: 1px solid rgba(88,101,242,.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 15px;
-        }
-        .format-meta { min-width: 0; }
-        .format-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-strong);
-            margin-bottom: 4px;
-        }
-        .format-syntax {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--accent);
-            background: rgba(88,101,242,.08);
-            padding: 2px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .format-preview {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text);
-            padding: 8px 12px;
-            background: rgba(255,255,255,.03);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: var(--sans);
-        }
-        .copy-btn {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: var(--muted);
-            width: 38px;
-            height: 38px;
-            border-radius: 9px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .2s;
-            flex-shrink: 0;
-        }
-        .copy-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-        .copy-btn.copied { background: #2ecc71; color: #fff; border-color: #2ecc71; }
-
-        /* Sidebar */
-        .sidebar-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            height: fit-content;
-        }
-        .sidebar-card h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text-strong);
-        }
-        .sidebar-card p {
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 18px;
-            line-height: 1.5;
-        }
-        .format-legend { list-style: none; padding: 0; }
-        .format-legend li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 13px;
-        }
-        .format-legend li:last-child { border-bottom: none; }
-        .legend-code {
-            font-family: var(--mono);
-            font-size: 12px;
-            background: rgba(88,101,242,.1);
-            color: var(--accent);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-        .guide-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 20px;
-        }
-        .guide-link:hover { text-decoration: underline; }
-    </style>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/tools.css">
+    <link rel="stylesheet" href="/static/css/user-lookup.css">
+    <link rel="stylesheet" href="/static/css/timestamp-generator.css?v=2">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
 </head>
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link active">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"><a href="/api/auth/login" class="login-btn"><i class="fa-brands fa-discord"></i> Login</a></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="/tools/">Tools</a>
-        <span>/</span>
-        <a href="/tools/timestamp-generator/" class="current">Timestamp Generator</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="lookup-page">
+    <div class="container">
 
-    <main class="tool-page">
+        <a href="/tools/" class="back-link"><i class="fa-solid fa-arrow-left"></i> All tools</a>
+
         <section class="tool-hero">
-            <span class="hero-tag">// time formatting</span>
             <h1>Timestamp <em>Generator</em></h1>
-            <p>Generate Discord timestamp codes for any date and timezone — all 7 formats, one click to copy.</p>
+            <p>Generate all Discord <code>&lt;t:&gt;</code> formats for any date and timezone — or decode an existing timestamp back to a date.</p>
         </section>
 
-        <a href="/invite/bot/disc-tools/" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:16px;padding:8px 16px;background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.2);border-radius:8px;transition:.2s;" onmouseover="this.style.background='rgba(88,101,242,.2)'" onmouseout="this.style.background='rgba(88,101,242,.1)'">
-            <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Also available as <code style="font-size:12px;">/timestamp</code> on Discord
-        </a>
-
-        <div class="ts-layout">
-            <div>
-                <!-- Input Card -->
-                <div class="input-card">
-                    <h3>Select Date & Time</h3>
-                    <div class="quick-btns">
-                        <button class="quick-btn" id="btn-now">Now</button>
-                        <button class="quick-btn" id="btn-tomorrow">Tomorrow</button>
-                        <button class="quick-btn" id="btn-nextweek">+1 Week</button>
-                        <button class="quick-btn" id="btn-nextmonth">+1 Month</button>
-                    </div>
-                    <div class="field-row">
-                        <div class="field">
-                            <label>Date & Time</label>
-                            <input type="datetime-local" id="dt-input">
-                        </div>
-                        <div class="field">
-                            <label>Timezone</label>
-                            <select id="tz-select"></select>
-                        </div>
-                    </div>
-                    <div class="unix-display">
-                        <i class="fa-solid fa-hashtag" style="color:var(--accent)"></i>
-                        <span>Unix Timestamp:</span>
-                        <strong class="unix-val" id="unix-display">—</strong>
-                    </div>
+    <!-- TrustBox - visible -->
+        <section class="tg-card">
+            <h2 class="tg-card-title"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Generate</h2>
+            <div class="tg-controls">
+                <div class="tg-field">
+                    <label for="tg-datetime">Date &amp; time</label>
+                    <input type="datetime-local" id="tg-datetime">
                 </div>
-
-                <!-- Formats -->
-                <div class="formats-grid" id="formats-grid">
-                    <!-- Populated by JS -->
+                <div class="tg-field">
+                    <label for="tg-tz">Timezone</label>
+                    <select id="tg-tz">
+                        <option value="local" selected>Local timezone</option>
+                        <option value="UTC">UTC</option>
+                        <option value="Europe/Berlin">Europe/Berlin (CET)</option>
+                        <option value="Europe/London">Europe/London (GMT)</option>
+                        <option value="Europe/Paris">Europe/Paris (CET)</option>
+                        <option value="Europe/Madrid">Europe/Madrid (CET)</option>
+                        <option value="Europe/Warsaw">Europe/Warsaw (CET)</option>
+                        <option value="Europe/Istanbul">Europe/Istanbul (GMT+3)</option>
+                        <option value="Europe/Moscow">Europe/Moscow (MSK)</option>
+                        <option value="America/New_York">America/New York (ET)</option>
+                        <option value="America/Chicago">America/Chicago (CT)</option>
+                        <option value="America/Denver">America/Denver (MT)</option>
+                        <option value="America/Los_Angeles">America/Los Angeles (PT)</option>
+                        <option value="America/Sao_Paulo">America/Sao Paulo (BRT)</option>
+                        <option value="Asia/Tokyo">Asia/Tokyo (JST)</option>
+                        <option value="Asia/Seoul">Asia/Seoul (KST)</option>
+                        <option value="Asia/Shanghai">Asia/Shanghai (CST)</option>
+                        <option value="Asia/Kolkata">Asia/Kolkata (IST)</option>
+                        <option value="Asia/Dubai">Asia/Dubai (GST)</option>
+                        <option value="Australia/Sydney">Australia/Sydney (AEST)</option>
+                        <option value="Pacific/Auckland">Pacific/Auckland (NZST)</option>
+                    </select>
                 </div>
+                <button type="button" class="btn btn-primary" id="tg-now"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Now</button>
             </div>
+            <div id="tg-rows" class="tg-rows"></div>
+        </section>
 
-            <!-- Sidebar -->
-            <div class="sidebar-card">
-                <h3>Format Reference</h3>
-                <p>All Discord timestamp flags and what they render to in the client.</p>
-                <ul class="format-legend">
-                    <li><span>Short Time</span><span class="legend-code">:t</span></li>
-                    <li><span>Long Time</span><span class="legend-code">:T</span></li>
-                    <li><span>Short Date</span><span class="legend-code">:d</span></li>
-                    <li><span>Long Date</span><span class="legend-code">:D</span></li>
-                    <li><span>Short Date/Time</span><span class="legend-code">:f</span></li>
-                    <li><span>Long Date/Time</span><span class="legend-code">:F</span></li>
-                    <li><span>Relative</span><span class="legend-code">:R</span></li>
-                </ul>
-
-                <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
-                    <p style="margin-bottom:10px;">Paste any format directly in Discord messages, embeds, or slash command responses.</p>
-                    <a href="/guides/timestamp-generator/" class="guide-link">
-                        <i class="fa-solid fa-book"></i> Read the guide
-                    </a>
+        <section class="tg-card">
+            <h2 class="tg-card-title"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Decode</h2>
+            <div class="tg-controls">
+                <div class="tg-field tg-field-grow">
+                    <label for="tg-decode">Timestamp or Discord code</label>
+                    <input type="text" id="tg-decode" placeholder="e.g. 1778263293 or <t:1778263293:f>" autocomplete="off" spellcheck="false">
                 </div>
+                <button type="button" class="btn btn-primary" id="tg-decode-btn"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Decode</button>
             </div>
+            <div id="tg-decode-result" class="tg-decode-result"></div>
+        </section>
+
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-
-    <script src="/js/main.js?v=3" defer></script>
-    <script>
-    const FORMATS = [
-        { flag: 't', name: 'Short Time',      icon: 'fa-clock',         example: '9:41 PM' },
-        { flag: 'T', name: 'Long Time',       icon: 'fa-stopwatch',     example: '9:41:30 PM' },
-        { flag: 'd', name: 'Short Date',      icon: 'fa-calendar',      example: '30/06/2021' },
-        { flag: 'D', name: 'Long Date',       icon: 'fa-calendar-days', example: '30 June 2021' },
-        { flag: 'f', name: 'Short Date/Time', icon: 'fa-calendar-plus', example: '30 June 2021 9:41 PM' },
-        { flag: 'F', name: 'Long Date/Time',  icon: 'fa-calendar-check','example': 'Wednesday, 30 June 2021 9:41 PM' },
-        { flag: 'R', name: 'Relative',        icon: 'fa-hourglass-half', example: '2 months ago' },
-    ];
-
-    const dtInput  = document.getElementById('dt-input');
-    const tzSelect = document.getElementById('tz-select');
-    const unixDisp = document.getElementById('unix-display');
-    const grid     = document.getElementById('formats-grid');
-
-    // Populate timezones
-    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const tzList = Intl.supportedValuesOf ? Intl.supportedValuesOf('timeZone') : [userTz];
-    tzList.forEach(tz => {
-        const opt = document.createElement('option');
-        opt.value = tz;
-        opt.textContent = tz.replace(/_/g, ' ');
-        if (tz === userTz) opt.selected = true;
-        tzSelect.appendChild(opt);
-    });
-
-    // Default datetime = now (local)
-    function toLocalISOString(date) {
-        const pad = n => String(n).padStart(2, '0');
-        return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
-    }
-    dtInput.value = toLocalISOString(new Date());
-
-    // Quick buttons
-    function setDate(d) { dtInput.value = toLocalISOString(d); generate(); }
-    document.getElementById('btn-now').onclick       = () => setDate(new Date());
-    document.getElementById('btn-tomorrow').onclick  = () => { const d = new Date(); d.setDate(d.getDate()+1); setDate(d); };
-    document.getElementById('btn-nextweek').onclick  = () => { const d = new Date(); d.setDate(d.getDate()+7); setDate(d); };
-    document.getElementById('btn-nextmonth').onclick = () => { const d = new Date(); d.setMonth(d.getMonth()+1); setDate(d); };
-
-    function getUnix(localStr, tz) {
-        // Treat datetime-local as wall-clock time in the chosen timezone
-        const asUtc = new Date(localStr + ':00Z');
-        const fmt = new Intl.DateTimeFormat('sv-SE', {
-            timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit',
-            hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false
-        });
-        const tzShown = new Date(fmt.format(asUtc).replace(' ', 'T') + 'Z');
-        const offset  = asUtc.getTime() - tzShown.getTime();
-        return Math.floor((asUtc.getTime() + offset) / 1000);
-    }
-
-    function fmtRelative(unix) {
-        const diff = unix - Math.floor(Date.now() / 1000);
-        const abs  = Math.abs(diff), past = diff < 0;
-        const rtf  = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-        const sign = past ? -1 : 1;
-        if (abs < 60)      return rtf.format(sign * abs, 'second');
-        if (abs < 3600)    return rtf.format(sign * Math.round(abs/60), 'minute');
-        if (abs < 86400)   return rtf.format(sign * Math.round(abs/3600), 'hour');
-        if (abs < 2592000) return rtf.format(sign * Math.round(abs/86400), 'day');
-        if (abs < 31536000)return rtf.format(sign * Math.round(abs/2592000), 'month');
-        return rtf.format(sign * Math.round(abs/31536000), 'year');
-    }
-
-    function fmtPreview(unix, flag, tz) {
-        const d = new Date(unix * 1000);
-        const o = { timeZone: tz, hour12: true };
-        const loc = navigator.language || 'en-US';
-        switch (flag) {
-            case 't': return d.toLocaleTimeString(loc, {...o, hour:'numeric', minute:'2-digit'});
-            case 'T': return d.toLocaleTimeString(loc, {...o, hour:'numeric', minute:'2-digit', second:'2-digit'});
-            case 'd': return d.toLocaleDateString(loc, {...o, day:'2-digit', month:'2-digit', year:'numeric'});
-            case 'D': return d.toLocaleDateString(loc, {...o, day:'numeric', month:'long', year:'numeric'});
-            case 'f': return d.toLocaleString(loc, {...o, day:'numeric', month:'long', year:'numeric', hour:'numeric', minute:'2-digit'});
-            case 'F': return d.toLocaleString(loc, {...o, weekday:'long', day:'numeric', month:'long', year:'numeric', hour:'numeric', minute:'2-digit'});
-            case 'R': return fmtRelative(unix);
-        }
-    }
-
-    function buildGrid(unix) {
-        grid.innerHTML = '';
-        FORMATS.forEach(f => {
-            const syntax  = `<t:${unix}:${f.flag}>`;
-            const preview = fmtPreview(unix, f.flag, tzSelect.value);
-            const row = document.createElement('div');
-            row.className = 'format-row';
-            row.innerHTML = `
-                <div class="format-icon"><i class="fa-solid ${f.icon}"></i></div>
-                <div class="format-meta">
-                    <div class="format-name">${f.name}</div>
-                    <span class="format-syntax" id="syn-${f.flag}">${syntax}</span>
-                </div>
-                <div class="format-preview" id="prev-${f.flag}">${preview}</div>
-                <button class="copy-btn" id="copy-${f.flag}" title="Copy" aria-label="Copy ${f.name}">
-                    <i class="fa-regular fa-copy"></i>
-                </button>`;
-            grid.appendChild(row);
-            document.getElementById(`copy-${f.flag}`).onclick = () => copyFormat(f.flag, syntax);
-        });
-    }
-
-    async function copyFormat(flag, syntax) {
-        try {
-            await navigator.clipboard.writeText(syntax);
-            const btn  = document.getElementById(`copy-${flag}`);
-            const icon = btn.querySelector('i');
-            btn.classList.add('copied');
-            icon.className = 'fa-solid fa-check';
-            setTimeout(() => {
-                btn.classList.remove('copied');
-                icon.className = 'fa-regular fa-copy';
-            }, 2000);
-        } catch(e) {}
-    }
-
-    function generate() {
-        const val = dtInput.value;
-        if (!val) return;
-        const unix = getUnix(val, tzSelect.value);
-        unixDisp.textContent = unix;
-        buildGrid(unix);
-    }
-
-    dtInput.addEventListener('input', generate);
-    tzSelect.addEventListener('change', generate);
-    document.addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
-
-    // Live relative time refresh every 30s
-    setInterval(() => {
-        const val = dtInput.value;
-        if (!val) return;
-        const unix = getUnix(val, tzSelect.value);
-        const rel = document.getElementById('prev-R');
-        if (rel) rel.textContent = fmtRelative(unix);
-    }, 30000);
-
-    generate();
-    </script>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/user-lookup/">User Lookup</a>
+            <a href="/tools/server-lookup/">Server Lookup</a>
+            <a href="/tools/invite-lookup/">Invite Lookup</a>
+            <a href="/tools/alt-account-lookup/">Alt Account Lookup</a>
+            <a href="/tools/emoji-stealer/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/timestamp-generator.js?v=3" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

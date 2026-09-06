@@ -1,0 +1,241 @@
+/* Disc-Tools: Collectibles Inspector */
+.ci-info {
+    margin-top: 2.2rem;
+    padding: 1.6rem 1.8rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+.ci-info h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    margin: 0 0 1rem;
+}
+.ci-info h2 i { color: var(--blurple-soft); }
+.ci-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.8rem;
+}
+.ci-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.7rem 0.9rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+}
+.ci-info-item i {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(88,101,242,0.12);
+    color: var(--blurple-soft);
+    border-radius: 9px;
+    font-size: 0.85rem;
+    margin-top: 1px;
+}
+.ci-info-item div { display: flex; flex-direction: column; }
+.ci-info-item strong { font-size: 0.9rem; color: var(--text); line-height: 1.2; }
+.ci-info-item span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; margin-top: 2px; }
+
+/* Result chrome */
+.ci-result-head {
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 1.6rem;
+}
+.ci-avatar-stack {
+    position: relative;
+    width: 112px;
+    height: 112px;
+    flex: 0 0 auto;
+}
+.ci-avatar-stack img.ci-avatar {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    display: block;
+    background: var(--surface-2);
+    object-fit: cover;
+    border: 3px solid var(--surface);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+.ci-avatar-stack img.ci-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 168px;
+    height: 168px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    object-fit: contain;
+}
+.ci-head-meta { flex: 1; min-width: 240px; }
+.ci-head-meta h2 { font-size: 1.55rem; margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.ci-head-meta .ci-username { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+.ci-head-meta .ci-idline { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+.ci-head-meta .ci-idline code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; font-size: 0.78rem; }
+.ci-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+/* Sections grid */
+.ci-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+    margin-top: 1.2rem;
+}
+.ci-card {
+    background: rgba(255,255,255,0.015);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.ci-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1rem 0.7rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ci-card-head i {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(88,101,242,0.14);
+    color: var(--blurple-soft);
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+.ci-card-head h3 { font-size: 0.95rem; margin: 0; flex: 1; }
+.ci-card-head .ci-card-badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+.badge-green { color: #23a55a; background: rgba(35,165,90,0.12); border: 1px solid rgba(35,165,90,0.35); }
+.badge-yellow { color: #f0b232; background: rgba(240,178,50,0.12); border: 1px solid rgba(240,178,50,0.35); }
+.badge-gray { color: var(--text-muted); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+.badge-blurple { color: var(--blurple-soft); background: rgba(88,101,242,0.12); border: 1px solid rgba(88,101,242,0.35); }
+
+.ci-card-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
+
+.ci-preview {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    position: relative;
+}
+.ci-preview img, .ci-preview video {
+    max-width: 100%;
+    max-height: 220px;
+    display: block;
+    object-fit: contain;
+}
+.ci-preview.avatar-preview { border-radius: 50%; width: 160px; height: 160px; margin: 0 auto; min-height: 160px; overflow: visible; background: transparent; border: none; }
+.ci-preview.avatar-preview img { width: 140px; height: 140px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.08); }
+.ci-preview.banner-preview { min-height: 180px; }
+.ci-preview.banner-preview img { width: 100%; height: 180px; object-fit: cover; }
+.ci-preview.deco-preview { min-height: 190px; background: rgba(255,255,255,0.02); }
+.ci-preview.deco-preview img { width: 192px; height: 192px; }
+.ci-preview.nameplate-preview { min-height: 140px; background: #12151d; display: flex; flex-direction: column; gap: 8px; padding: 12px; align-items: center; }
+.ci-preview.nameplate-preview img { max-height: 96px; width: auto; }
+.ci-preview.nameplate-preview video { max-height: 96px; width: auto; }
+.ci-mock { background: #313338; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
+
+.ci-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1.2rem;
+}
+.ci-empty i { font-size: 1.4rem; opacity: 0.5; }
+.ci-color-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+.ci-color-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.12);
+    flex: 0 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.ci-color-row code { font-size: 0.8rem; background: rgba(255,255,255,0.06); padding: 2px 7px; border-radius: 6px; font-family: var(--font-mono); }
+.ci-meta-list { display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem; color: var(--text-muted); }
+.ci-meta-list strong { color: var(--text); font-weight: 600; margin-right: 4px; }
+.ci-meta-list code { background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 6px; font-size: 0.78rem; }
+.ci-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.ci-link-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.55rem 0.7rem;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+.ci-link-row .ci-link-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(240,178,50,0.12);
+    color: #f0b232;
+    border: 1px solid rgba(240,178,50,0.25);
+    flex: 0 0 auto;
+}
+.ci-link-row a {
+    flex: 1;
+    min-width: 120px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    word-break: break-all;
+    text-decoration: none;
+}
+.ci-link-row a:hover { color: var(--blurple-soft); }
+.ci-link-actions { display: flex; gap: 0.4rem; flex: 0 0 auto; }
+
+/* Nameplate palette dot */
+.ci-palette { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; }
+.ci-palette-dot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 12px; border: 1px solid rgba(255,255,255,0.15); }
+
+/* Result container tweak */
+#result .result-card { overflow: visible; }
+#result .result-body { padding: 20px 22px 22px; }
+
+@media (max-width: 640px) {
+    .ci-sections { grid-template-columns: 1fr; }
+    .ci-avatar-stack { width: 96px; height: 96px; }
+    .ci-avatar-stack img.ci-avatar { width: 96px; height: 96px; }
+    .ci-avatar-stack img.ci-decoration { width: 144px; height: 144px; }
+}

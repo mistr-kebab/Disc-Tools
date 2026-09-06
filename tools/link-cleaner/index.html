@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Link Cleaner | Remove Tracking from URLs – TikTok, YouTube, UTM & more | Disc-Tools</title>
+    <meta name="description" content="Free link cleaner: paste any TikTok, YouTube, Amazon or UTM-tagged URL and strip all tracking params (fbclid, gclid, ttclid, utm_*, is_from_webapp & 50+ more). Bulk, privacy-first, runs in your browser.">
+    <meta name="keywords" content="link cleaner, url cleaner, remove tracking from url, tiktok link cleaner, utm remover, fbclid remover, ttclid, tracking remover, clean url, debloater">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/tools.css">
+    <link rel="stylesheet" href="/static/css/user-lookup.css">
+    <link rel="stylesheet" href="/static/css/link-cleaner.css?v=1">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
+            <div class="nav-dropdown">
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
+                </div>
+            </div>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="lookup-page">
+    <div class="container">
+
+        <a href="/tools/" class="back-link"><i class="fa-solid fa-arrow-left"></i> All tools</a>
+
+        <section class="tool-hero">
+            <h1>Link <em>Cleaner</em></h1>
+            <p>Paste any messy TikTok, YouTube, Amazon or UTM link — strip <code>is_from_webapp</code>, <code>fbclid</code>, <code>ttclid</code>, <code>utm_*</code> & 60+ trackers in one click. Bulk, private, offline.</p>
+        </section>
+
+    <!-- TrustBox - visible -->
+        <div class="lc-layout">
+            <section class="lc-card lc-input-card">
+                <div class="lc-card-head">
+                    <h2><i class="fa-solid fa-link"></i> Paste links</h2>
+                    <span class="lc-badge" id="lc-count">0 links</span>
+                </div>
+                <textarea id="lc-input" placeholder="Paste one or many URLs — e.g.&#10;https://www.tiktok.com/@khaby.lame/video/719...?is_from_webapp=1&sender_device=pc&web_id=728...&#10;https://www.youtube.com/watch?v=dQw4w9WgXcQ&si=abc123&feature=share&#10;https://www.amazon.de/dp/B0XXXX?tag=mytag-21&ref=sr_1_1&psc=1&#10;https://example.com/?utm_source=tiktok&utm_medium=social&fbclid=xxx" rows="7" spellcheck="false"></textarea>
+                <div class="lc-actions">
+                    <button type="button" class="btn btn-primary" id="lc-clean"><i class="fa-solid fa-broom"></i> Clean links</button>
+                    <button type="button" class="btn btn-ghost" id="lc-paste"><i class="fa-solid fa-clipboard"></i> Paste</button>
+                    <button type="button" class="btn btn-ghost" id="lc-clear"><i class="fa-solid fa-trash"></i> Clear</button>
+                    <label class="lc-file-btn btn btn-ghost"><i class="fa-solid fa-file-arrow-up"></i> Upload .txt <input type="file" id="lc-file" accept=".txt,.csv" hidden></label>
+                </div>
+                <div class="lc-options">
+                    <label class="lc-opt"><input type="checkbox" data-opt="utm" checked> <span><strong>UTM</strong> <small>utm_*</small></span></label>
+                    <label class="lc-opt"><input type="checkbox" data-opt="social" checked> <span><strong>Click IDs</strong> <small>fbclid, gclid, ttclid, twclid, msclkid, igsh</small></span></label>
+                    <label class="lc-opt"><input type="checkbox" data-opt="tiktok" checked> <span><strong>TikTok</strong> <small>is_from_webapp, sender_device, web_id, is_copy_url</small></span></label>
+                    <label class="lc-opt"><input type="checkbox" data-opt="youtube" checked> <span><strong>YouTube</strong> <small>si, feature, pp, ehs</small></span></label>
+                    <label class="lc-opt"><input type="checkbox" data-opt="amazon" checked> <span><strong>Amazon</strong> <small>tag, ref, pf_rd_*, pd_rd_*</small></span></label>
+                    <label class="lc-opt"><input type="checkbox" data-opt="other" checked> <span><strong>Other</strong> <small>srsltid, zanpid, yclid, mkclid & 20+</small></span></label>
+                </div>
+                <div class="lc-examples">
+                    Try:
+                    <button type="button" class="hint-example" data-example="tiktok">TikTok</button>
+                    <button type="button" class="hint-example" data-example="youtube">YouTube</button>
+                    <button type="button" class="hint-example" data-example="amazon">Amazon</button>
+                    <button type="button" class="hint-example" data-example="utm">UTM</button>
+                    <button type="button" class="hint-example" data-example="bulk">Bulk 4</button>
+                </div>
+            </section>
+
+            <section class="lc-card lc-output-card" id="lc-output-card" hidden>
+                <div class="lc-card-head">
+                    <h2><i class="fa-solid fa-sparkles"></i> Cleaned</h2>
+                    <div class="lc-head-actions">
+                        <span class="lc-badge lc-badge-success" id="lc-stats"></span>
+                        <button type="button" class="btn btn-ghost btn-sm" id="lc-copy-all"><i class="fa-solid fa-copy"></i> Copy all</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="lc-download"><i class="fa-solid fa-download"></i> .txt</button>
+                    </div>
+                </div>
+                <div id="lc-results"></div>
+            </section>
+        </div>
+
+        <section class="lc-info">
+            <h3><i class="fa-solid fa-shield-halved"></i> What we remove</h3>
+            <div class="lc-info-grid">
+                <div class="lc-info-col">
+                    <h4>TikTok</h4>
+                    <code>is_from_webapp</code> <code>sender_device</code> <code>sender_web_id</code> <code>web_id</code> <code>is_copy_url</code> <code>browser</code> <code>u_code</code> <code>sharer_language</code> <code>sec_uid</code> …
+                </div>
+                <div class="lc-info-col">
+                    <h4>UTM & Analytics</h4>
+                    <code>utm_source</code> <code>utm_medium</code> <code>utm_campaign</code> <code>utm_term</code> <code>utm_content</code> <code>utm_id</code> …
+                </div>
+                <div class="lc-info-col">
+                    <h4>Click IDs</h4>
+                    <code>fbclid</code> <code>gclid/gclsrc</code> <code>dclid</code> <code>twclid</code> <code>ttclid</code> <code>msclkid</code> <code>igsh/id</code> <code>wbraid/gbraid</code>
+                </div>
+                <div class="lc-info-col">
+                    <h4>Shops & Search</h4>
+                    <code>srsltid</code> <code>si</code> <code>feature</code> <code>tag</code> <code>ref</code> <code>pf_rd_*</code> <code>pd_rd_*</code> <code>zanpid</code> <code>yclid</code>
+                </div>
+            </div>
+            <p class="lc-privacy"><i class="fa-solid fa-lock"></i> 100% offline — links never leave your browser. No log, no API.</p>
+        </section>
+
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
+        </div>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/user-lookup/">User Lookup</a>
+            <a href="/tools/avatar-cdn/">Avatar CDN</a>
+            <a href="/tools/collectibles-inspector/">Collectibles Inspector</a>
+            <a href="/tools/link-cleaner/">Link Cleaner</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/link-cleaner.js?v=1" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+</body>
+</html>

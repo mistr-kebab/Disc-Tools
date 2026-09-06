@@ -1,11 +1,9 @@
-/api/
 /fonts/
 sw.js
 ads.txt
 node_modules/
 .env
 *.log
-*.json
 .git/
 /root/
 uploads/

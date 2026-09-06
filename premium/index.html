@@ -2,113 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Premium | Disc-Tools</title>
-    <meta name="description" content="Unlock premium Discord utilities — alt account detection, premium quote GIFs, and more.">
-    <meta name="theme-color" content="#5865F2">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+    <meta name="description" content="Premium - Disc-Tools">
+    <meta name="keywords" content="discord premium tools, disc-tools premium, premium discord tools, discord tools member">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/landing.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
     <style>
-        .premium-hero{text-align:center;padding:100px 20px 40px}
-        .premium-hero h1{font-size:48px;margin:10px 0}
-        .premium-hero h1 em{color:var(--accent);font-style:normal}
-        .premium-hero p{color:var(--muted);max-width:500px;margin:0 auto 30px;font-size:18px}
-        .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),#9b59b6,var(--accent))}
-        .pricing-card.gift-card::before{background:linear-gradient(90deg,#9b59b6,#e91e63,#9b59b6)}
-        .btn-premium{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;padding:14px 40px;border-radius:8px;font-size:18px;font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .15s;width:100%;box-sizing:border-box;border:none;cursor:pointer}
-        .btn-premium:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(88,101,242,.35)}
-        .btn-premium:active{transform:translateY(0)}
-        .btn-premium:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
-        .premium-login-warning{background:rgba(88,101,242,.1);border:1px solid var(--accent);border-radius:12px;padding:20px;max-width:400px;margin:20px auto;text-align:center;color:var(--muted)}
-        .premium-login-warning a{color:var(--accent)}
-        .premium-perks{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;max-width:800px;margin:40px auto 0;padding:0 20px}
-        .perk-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;flex:1;min-width:200px;max-width:240px;text-align:center}
-        .perk-card i{font-size:28px;color:var(--accent);margin-bottom:10px}
-        .perk-card h3{font-size:16px;margin:0 0 6px;color:#fff}
-        .perk-card p{font-size:13px;color:var(--muted);margin:0;line-height:1.4}
-        .pricing-row{max-width:900px;margin:0 auto;padding:0 60px;display:flex;flex-direction:column;gap:24px}
-        .pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:0;text-align:center;position:relative;overflow:hidden;box-sizing:border-box;width:100%}
-        .pricing-card .card-header{padding:40px 40px 0;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center;gap:10px}
-        .pricing-card .card-header .toggle-icon{transition:transform .2s;color:var(--muted);font-size:14px}
-        .pricing-card .card-header .toggle-icon.open{transform:rotate(180deg)}
-        .pricing-card .card-body{padding:0 40px 40px;overflow:hidden;max-height:0;transition:max-height .3s ease}
-        .pricing-card .card-body.open{max-height:2000px}
-        .pricing-card h2{margin:0 0 16px;font-size:22px;color:#fff}
-        .pricing-card .price{font-size:56px;font-weight:800;color:#fff}
-        .pricing-card .price span{font-size:20px;color:var(--muted);font-weight:400}
-        .pricing-card .features{list-style:none;padding:0;margin:30px 0;text-align:left}
-        .pricing-card .features li{padding:10px 0;color:var(--text);display:flex;align-items:center;gap:10px}
-        .pricing-card .features li i{color:var(--accent);width:20px}
-        .pricing-card .features li.muted{color:var(--muted)}
-        .login-notice{background:rgba(88,101,242,.1);border:1px solid var(--accent);border-radius:12px;padding:16px 20px;max-width:780px;margin:0 auto 24px;text-align:center;color:var(--text);display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px}
-        .login-notice i{color:var(--accent);font-size:18px}
-        .gift-input{flex:1;min-width:0;padding:12px 16px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:#fff;font-size:15px;box-sizing:border-box;outline:none;transition:border-color .15s}
-        .gift-input:focus{border-color:var(--accent)}
-        .gift-input::placeholder{color:var(--muted)}
-        .gift-row{display:flex;gap:8px;margin-bottom:12px;align-items:center;width:100%}
-        .gift-row .btn-sm{height:45px;padding:12px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;box-sizing:border-box;line-height:1;transition:opacity .15s}
-        .gift-row .btn-sm:hover{opacity:.85}
-        .gift-row .btn-sm:disabled{opacity:.5;cursor:not-allowed}
-        .gift-user-card{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:16px;display:none;align-items:center;gap:16px;margin-bottom:12px;text-align:left;width:100%;box-sizing:border-box}
-        .gift-user-card img{width:48px;height:48px;border-radius:50%}
-        .gift-user-card .info{flex:1;min-width:0;overflow:hidden}
-        .gift-user-card .info .name{color:#fff;font-weight:600;font-size:15px}
-        .gift-user-card .info .username{color:var(--muted);font-size:13px;margin:2px 0 4px}
-        .gift-user-card .info .badge{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
-        .gift-user-card .info .badge.in-guild{background:rgba(46,204,113,.15);color:#2ecc71}
-        .gift-user-card .info .badge.not-in-guild{background:rgba(231,76,60,.15);color:#e74c3c}
-        .gift-user-card .actions{display:flex;gap:8px;flex-shrink:0}
-        .gift-user-card .actions button{padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s}
-        .gift-user-card .actions button:hover{opacity:.85}
-        .gift-user-card .actions .btn-confirm{background:#2ecc71;color:#fff}
-        .gift-user-card .actions .btn-cancel{background:rgba(255,255,255,.1);color:var(--text)}
-        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 24px;color:var(--text);z-index:9999;display:none;align-items:center;gap:10px}
-        @media(max-width:600px){.premium-hero{padding:80px 16px 40px}.pricing-card{padding:24px;min-width:unset}.pricing-row{padding:0 12px}.gift-row{flex-direction:column}}
+        /* Fix: content hidden behind fixed header (same as /about) */
+        #main{padding:calc(var(--nav-h) + 56px) 0 100px}
+        @media(max-width:640px){#main{padding:calc(var(--nav-h) + 36px) 0 80px}}
     </style>
 </head>
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-        <nav class="nav-links">
-            <a href="/tools/" class="nav-link">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/premium/" class="nav-link active">Premium</a>
-            <a href="/about/" class="nav-link">About</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
         </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"></span>
-    </header>
+    </div>
+</header>
+<main id="main" class="__PAGE_CLASS__">
+    <div class="container">
 
-    <main>
-        <section class="premium-hero">
-            <span class="hero-tag">// premium</span>
+<section class="premium-hero">
             <h1>Unlock <em>Premium</em></h1>
             <p>Get access to exclusive Discord utilities for your server.</p>
         </section>
 
-        <div class="login-notice" id="login-notice" style="display:none">
+        <div class="login-notice" id="login-notice">
             <i class="fa-solid fa-circle-exclamation"></i>
-            <span>You need to <a href="/login/" style="color:var(--accent);text-decoration:underline">log in with Discord</a> before you can purchase Premium.</span>
+            <span>You need to <a href="/login/">log in with Discord</a> before you can purchase Premium.</span>
         </div>
 
         <div class="pricing-row">
@@ -126,18 +95,18 @@
                         <li class="muted"><i class="fa-solid fa-headset"></i> Priority support — coming soon</li>
                     </ul>
                     <button class="btn-premium" id="btn-buy" onclick="startCheckout()">Subscribe Now <i class="fa-solid fa-arrow-right"></i></button>
-                    <p style="color:var(--muted);font-size:12px;margin-top:12px">Cancel anytime. No strings attached.</p>
+                    <p>Cancel anytime. No strings attached.</p>
                 </div>
             </div>
 
             <div class="pricing-card gift-card">
                 <div class="card-header" onclick="toggleCard(this)">
-                    <h2 style="margin:0"><i class="fa-solid fa-gift" style="margin-right:8px"></i> Gift Premium</h2>
-                    <div class="price" style="font-size:36px">€4 <span style="font-size:14px">one-time</span></div>
+                    <h2><i class="fa-solid fa-gift"></i> Gift Premium</h2>
+                    <div class="price">€4 <span>one-time</span></div>
                     <i class="fa-solid fa-chevron-down toggle-icon"></i>
                 </div>
                 <div class="card-body">
-                    <p style="color:var(--muted);font-size:14px;margin:12px 0 0">Give 1 month of Premium to a friend.</p>
+                    <p>Give 1 month of Premium to a friend.</p>
                     <ul class="features">
                         <li><i class="fa-solid fa-shield-halved"></i> Same features as self-purchase</li>
                         <li><i class="fa-solid fa-user-plus"></i> Recipient gets Premium role</li>
@@ -188,241 +157,65 @@
                 <p>Be the first to try new features and tools.</p>
             </div>
         </div>
-    </main>
-
-    <div class="toast" id="toast"><i class="fa-solid fa-circle-exclamation"></i> <span id="toast-msg"></span></div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo" onerror="this.style.display='none'">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
             </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/refund-policy/">Refund Policy</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/">User Lookup</a>
+            <a href="/tools/">Embed Builder</a>
+            <a href="/tools/">Snowflake Decoder</a>
+            <a href="/tools/">Webhook Manager</a>
+            <a href="/tools/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
 
-    <script src="/js/main.js?v=3" defer></script>
-    <script>
-    function toggleCard(header) {
-        const card = header.closest('.pricing-card');
-        const body = card.querySelector('.card-body');
-        const icon = header.querySelector('.toggle-icon');
-        const isOpen = body.classList.contains('open');
-
-        // Close all other cards
-        document.querySelectorAll('.pricing-card .card-body.open').forEach(b => {
-            if (b !== body) {
-                b.classList.remove('open');
-                b.closest('.pricing-card').querySelector('.toggle-icon').classList.remove('open');
-            }
-        });
-
-        // Toggle this one
-        body.classList.toggle('open');
-        icon.classList.toggle('open');
-    }
-
-    // Check auth + open first card by default
-    document.addEventListener('DOMContentLoaded', async () => {
-        try {
-            const auth = await fetch('/api/auth/me', { cache: 'no-store' });
-            const data = await auth.json();
-            if (!data.authenticated) {
-                document.getElementById('login-notice').style.display = 'flex';
-            }
-        } catch {}
-
-        const first = document.querySelector('.pricing-card .card-body');
-        if (first) {
-            first.classList.add('open');
-            document.querySelector('.pricing-card .toggle-icon').classList.add('open');
-        }
-    });
-
-    async function startCheckout() {
-        const btn = document.getElementById('btn-buy');
-        btn.disabled = true;
-        btn.textContent = 'Redirecting...';
-
-        try {
-            const auth = await fetch('/api/auth/me', { cache: 'no-store' });
-            const data = await auth.json();
-
-            if (!data.authenticated || !data.user) {
-                showToast('Please log in with Discord first.');
-                btn.disabled = false;
-                btn.textContent = 'Subscribe Now';
-                return;
-            }
-
-            const res = await fetch('/api/premium/create-checkout-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userId: data.user.id,
-                    successUrl: window.location.origin + '/premium/success',
-                    cancelUrl: window.location.href
-                })
-            });
-
-            const session = await res.json();
-            if (session.url) {
-                window.location.href = session.url;
-            } else {
-                showToast('Failed to create checkout session.');
-                btn.disabled = false;
-                btn.textContent = 'Subscribe Now';
-            }
-        } catch (err) {
-            showToast('An error occurred. Please try again.');
-            btn.disabled = false;
-            btn.textContent = 'Subscribe Now';
-        }
-    }
-
-    let verifiedRecipientId = null;
-
-    async function checkRecipient() {
-        const btn = document.getElementById('btn-check');
-        const input = document.getElementById('gift-recipient');
-        const card = document.getElementById('gift-user-card');
-        const recipientId = input.value.trim();
-
-        if (!recipientId || !/^\d{17,20}$/.test(recipientId)) {
-            showToast('Please enter a valid Discord User ID (17-20 digits).');
-            return;
-        }
-
-        btn.disabled = true;
-        btn.innerHTML = 'Checking <i class="fa-solid fa-spinner fa-spin"></i>';
-
-        try {
-            const auth = await fetch('/api/auth/me', { cache: 'no-store' });
-            const data = await auth.json();
-            if (!data.authenticated || !data.user) {
-                showToast('Please log in with Discord first.');
-                btn.disabled = false;
-                btn.innerHTML = 'Check User <i class="fa-solid fa-search"></i>';
-                return;
-            }
-
-            const res = await fetch('/api/premium/lookup-user/' + recipientId);
-            if (!res.ok) {
-                showToast('User not found. Make sure the ID is correct.');
-                btn.disabled = false;
-                btn.innerHTML = 'Check User <i class="fa-solid fa-search"></i>';
-                return;
-            }
-
-            const user = await res.json();
-            document.getElementById('gift-avatar').src = user.avatar;
-            document.getElementById('gift-name').textContent = user.globalName || user.username;
-            document.getElementById('gift-username').textContent = '@' + user.username;
-            const badge = document.getElementById('gift-badge');
-            badge.textContent = user.inGuild ? 'In Server' : 'Not in Server';
-            badge.className = 'badge ' + (user.inGuild ? 'in-guild' : 'not-in-guild');
-
-            verifiedRecipientId = recipientId;
-            card.style.display = 'flex';
-            btn.disabled = false;
-            btn.innerHTML = 'Check User <i class="fa-solid fa-search"></i>';
-        } catch (err) {
-            showToast('Failed to look up user.');
-            btn.disabled = false;
-            btn.innerHTML = 'Check User <i class="fa-solid fa-search"></i>';
-        }
-    }
-
-    async function startGiftCheckout() {
-        const btn = document.getElementById('btn-confirm-gift');
-        const recipientId = verifiedRecipientId;
-
-        if (!recipientId) {
-            showToast('Please verify the recipient first.');
-            return;
-        }
-
-        btn.disabled = true;
-        btn.innerHTML = 'Redirecting <i class="fa-solid fa-spinner fa-spin"></i>';
-
-        try {
-            const auth = await fetch('/api/auth/me', { cache: 'no-store' });
-            const data = await auth.json();
-
-            if (!data.authenticated || !data.user) {
-                showToast('Please log in with Discord first.');
-                btn.disabled = false;
-                btn.innerHTML = 'Confirm & Pay <i class="fa-solid fa-gift"></i>';
-                return;
-            }
-
-            const res = await fetch('/api/premium/create-gift-checkout-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    buyerId: data.user.id,
-                    recipientId: recipientId,
-                    successUrl: window.location.origin + '/premium/success?gift=1',
-                    cancelUrl: window.location.href
-                })
-            });
-
-            const session = await res.json();
-            if (session.url) {
-                window.location.href = session.url;
-            } else {
-                showToast('Failed to create gift checkout session.');
-                btn.disabled = false;
-                btn.innerHTML = 'Confirm & Pay <i class="fa-solid fa-gift"></i>';
-            }
-        } catch (err) {
-            showToast('An error occurred. Please try again.');
-            btn.disabled = false;
-            btn.innerHTML = 'Confirm & Pay <i class="fa-solid fa-gift"></i>';
-        }
-    }
-
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        document.getElementById('toast-msg').textContent = msg;
-        t.style.display = 'flex';
-        setTimeout(() => t.style.display = 'none', 4000);
-    }
-    </script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

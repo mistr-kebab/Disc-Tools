@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile | Disc-Tools</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+    <style>
+        body { margin: 0; background: var(--bg); min-height: 100vh; padding-left: 240px; }
+        .login-prompt { text-align: center; padding: 80px 24px; max-width: 400px; margin: 0 auto; }
+        .login-prompt i { font-size: 48px; color: var(--text-muted); margin-bottom: 16px; display: block; }
+        .login-prompt h2 { margin-bottom: 8px; font-family: var(--font-display); }
+        .login-prompt p { color: var(--text-muted); margin-bottom: 24px; font-size: 15px; }
+        .login-prompt .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 24px; background: var(--blurple); color: #fff; border: none; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 15px; transition: background 0.15s; }
+        .login-prompt .btn:hover { background: var(--blurple-strong); }
+
+        .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 240px; background: rgba(10,13,19,0.97); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; }
+        .sidebar .sb-brand { display: flex; align-items: center; gap: 10px; padding: 24px 20px; text-decoration: none; color: var(--text); }
+        .sidebar .sb-brand img { width: 32px; height: 32px; border-radius: 9px; }
+        .sidebar .sb-brand span { font-family: var(--font-display); font-size: 17px; font-weight: 700; }
+        .sidebar nav { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 0 12px; }
+        .sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: background 0.12s, color 0.12s; }
+        .sidebar nav a:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+        .sidebar nav a.active { background: rgba(88,101,242,0.12); color: var(--blurple-soft); font-weight: 600; }
+        .sidebar nav a i { width: 18px; text-align: center; }
+        .sidebar .sb-bottom { padding: 12px; }
+        .sidebar .sb-bottom a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; color: #f04747; text-decoration: none; font-size: 15px; font-weight: 500; transition: background 0.12s; }
+        .sidebar .sb-bottom a:hover { background: rgba(240,71,71,0.08); }
+
+        .banner { height: 160px; background: linear-gradient(135deg, var(--surface-2), var(--bg)); background-size: cover; background-position: center; }
+        .layout { max-width: 860px; margin: 0 auto; padding: 0 40px 60px; }
+        .head { display: flex; align-items: flex-end; gap: 24px; margin-top: -52px; position: relative; }
+        .main-content { min-width: 0; }
+
+        .sidebar-toggle { display: none; position: fixed; bottom: 20px; left: 20px; z-index: 250; width: 48px; height: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; color: var(--text); font-size: 20px; cursor: pointer; align-items: center; justify-content: center; }
+        .sidebar-overlay { display: none; position: fixed; inset: 0; z-index: 290; background: rgba(0,0,0,0.6); }
+        .sidebar-overlay.show { display: block; }
+        @media (max-width: 780px) {
+            body { padding-left: 0; }
+            .banner { height: 130px; }
+            .layout { padding: 0 16px 40px; }
+            .sidebar { position: fixed; left: -280px; top: 0; bottom: 0; width: 260px; z-index: 300; background: var(--surface); transition: left 0.25s var(--ease-out); }
+            .sidebar.open { left: 0; }
+            .sidebar-toggle { display: flex; }
+        }
+        .avatar-outer { position: relative; flex-shrink: 0; width: 108px; height: 108px; }
+        .avatar-outer .avatar-img { display: block; width: 108px; height: 108px; border-radius: 50%; border: 6px solid var(--bg); background: var(--bg); object-fit: cover; position: relative; z-index: 2; }
+        .avatar-outer .avatar-deco { position: absolute; top: 50%; left: 50%; width: 132px; height: 132px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+        .avatar-outer .avatar-deco img { width: 100%; height: 100%; object-fit: cover; }
+        .name-block { padding-bottom: 4px; }
+        .name-block h1 { font-size: clamp(1.4rem, 3vw, 1.8rem); font-family: var(--font-display); }
+        .name-block .handle { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 14px; color: var(--text-muted); }
+        .info { margin-top: 28px; }
+        .info .row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+        .info .row:last-child { border-bottom: none; }
+        .info .row .label { color: var(--text-muted); min-width: 90px; font-weight: 500; }
+        .info .row .value { color: var(--text); font-family: var(--font-mono); font-size: 13px; word-break: break-all; }
+        .info .row .value.email-blur { filter: blur(4px); transition: filter 0.15s; cursor: default; }
+        .info .row .value.email-blur:hover { filter: none; }
+        .actions { display: flex; gap: 12px; margin-top: 28px; }
+        .actions a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 20px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 14px; transition: border-color 0.15s, background 0.15s; }
+        .actions a:hover { border-color: var(--blurple); background: rgba(88,101,242,0.08); }
+        .actions a.danger { color: #f04747; }
+        .actions a.danger:hover { border-color: #f04747; background: rgba(240,71,71,0.08); }
+        .loading { color: var(--text-muted); font-size: 15px; text-align: center; padding: 80px 24px; }
+    </style>
+</head>
+<body>
+<div id="profileContent">
+    <div class="loading"><i class="fa-solid fa-spinner fa-spin" style="font-size:24px;display:block;margin-bottom:8px"></i> Loading&hellip;</div>
+</div>
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<script>
+(function () {
+    'use strict';
+    var el = document.getElementById('profileContent');
+
+    function esc(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function showLogin() {
+        el.innerHTML =
+            '<div class="login-prompt">' +
+            '<i class="fa-solid fa-user-lock"></i>' +
+            '<h2>Not logged in</h2>' +
+            '<p>Log in with Discord to view your profile.</p>' +
+            '<a href="/api/auth/login?redirect=/profile/" class="btn"><i class="fa-brands fa-discord"></i> Login</a></div>';
+    }
+
+    function decoImg(asset) {
+        if (!asset) return '';
+        return '<span class="avatar-deco"><img src="https://cdn.discordapp.com/avatar-decoration-presets/' + esc(asset) + '.png" alt="" onerror="this.parentElement.remove()"></span>';
+    }
+
+    function showProfile(u) {
+        var ext = u.avatar && u.avatar.startsWith('a_') ? 'gif' : 'webp';
+        var avatarURL = u.avatar
+            ? 'https://cdn.discordapp.com/avatars/' + u.id + '/' + u.avatar + '.' + ext + '?size=256'
+            : '/static/assets/img/logo.png';
+        var bannerURL = u.banner
+            ? 'https://cdn.discordapp.com/banners/' + u.id + '/' + u.banner + '.' + (u.banner.startsWith('a_') ? 'gif' : 'webp') + '?size=600'
+            : '';
+        var premium = ['', 'Nitro Classic', 'Nitro', 'Nitro Basic'][u.premium_type || 0];
+        var flags = [];
+        if (u.public_flags) {
+            if (u.public_flags & 1) flags.push('Staff');
+            if (u.public_flags & 2) flags.push('Partner');
+            if (u.public_flags & 4) flags.push('HypeSquad');
+            if (u.public_flags & 8) flags.push('Bug Hunter');
+            if (u.public_flags & 64) flags.push('Bravery');
+            if (u.public_flags & 128) flags.push('Brilliance');
+            if (u.public_flags & 256) flags.push('Balance');
+            if (u.public_flags & 512) flags.push('Early Supporter');
+            if (u.public_flags & 16384) flags.push('Bug Hunter 2');
+            if (u.public_flags & 131072) flags.push('Verified Dev');
+            if (u.public_flags & 262144) flags.push('Certified Mod');
+            if (u.public_flags & 4194304) flags.push('Active Dev');
+        }
+
+        el.innerHTML =
+            '<div class="banner"' + (bannerURL ? ' style="background-image:url(' + esc(bannerURL) + ')"' : '') + '></div>' +
+            '<aside class="sidebar">' +
+            '<a href="/" class="sb-brand"><img src="/static/assets/img/logo.png" alt="" width="32" height="32"><span>Disc-Tools</span></a>' +
+            '<nav>' +
+            '<a href="/profile/" class="active"><i class="fa-solid fa-user"></i> Profile</a>' +
+            '<a href="/profile/linktree/"><i class="fa-solid fa-link"></i> Linktree</a>' +
+            '</nav>' +
+            '<div class="sb-bottom">' +
+            '<a href="/profile/settings/" style="color:var(--text-muted);display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.12s"><i class="fa-solid fa-gear"></i> Settings</a>' +
+            '<a href="/api/auth/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>' +
+            '</aside>' +
+            '<div class="layout">' +
+            '<div class="head">' +
+            '<div class="avatar-outer">' +
+            '<img src="' + avatarURL + '" alt="" class="avatar-img">' +
+            decoImg(u.avatar_decoration_data ? u.avatar_decoration_data.asset : null) +
+            '</div>' +
+            '<div class="name-block"><h1>' + esc(u.global_name || u.username) + '</h1>' +
+            '<span class="handle">@' + esc(u.username) + '</span></div>' +
+            '</div>' +
+            '<div class="info">' +
+            '<div class="row"><span class="label">User ID</span><span class="value">' + esc(u.id) + '</span></div>' +
+            '<div class="row"><span class="label">Email</span><span class="value email-blur">' + (u.email ? esc(u.email) : 'Hidden') + '</span></div>' +
+            '<div class="row"><span class="label">Verified</span><span class="value">' + (u.verified ? '<span style="color:var(--success)">Yes</span>' : 'No') + '</span></div>' +
+            '<div class="row"><span class="label">Nitro</span><span class="value">' + (premium || 'None') + '</span></div>' +
+            (flags.length ? '<div class="row"><span class="label">Badges</span><span class="value" style="font-family:var(--font-body);font-size:13px;white-space:normal">' + flags.join(', ') + '</span></div>' : '') +
+            '</div>' +
+            '</div>' +
+            '</div>';
+    }
+
+    fetch('/api/auth/me/refresh', { credentials: 'include' })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+            if (d.authenticated && d.user) showProfile(d.user);
+            else showLogin();
+        })
+        .catch(function () { showLogin(); });
+
+    // Sidebar mobile toggle
+    var toggle = document.getElementById('sidebarToggle');
+    var overlay = document.getElementById('sidebarOverlay');
+    if (toggle && overlay) {
+        toggle.addEventListener('click', function () {
+            var sb = document.querySelector('.sidebar');
+            if (sb) sb.classList.toggle('open');
+            overlay.classList.toggle('show');
+        });
+        overlay.addEventListener('click', function () {
+            var sb = document.querySelector('.sidebar');
+            if (sb) sb.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+    }
+})();
+</script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
+</body>
+</html>

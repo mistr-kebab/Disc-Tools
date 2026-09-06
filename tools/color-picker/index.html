@@ -2,578 +2,210 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Color Picker & Integer Converter | Disc-Tools</title>
-    <meta name="description" content="Convert HEX, RGB, and Discord Integer colors. Preview role colors and browse the official Discord color palette.">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/css/style.css?v=2">
-    <link rel="canonical" href="https://disc-tools.de/tools/color-picker/">
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
-    <style>
-        .color-picker-container {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 30px;
-        }
-
-        @media (max-width: 992px) {
-            .color-picker-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .main-converter {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-        }
-
-        .preview-box {
-            width: 100%;
-            height: 120px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 8px;
-            transition: background 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .preview-box::after {
-            content: 'Role Color Preview';
-            font-family: var(--mono);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.8);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            z-index: 1;
-        }
-
-        .converter-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--muted);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            gap: 10px;
-        }
-
-        .input-wrapper input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 15px;
-            color: #fff;
-            font-family: var(--mono);
-            font-size: 15px;
-            transition: all 0.2s;
-        }
-
-        .input-wrapper input:focus {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.05);
-            outline: none;
-        }
-
-        .copy-btn {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: var(--muted);
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .copy-btn:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-
-        .visual-picker-btn {
-            width: 100%;
-            padding: 15px;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: #fff;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.2s;
-        }
-
-        .visual-picker-btn:hover {
-            border-color: var(--accent);
-            background: rgba(88, 101, 242, 0.1);
-        }
-
-        #native-color-picker {
-            position: absolute;
-            opacity: 0;
-            width: 1px;
-            height: 1px;
-            pointer-events: none;
-        }
-
-        .sidebar-palette {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px;
-            height: fit-content;
-        }
-
-        .palette-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .palette-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 12px;
-            color: var(--muted);
-            font-weight: 500;
-        }
-
-        .palette-item:hover {
-            border-color: var(--accent);
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-        }
-
-        .color-circle {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .history-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .history-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .history-item {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-        }
-
-        .history-item:hover {
-            transform: scale(1.15);
-            border-color: var(--accent);
-            z-index: 2;
-        }
-
-        .history-item::after {
-            content: attr(data-hex);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-family: var(--mono);
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-            z-index: 100;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
-        .history-item:hover::after {
-            opacity: 1;
-        }
-    </style>
-    <meta property="og:image" content="https://disc-tools.de/assets/img/logo.png">
-    <meta property="og:image:width" content="64">
-    <meta property="og:image:height" content="64">
-    <meta name="twitter:image" content="https://disc-tools.de/assets/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Color Picker | Disc-Tools</title>
+    <meta name="description" content="Pick any color and get it as HEX, RGB, HSL and Discord role color integer value — with one-click copy.">
+    <meta name="keywords" content="discord color picker, role color picker discord, hex to rgb, hex to hsl, hex to integer, discord role color, hex color converter">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0d13">
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/tools.css">
+    <link rel="stylesheet" href="/static/css/user-lookup.css">
+    <link rel="stylesheet" href="/static/css/color-picker.css?v=3">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
 </head>
 <body>
-    <div class="glow"></div>
-    <header>
-        <a href="/" class="logo-container">
-            <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo">
-            <div class="logo">Disc<span>-</span>Tools</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav-shell" id="siteNav">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="/" aria-label="Disc-Tools home">
+            <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+            <span class="brand-name">Disc-Tools</span>
         </a>
-                <nav class="nav-links">
-            <a href="/tools/" class="nav-link active">Tools</a>
-            <a href="/gifs/" class="nav-link">GIFs</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/team/">Team</a>
+            <a href="/tools/">Tools</a>
             <div class="nav-dropdown">
-                <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Learn <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="dropdown-menu">
-                    <a href="/guides/">Guides</a>
-                    <a href="/tips/formatting/">Formatting</a>
-                    <a href="/tips/shortcuts/">Shortcuts</a>
+                <a>Learn <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="/learn/"><i class="fa-solid fa-graduation-cap"></i> All Resources</a>
+                    <a href="/tips/formatting/"><i class="fa-solid fa-text-height"></i> Formatting</a>
+                    <a href="/tips/shortcuts/"><i class="fa-solid fa-keyboard"></i> Shortcuts</a>
+                    <a href="/security-articles/"><i class="fa-solid fa-shield"></i> Security</a>
+                    <a href="/about/"><i class="fa-solid fa-circle-info"></i> About</a>
                 </div>
             </div>
-            <a href="https://status.disc-tools.de/status/disc-tools" class="nav-link">Status</a>
-            <a href="/partner/" class="nav-link">Partner</a>
-            <a href="/about/" class="nav-link">About</a>
-        </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <span class="login-badge"><a href="/api/auth/login" class="login-btn"><i class="fa-brands fa-discord"></i> Login</a></span>
-    </header>
-
-    <nav class="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>
-        <a href="/tools/">Tools</a>
-        <span>/</span>
-        <a href="/tools/color-picker/" class="current">Color Picker</a>
+            <a href="/partner/">Partners</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-sm">Login</a>
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+        </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+        <nav aria-label="Mobile navigation">
+            <a href="/tools/">Tools</a>
+            <a href="/learn/">Learn</a>
+            <a href="/security-articles/">Security</a>
+            <a href="https://discord.gg/rtRs8rhj5u" rel="noopener">Community</a>
+            <a href="/team/" class="btn btn-ghost btn-block"><i class="fa-solid fa-users" aria-hidden="true"></i> Team</a>
+            <a href="https://status.disc-tools.de/status/main-site" class="btn btn-ghost btn-block" rel="noopener"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Status</a>
+            <a href="https://dash.disc-tools.de/premium" class="btn btn-primary btn-block" rel="noopener"><i class="fa-solid fa-crown" aria-hidden="true"></i> Premium</a>
+            <a href="/api/auth/login?redirect=/success/login/" class="btn btn-ghost btn-block">Login</a>
+        </nav>
+    </div>
+</header>
+<main id="main" class="lookup-page">
+    <div class="container">
 
-    <main class="tool-page">
+        <a href="/tools/" class="back-link"><i class="fa-solid fa-arrow-left"></i> All tools</a>
+
         <section class="tool-hero">
-            <span class="hero-tag">// design systems</span>
             <h1>Color <em>Picker</em></h1>
-            <p>Convert HEX, RGB, and Discord Integer colors for your roles and embeds.</p>
+            <p>Pick any color and get it as HEX, RGB, HSL and Discord role color integer — with one-click copy.</p>
         </section>
 
-        <a href="/invite/bot/disc-tools/" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:16px;padding:8px 16px;background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.2);border-radius:8px;transition:.2s;" onmouseover="this.style.background='rgba(88,101,242,.2)'" onmouseout="this.style.background='rgba(88,101,242,.1)'">
-            <i class="fa-brands fa-discord" style="color:#5865F2;"></i> Also available as <code style="font-size:12px;">/color</code> on Discord
-        </a>
+    <!-- TrustBox - visible -->
+        <div class="result-card cp-card">
+            <div class="result-body">
 
-        <div class="color-picker-container">
-            <div class="main-converter">
-                <div id="preview" class="preview-box" style="background-color: #5865F2;"></div>
-                
-                <div class="converter-inputs">
-                    <div class="input-group">
-                        <label>Hex Color</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="hex-input" value="#5865F2" spellcheck="false">
-                            <button class="copy-btn" onclick="copyValue('hex-input')" title="Copy HEX"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>RGB Color</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="rgb-input" value="88, 101, 242" spellcheck="false">
-                            <button class="copy-btn" onclick="copyValue('rgb-input')" title="Copy RGB"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Discord Integer (Decimal)</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="int-input" value="5793266" spellcheck="false">
-                            <button class="copy-btn" onclick="copyValue('int-input')" title="Copy Integer"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <input type="color" id="native-color-picker" value="#5865F2">
-                    <button class="visual-picker-btn" onclick="document.getElementById('native-color-picker').click()">
-                        <i class="fa-solid fa-eye-dropper"></i> Open Visual Color Picker
-                    </button>
+                <div class="cp-preview" id="cp-preview">
+                    <span class="cp-preview-hex" id="cp-preview-hex">#5865F2</span>
                 </div>
-            </div>
 
-            <div class="sidebar-palette">
-                <h3 style="font-size: 16px; margin-bottom: 5px;">Discord Palette</h3>
-                <p style="font-size: 13px; color: var(--muted);">Official role & brand colors.</p>
-                
-                <div class="palette-grid">
-                    <div class="palette-item" onclick="setFromHex('#5865F2')">
-                        <div class="color-circle" style="background: #5865F2;"></div> Blurple
+                <div class="cp-controls">
+                    <label class="cp-native-wrap" title="Open the native color picker">
+                        <i class="fa-solid fa-palette" aria-hidden="true"></i>
+                        <input type="color" id="cp-native" value="#5865f2">
+                    </label>
+
+                    <div class="cp-sliders">
+                        <label class="cp-slider">
+                            <span class="cp-slider-label">R</span>
+                            <input type="range" id="cp-r" min="0" max="255" value="88">
+                            <span class="cp-slider-value" id="cp-r-val">88</span>
+                        </label>
+                        <label class="cp-slider">
+                            <span class="cp-slider-label">G</span>
+                            <input type="range" id="cp-g" min="0" max="255" value="101">
+                            <span class="cp-slider-value" id="cp-g-val">101</span>
+                        </label>
+                        <label class="cp-slider">
+                            <span class="cp-slider-label">B</span>
+                            <input type="range" id="cp-b" min="0" max="255" value="242">
+                            <span class="cp-slider-value" id="cp-b-val">242</span>
+                        </label>
                     </div>
-                    <div class="palette-item" onclick="setFromHex('#57F287')">
-                        <div class="color-circle" style="background: #57F287;"></div> Green
+
+                    <button type="button" class="btn btn-ghost btn-sm cp-random" id="cp-random"><i class="fa-solid fa-shuffle" aria-hidden="true"></i> Random</button>
+                </div>
+
+                <div class="cp-values">
+                    <div class="cp-value">
+                        <span class="cp-value-label"><i class="fa-solid fa-hashtag" aria-hidden="true"></i> HEX</span>
+                        <input class="cp-value-input" id="cp-hex" value="#5865F2" spellcheck="false">
+                        <button type="button" class="btn btn-ghost btn-sm cp-copy" data-copy="#5865F2"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copy</button>
                     </div>
-                    <div class="palette-item" onclick="setFromHex('#FEE75C')">
-                        <div class="color-circle" style="background: #FEE75C;"></div> Yellow
+                    <div class="cp-value">
+                        <span class="cp-value-label"><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> RGB</span>
+                        <span class="cp-value-plain" id="cp-rgb">rgb(88, 101, 242)</span>
+                        <button type="button" class="btn btn-ghost btn-sm cp-copy" data-copy="rgb(88, 101, 242)"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copy</button>
                     </div>
-                    <div class="palette-item" onclick="setFromHex('#EB459E')">
-                        <div class="color-circle" style="background: #EB459E;"></div> Fuchsia
+                    <div class="cp-value">
+                        <span class="cp-value-label"><i class="fa-solid fa-droplet" aria-hidden="true"></i> HSL</span>
+                        <span class="cp-value-plain" id="cp-hsl">hsl(235.5, 86.5%, 64.7%)</span>
+                        <button type="button" class="btn btn-ghost btn-sm cp-copy" data-copy="hsl(235.5, 86.5%, 64.7%)"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copy</button>
                     </div>
-                    <div class="palette-item" onclick="setFromHex('#ED4245')">
-                        <div class="color-circle" style="background: #ED4245;"></div> Red
-                    </div>
-                    <div class="palette-item" onclick="setFromHex('#23272A')">
-                        <div class="color-circle" style="background: #23272A;"></div> Black
-                    </div>
-                    <div class="palette-item" onclick="setFromHex('#99AAB5')">
-                        <div class="color-circle" style="background: #99AAB5;"></div> Greyple
-                    </div>
-                    <div class="palette-item" onclick="setFromHex('#3498DB')">
-                        <div class="color-circle" style="background: #3498DB;"></div> Blue
+                    <div class="cp-value">
+                        <span class="cp-value-label"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Integer <small>(Discord role color)</small></span>
+                        <span class="cp-value-plain" id="cp-int">5793266</span>
+                        <button type="button" class="btn btn-ghost btn-sm cp-copy" data-copy="5793266"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copy</button>
                     </div>
                 </div>
 
-                <div class="history-section">
-                    <h3 style="font-size: 16px; margin-bottom: 5px;">Recent History</h3>
-                    <p id="history-label" style="font-size: 13px; color: var(--muted);">Your local session colors.</p>
-                    <div id="history-grid" class="history-grid">
-                        <!-- History items added here -->
-                    </div>
+            <div class="cp-section">
+                    <h3 class="cp-section-title"><i class="fa-solid fa-star" aria-hidden="true"></i> Presets</h3>
+                    <p class="cp-section-hint">Disc-Tools brand colors &amp; basics — click to apply, use the copy icon for the value.</p>
+                    <div class="cp-swatches" id="cp-presets"></div>
                 </div>
 
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
-                    <a href="/guides/color-picker/" style="color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-book"></i> Read the guide
-                    </a>
+                <div class="cp-section" id="cp-recent-section">
+                    <h3 class="cp-section-title"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Recent <span class="cp-recent-count" id="cp-recent-count">0/5</span></h3>
+                    <p class="cp-section-hint" id="cp-recent-hint">Log in with Discord to keep your last 5 colors here.</p>
+                    <div class="cp-swatches" id="cp-recent"></div>
                 </div>
+
             </div>
         </div>
-    </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="/" class="logo-container">
-                    <img loading="lazy" src="/assets/img/logo.png" alt="Disc-Tools Logo" class="main-logo">
-                    <div class="logo">Disc<span>-</span>Tools</div>
-                </a>
-                <p>The ultimate collection of Discord utilities. Secure, fast, and privacy-focused.</p>
-                <a href="https://discord.gg/rtRs8rhj5u" target="_blank" rel="noopener" class="footer-github" aria-label="Discord Server"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/mistr-kebab/Disc-Tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                <a href="https://tiktok.com/@disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://instagram.com/disc.tools" target="_blank" rel="noopener" class="footer-github" style="margin-left:12px;" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</main>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a class="brand" href="/" aria-label="Disc-Tools home">
+                <img src="/static/assets/img/logo.png" alt="" width="32" height="32" class="brand-mark">
+                <span class="brand-name">Disc-Tools</span>
+            </a>
+            <p>The ultimate collection of free Discord utilities. Built for people who actually use Discord.</p>
+            <div class="footer-social">
+                <a href="https://discord.gg/rtRs8rhj5u" aria-label="Discord" rel="noopener"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+                <a href="https://github.com/Disc-Tools/disc-tools.de" aria-label="GitHub" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/disc.tools" aria-label="Instagram" rel="noopener"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@disc.tools" aria-label="TikTok" rel="noopener"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+                <a href="https://x.com/disc_tools" aria-label="X" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
             </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Explore</h3>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/tools/">All Tools</a></li>
-                    <li><a href="https://status.disc-tools.de/status/disc-tools">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Support</h3>
-                <ul class="footer-links">
-                    <li><a href="/about/">About Us</a></li>
-                    <li><a href="/guides/">Quick Start Guides</a></li>
-                    <li><a href="/team/">Our Team</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 class="footer-section-title">Legal</h3>
-                <ul class="footer-links">
-                    <li><a href="/legal/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/legal/terms-of-service/">Terms of Service</a></li>
-                    <li><a href="/legal/imprint/">Imprint</a></li>
-                </ul>
-            </div>
+            <p class="footer-note">Not affiliated with Discord Inc.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Disc-Tools &mdash; not affiliated with <a href="https://discord.com" target="_blank">Discord Inc.</a></p>
-        </div>
-    </footer>
-
-    <script src="/js/main.js?v=3" defer></script>
-    <script>
-        const hexIn = document.getElementById('hex-input');
-        const rgbIn = document.getElementById('rgb-input');
-        const intIn = document.getElementById('int-input');
-        const nativePicker = document.getElementById('native-color-picker');
-        const preview = document.getElementById('preview');
-        const historyGrid = document.getElementById('history-grid');
-        const historyLabel = document.getElementById('history-label');
-
-        let history = JSON.parse(localStorage.getItem('color_history') || '[]');
-        let saveTimeout;
-
-        function updateAll(hex, skipHistory = false) {
-            hex = hex.toUpperCase();
-            if (!hex.startsWith('#')) hex = '#' + hex;
-            
-            if (!/^#[0-9A-F]{6}$/i.test(hex)) return;
-
-            preview.style.backgroundColor = hex;
-            nativePicker.value = hex;
-            hexIn.value = hex;
-
-            const r = parseInt(hex.slice(1, 3), 16);
-            const g = parseInt(hex.slice(3, 5), 16);
-            const b = parseInt(hex.slice(5, 7), 16);
-            rgbIn.value = `${r}, ${g}, ${b}`;
-            intIn.value = parseInt(hex.slice(1), 16);
-
-            // Persistence
-            localStorage.setItem('last_color', hex);
-
-            // History management (Debounced)
-            if (!skipHistory) {
-                clearTimeout(saveTimeout);
-                saveTimeout = setTimeout(() => {
-                    addToHistory(hex);
-                }, 1000);
-            }
-        }
-
-        function addToHistory(hex) {
-            // Remove if already exists (move to front)
-            history = history.filter(h => h !== hex);
-            history.unshift(hex);
-            history = history.slice(0, 14); // Keep last 14
-            localStorage.setItem('color_history', JSON.stringify(history));
-            renderHistory();
-        }
-
-        function renderHistory() {
-            const loginBadge = document.querySelector('.login-badge');
-            
-            // Guest mode
-            if (!loginBadge || !loginBadge.classList.contains('logged-in')) {
-                historyLabel.innerHTML = 'Personalize your workflow.';
-                historyGrid.innerHTML = `
-                    <div style="padding: 15px; background: rgba(88, 101, 242, 0.05); border: 1px dashed var(--border); border-radius: 12px; margin-top: 5px; width: 100%;">
-                        <p style="font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.4;">Login to save and sync your color history across devices.</p>
-                        <a href="/api/auth/login" class="login-btn" style="width: 100%; justify-content: center; font-size: 11px; padding: 8px;">
-                            <i class="fa-brands fa-discord"></i> Login
-                        </a>
-                    </div>
-                `;
-                return;
-            }
-
-            // Logged in mode
-            historyLabel.innerHTML = 'Synced to your account history.';
-            
-            if (history.length === 0) {
-                historyGrid.innerHTML = '<p style="font-size: 12px; color: var(--muted); width: 100%;">No recent colors yet.</p>';
-                return;
-            }
-
-            historyGrid.innerHTML = history.map(hex => `
-                <div class="history-item" 
-                     style="background: ${hex};" 
-                     data-hex="${hex}"
-                     onclick="updateAll('${hex}', true)">
-                </div>
-            `).join('');
-        }
-
-        // Initialize from storage
-        const lastColor = localStorage.getItem('last_color');
-        if (lastColor) {
-            updateAll(lastColor, true);
-        }
-        
-        // Wait for main.js to handle auth then render history
-        setTimeout(renderHistory, 500);
-        
-        // Also observe for login changes
-        const authObserver = new MutationObserver(renderHistory);
-        authObserver.observe(document.querySelector('.login-badge'), { 
-            attributes: true, 
-            childList: true, 
-            subtree: true 
-        });
-
-        hexIn.addEventListener('input', e => updateAll(e.target.value));
-        
-        rgbIn.addEventListener('input', e => {
-            const parts = e.target.value.split(',').map(p => parseInt(p.trim()));
-            if (parts.length === 3 && parts.every(p => !isNaN(p) && p >= 0 && p <= 255)) {
-                const hex = '#' + parts.map(p => p.toString(16).padStart(2, '0')).join('');
-                updateAll(hex);
-            }
-        });
-
-        intIn.addEventListener('input', e => {
-            const val = parseInt(e.target.value);
-            if (!isNaN(val) && val >= 0 && val <= 16777215) {
-                const hex = '#' + val.toString(16).padStart(6, '0');
-                updateAll(hex);
-            }
-        });
-
-        nativePicker.addEventListener('input', e => updateAll(e.target.value));
-
-        function setFromHex(hex) {
-            updateAll(hex);
-        }
-
-        async function copyValue(id) {
-            const el = document.getElementById(id);
-            try {
-                await navigator.clipboard.writeText(el.value);
-                const btn = el.nextElementSibling;
-                const icon = btn.querySelector('i');
-                icon.className = 'fa-solid fa-check';
-                btn.style.borderColor = '#2ecc71';
-                btn.style.color = '#2ecc71';
-                
-                setTimeout(() => {
-                    icon.className = 'fa-regular fa-copy';
-                    btn.style.borderColor = '';
-                    btn.style.color = '';
-                }, 2000);
-            } catch (err) {
-                console.error('Copy failed');
-            }
-        }
-    </script>
+        <nav class="footer-col" aria-label="Tools">
+            <h3>Tools</h3>
+            <a href="/tools/user-lookup/">User Lookup</a>
+            <a href="/tools/server-lookup/">Server Lookup</a>
+            <a href="/tools/invite-lookup/">Invite Lookup</a>
+            <a href="/tools/alt-account-lookup/">Alt Account Lookup</a>
+            <a href="/tools/emoji-stealer/">Emoji Stealer</a>
+            <a href="/tools/">All tools</a>
+        </nav>
+        <nav class="footer-col" aria-label="Learn">
+            <h3>Learn</h3>
+            <a href="/learn/">Learn</a>
+            <a href="/tips/formatting/">Formatting tips</a>
+            <a href="/tips/shortcuts/">Shortcuts</a>
+            <a href="/security-articles/">Security articles</a>
+        </nav>
+        <nav class="footer-col" aria-label="Site">
+            <h3>Site</h3>
+            <a href="/team/">Team</a>
+            <a href="/partner/">Partners</a>
+            <a href="/announcements/">Announcements</a>
+            <a href="https://status.disc-tools.de/status/main-site" rel="noopener">Status</a>
+            <a href="https://dash.disc-tools.de" rel="noopener">Dashboard</a>
+            <a href="https://dash.disc-tools.de/premium" rel="noopener">Premium</a>
+        </nav>
+        <nav class="footer-col" aria-label="Legal">
+            <h3>Legal</h3>
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <a href="/legal/terms-of-service/">Terms of Service</a>
+            <a href="/legal/imprint/">Imprint</a>
+            <a href="https://dash.disc-tools.de/legal/refund-policy/">Refund Policy</a>
+        </nav>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<script src="/static/js/backtotop.js" defer></script>
+<script src="/static/js/landing.js" defer></script>
+<script src="/static/js/color-picker.js?v=2" defer></script>
+<script src="/static/js/authnav.js" defer></script>
+<script src="/static/js/sw-cache.js" defer></script>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

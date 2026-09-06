@@ -1,0 +1,67 @@
+/* ============================================================
+   Disc-Tools: Invite Lookup
+   Builds on top of user-lookup.css + server-lookup.css
+   ============================================================ */
+
+.invite-head-icon {
+    color: var(--blurple-soft);
+    font-size: 0.75em;
+}
+
+/* ---------- Inviter card ---------- */
+.invite-inviter {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(10, 13, 19, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+.invite-inviter-avatar {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--surface-2);
+}
+.invite-inviter-avatar-none {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 20px;
+}
+.invite-inviter-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+.invite-inviter-name {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--text);
+}
+.invite-inviter-user {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .invite-inviter-avatar {
+        width: 44px;
+        height: 44px;
+    }
+}

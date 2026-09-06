@@ -2,86 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>404 | Disc-Tools</title>
-    <meta name="description" content="This tool got rate-limited by existence.">
-    <link rel="icon" type="image/png" href="/assets/img/logo.png">
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0d13">
+
+    <link rel="icon" type="image/png" href="/static/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/static/assets/img/logo.png">
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/fa-icons/fa.min.css">
+
     <style>
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background: var(--bg);
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-            gap: 12px;
-        }
-        .error-icon {
-            font-size: 48px;
-            color: var(--accent2);
-            opacity: .6;
-        }
-        .error-tag {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent2);
-            font-family: var(--mono, monospace);
-        }
-        h1 {
-            font-size: clamp(6rem, 20vw, 12rem);
-            font-weight: 900;
-            margin: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-        }
-        p {
-            color: var(--muted);
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            line-height: 1.6;
-            max-width: 480px;
-            margin: 0;
-        }
-        .error-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 15px;
-            background: var(--accent);
-            color: #fff;
-            text-decoration: none;
-            transition: all .2s;
-            margin-top: 8px;
-        }
-        .error-btn:hover {
-            background: var(--accent2);
-            transform: translateY(-2px);
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
+        .four04 { padding: 48px 32px; }
+        .four04 .code { font-family: var(--font-display); font-size: clamp(5rem, 12vw, 8rem); font-weight: 700; color: var(--blurple); line-height: 1; margin-bottom: 8px; }
+        .four04 h1 { font-size: clamp(1.2rem, 3vw, 1.6rem); margin-bottom: 8px; }
+        .four04 p { color: var(--text-muted); font-size: 15px; max-width: 42ch; margin: 0 auto 28px; }
+        .four04 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .four04 .links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: border-color 0.15s, background 0.15s; }
+        .four04 .links a:hover { border-color: var(--blurple); background: rgba(88,101,242,0.08); }
+        .four04 .links a.primary { background: var(--blurple); border-color: var(--blurple); color: #fff; }
+        .four04 .links a.primary:hover { background: var(--blurple-strong); }
     </style>
-    <script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </head>
 <body>
-    <div class="glow"></div>
-    <div class="error-icon"><i class="fa-solid fa-wrench"></i></div>
-    <div class="error-tag">// 404</div>
-    <h1>404</h1>
-    <p>This tool either doesn't exist yet<br>or got rate-limited by existence.</p>
-    <a href="/" class="error-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+    <div class="four04">
+        <div class="code">404</div>
+        <h1>Page not found</h1>
+        <p>The page you are looking for does not exist or has been moved.</p>
+        <div class="links">
+            <a href="/" class="primary"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="/tools/"><i class="fa-solid fa-wrench"></i> Tools</a>
+            <a href="/team/"><i class="fa-solid fa-users"></i> Team</a>
+        </div>
+    </div>
+<script defer src="https://umami.disc-tools.de/script.js" data-website-id="0cf82497-80c8-42a2-b6e4-8a8ae179d1fe"></script>
 </body>
 </html>

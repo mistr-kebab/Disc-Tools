@@ -1,0 +1,139 @@
+/* Disc-Tools: Avatar CDN — free CDN links for Discord avatars */
+/* Reuses .es-* styles from emoji-stealer.css for gate, preview & link list */
+
+.es-preview-avatar {
+    border-radius: 50%;
+}
+
+.es-preview-avatar .es-preview {
+    border-radius: 50%;
+}
+
+/* ---------- Format / size picker ---------- */
+/* Let the open dropdown overflow the card instead of being clipped */
+.result-card {
+    overflow: visible;
+}
+
+.ac-picker {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin: 1.2rem 0 0;
+}
+
+.ac-picker-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary, #9aa3b2);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+/* ---------- Custom dropdown ---------- */
+.ac-dd {
+    position: relative;
+}
+
+.ac-dd-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--blurple-soft, #7c85f0);
+    background: rgba(88, 101, 242, 0.1);
+    border: 1px solid rgba(88, 101, 242, 0.45);
+    border-radius: 12px;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    min-width: 120px;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.ac-dd-btn:hover,
+.ac-dd-btn:focus,
+.ac-dd-btn.ac-dd-open {
+    border-color: var(--blurple, #5865f2);
+    background-color: rgba(88, 101, 242, 0.16);
+    box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.2);
+    outline: none;
+}
+
+.ac-dd-chev {
+    font-size: 0.7rem;
+    color: var(--blurple-soft, #7c85f0);
+    transition: transform 0.18s;
+}
+
+.ac-dd-open .ac-dd-chev {
+    transform: rotate(180deg);
+}
+
+.ac-dd-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 60;
+    min-width: 100%;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0.3rem;
+    background: var(--surface-2, #171c29);
+    border: 1px solid rgba(88, 101, 242, 0.45);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.ac-dd.is-open .ac-dd-menu {
+    display: flex;
+}
+
+.ac-dd-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    color: var(--text, #edf1fa);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.12s, color 0.12s;
+}
+
+.ac-dd-option:hover {
+    background: rgba(88, 101, 242, 0.15);
+    color: #fff;
+}
+
+.ac-dd-option-selected {
+    color: var(--blurple-soft, #7c85f0);
+    background: rgba(88, 101, 242, 0.12);
+    font-weight: 600;
+}
+
+.ac-dd-check {
+    font-size: 0.75rem;
+    color: var(--blurple, #5865f2);
+    opacity: 0;
+    flex: 0 0 auto;
+}
+
+.ac-dd-option-selected .ac-dd-check {
+    opacity: 1;
+}
